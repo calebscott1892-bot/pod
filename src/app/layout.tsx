@@ -1,21 +1,47 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const arcon = localFont({
+  src: "../fonts/arcon-regular.otf",
+  variable: "--font-arcon",
+  display: "swap",
+  fallback: ["Avenir Next", "Segoe UI", "sans-serif"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const corbel = localFont({
+  src: "../fonts/corbel.ttf",
+  variable: "--font-corbel",
+  display: "swap",
+  fallback: ["Corbel", "Segoe UI", "system-ui", "sans-serif"],
+});
+
+const haroldGraham = localFont({
+  src: "../fonts/harold-graham.otf",
+  variable: "--font-harold",
+  display: "swap",
+  fallback: ["Georgia", "serif"],
+});
+
+const sophistica = localFont({
+  src: "../fonts/sophistica-monoline-slant.ttf",
+  variable: "--font-sophistica",
+  display: "swap",
+  preload: false,
+  fallback: ["Georgia", "serif"],
 });
 
 export const metadata: Metadata = {
-  title: "Space Sheds - Build Your Shed",
+  title: {
+    default: "Spare Space — Premium Lifestyle Studios",
+    template: "%s | Spare Space",
+  },
   description:
-    "Choose a shed or garden pod style, shape, colour and optional upgrades, then send your selection through for a quote.",
+    "Premium modular lifestyle studios for home gyms, offices, creative spaces and wellness retreats. Delivered and installed from the Northern Rivers NSW to the Sunshine Coast QLD.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#f0e3db",
 };
 
 export default function RootLayout({
@@ -25,10 +51,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="en-AU"
+      className={`${arcon.variable} ${corbel.variable} ${haroldGraham.variable} ${sophistica.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full bg-cream font-sans text-dark">
+        {children}
+      </body>
     </html>
   );
 }

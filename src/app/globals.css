@@ -1,45 +1,189 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbf5ec;
-  --foreground: #24231f;
-  --cream: #fbf5ec;
-  --cream-soft: #fffaf2;
-  --pistachio: #d7e2c0;
-  --sage: #b8c7a3;
-  --blush: #edc3c0;
-  --blush-soft: #f6dddd;
-  --mist-blue: #cbdce0;
-  --clay: #d8c4ad;
-  --eucalyptus: #6f8067;
-  --olive: #59664f;
-  --charcoal: #24231f;
-  --trim: #151411;
+  /* Spare Space brand system */
+  --ss-cream: #f0e3db;
+  --ss-cream-soft: #f8f0ea;
+  --ss-white: #ffffff;
+  --ss-dark: #2c2825;
+  --ss-mid: #6b5e58;
+  --ss-line: #e0d0c8;
+
+  /* Accent defaults to Rentals blue; each site overrides via data-site */
+  --accent: #4093d9;
+  --accent-soft: #ddeaf6;
+  --accent-strong: #2d6ca3;
+
+  --background: var(--ss-cream);
+  --foreground: var(--ss-dark);
+}
+
+[data-site="rentals"] {
+  --accent: #4093d9;
+  --accent-soft: #ddeaf6;
+  --accent-strong: #2d6ca3;
+}
+
+[data-site="studios"] {
+  --accent: #febfa5;
+  --accent-soft: #fbe3d6;
+  --accent-strong: #a0522d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--ss-cream);
+  --color-cream-soft: var(--ss-cream-soft);
+  --color-dark: var(--ss-dark);
+  --color-mid: var(--ss-mid);
+  --color-line: var(--ss-line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-strong: var(--accent-strong);
+  --font-sans: var(--font-corbel);
+  --font-heading: var(--font-arcon);
+  --font-script: var(--font-harold);
+  --font-script-alt: var(--font-sophistica);
 }
 
 html,
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-corbel), "Corbel", system-ui, sans-serif;
   overflow-x: hidden;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 92px;
 }
 
 ::selection {
-  background: var(--blush);
-  color: var(--charcoal);
+  background: var(--accent-soft);
+  color: var(--ss-dark);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   Shaped picture boxes — organic frames per Paul's "picture box" reference.
+   Shapes simplify on small screens; the md+ variants carry the full character.
+--------------------------------------------------------------------------- */
+
+.shape-arch {
+  border-radius: 26px;
+}
+
+.shape-soft {
+  border-radius: 24px;
+}
+
+.shape-oblong {
+  border-radius: 32px;
+}
+
+.shape-blob {
+  border-radius: 56% 44% 52% 48% / 48% 54% 46% 52%;
+}
+
+@media (min-width: 768px) {
+  .shape-arch {
+    border-radius: 999px 999px 36px 36px;
+  }
+
+  .shape-soft {
+    border-radius: 44px;
+  }
+
+  .shape-oblong {
+    border-radius: 999px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Hero video placeholder — warm cream gradient with a slow soft-light shimmer.
+   Swap for a <video> once Paul supplies footage; the markup already allows it.
+--------------------------------------------------------------------------- */
+
+.video-placeholder {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    115deg,
+    #f3e7de 0%,
+    #f9efe6 30%,
+    #fcebdb 52%,
+    #f1ddcb 74%,
+    #f3e7de 100%
+  );
+  background-size: 240% 240%;
+  animation: hero-pan 18s ease-in-out infinite alternate;
+}
+
+.video-placeholder::before {
+  content: "";
+  position: absolute;
+  inset: -22%;
+  background:
+    radial-gradient(42% 38% at 28% 30%, rgba(255, 255, 255, 0.9), transparent 70%),
+    radial-gradient(38% 34% at 74% 62%, var(--accent-soft), transparent 72%),
+    radial-gradient(30% 30% at 62% 18%, rgba(255, 255, 255, 0.55), transparent 70%);
+  mix-blend-mode: soft-light;
+  animation: hero-drift 24s ease-in-out infinite alternate;
+}
+
+.video-placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, var(--ss-cream) 98%);
+}
+
+@keyframes hero-pan {
+  from {
+    background-position: 0% 40%;
+  }
+  to {
+    background-position: 100% 60%;
+  }
+}
+
+@keyframes hero-drift {
+  from {
+    transform: translate3d(-3%, -2%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3%, 3%, 0) scale(1.07);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll reveal — elements below the fold ease in as they enter the viewport.
+   Classes are applied by <Reveal>; without JavaScript nothing is ever hidden.
+--------------------------------------------------------------------------- */
+
+.reveal-pending {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Accordion: hide the native disclosure marker, we draw our own. */
+.faq-summary::-webkit-details-marker {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -49,7 +193,13 @@ html {
     transition-duration: 0.001ms !important;
     animation-duration: 0.001ms !important;
   }
+
   html {
     scroll-behavior: auto;
+  }
+
+  .reveal-pending {
+    opacity: 1;
+    transform: none;
   }
 }
