@@ -18,6 +18,7 @@ export function Reveal({ children, className, delay = 0 }: Props) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (typeof IntersectionObserver === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (el.getBoundingClientRect().top < window.innerHeight * 0.92) return;
 
