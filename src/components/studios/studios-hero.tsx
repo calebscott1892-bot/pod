@@ -1,3 +1,7 @@
+import { Drift } from "@/components/shared/drift";
+
+import { StudioPreview } from "./studio-preview";
+
 export function StudiosHero() {
   return (
     <section
@@ -7,6 +11,37 @@ export function StudiosHero() {
     >
       {/* Video placeholder — swap for a muted, looping <video> when supplied. */}
       <div className="video-placeholder" aria-hidden="true" />
+
+      {/* Floating product chips, drifting on scroll. Wide screens only. */}
+      <div className="pointer-events-none absolute inset-0 hidden 2xl:block" aria-hidden="true">
+        <Drift speed={0.14} className="absolute top-[16%] left-[3.5%]">
+          <div
+            className="shape-arch relative aspect-[3/3.7] w-56 -rotate-3 border border-line shadow-[0_36px_80px_-50px_rgba(44,40,37,0.55)]"
+            style={{
+              background:
+                "linear-gradient(150deg, #f8e7da 8%, #eec3a8 56%, #e2a583 100%)",
+            }}
+          />
+          <p className="shape-soft mt-4 ml-6 w-max -rotate-2 border border-line bg-white/85 px-4 py-2 font-heading text-[11px] tracking-[0.14em] text-dark uppercase backdrop-blur">
+            Seven styles · From $17,000
+          </p>
+        </Drift>
+        <Drift speed={-0.09} className="absolute right-[3%] bottom-[16%]">
+          <div className="shape-soft w-72 rotate-2 border border-line bg-white/90 p-4 pb-2 shadow-[0_30px_70px_-50px_rgba(44,40,37,0.5)] backdrop-blur">
+            <StudioPreview
+              config={{
+                styleId: "wellness",
+                windowId: "feature",
+                doorId: "french",
+                claddingId: "sage",
+              }}
+            />
+            <p className="pb-1 text-center font-script text-[19px] text-accent-strong">
+              make it yours
+            </p>
+          </div>
+        </Drift>
+      </div>
 
       <div className="relative mx-auto w-full max-w-[1280px] px-4 py-20 text-center sm:px-6 lg:px-8">
         <p className="font-heading text-[13px] tracking-[0.3em] text-accent-strong uppercase">

@@ -67,13 +67,15 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-start">
           <aside className="order-first lg:order-last lg:sticky lg:top-24">
-            <div className="shape-soft border border-line bg-white p-5 shadow-[0_36px_90px_-65px_rgba(44,40,37,0.6)]">
-              <StudioPreview config={config} />
-              <p className="mt-2 text-center text-[13px] leading-6 text-mid">
-                Live preview — {resolved?.style.name} in{" "}
-                {resolved?.cladding.name.toLowerCase()}
-              </p>
-            </div>
+            <Reveal>
+              <div className="shape-soft border border-line bg-white p-5 shadow-[0_36px_90px_-65px_rgba(44,40,37,0.6)]">
+                <StudioPreview config={config} />
+                <p className="mt-2 text-center text-[13px] leading-6 text-mid">
+                  Live preview — {resolved?.style.name} in{" "}
+                  {resolved?.cladding.name.toLowerCase()}
+                </p>
+              </div>
+            </Reveal>
 
             <div className="shape-soft mt-5 border border-line bg-white p-6 shadow-[0_36px_90px_-65px_rgba(44,40,37,0.6)]">
               <p className="font-heading text-[13px] tracking-[0.18em] text-accent-strong uppercase">

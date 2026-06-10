@@ -35,55 +35,55 @@ export function StudioPreview({ config }: { config: StudioConfig }) {
       </defs>
 
       {/* Backdrop sun */}
-      <circle cx="430" cy="84" r="44" fill="var(--accent-soft)" />
+      <circle className="sp-stage" cx="430" cy="84" r="44" fill="var(--accent-soft)" />
 
       {/* Ground shadow */}
-      <ellipse cx="260" cy="356" rx="206" ry="13" fill="#2c2825" opacity="0.08" />
+      <ellipse className="sp-stage sp-d1" cx="260" cy="356" rx="206" ry="13" fill="#2c2825" opacity="0.08" />
 
       {/* Body */}
-      <rect
-        x="80"
-        y="140"
-        width="360"
-        height="204"
-        rx="10"
-        fill={cladding.swatch}
-        stroke="#2c2825"
-        strokeWidth="3"
-        style={{ transition: "fill 0.45s ease" }}
-      />
-
-      {/* Cladding boards */}
-      <g stroke={darkCladding ? "#ffffff" : "#2c2825"} strokeOpacity="0.08" strokeWidth="1.5">
-        {[160, 177, 194, 211, 228, 245, 262, 279, 296, 313, 330].map((y) => (
-          <path key={y} d={`M84 ${y}h352`} />
-        ))}
+      <g className="sp-stage sp-d1">
+        <rect
+          x="80"
+          y="140"
+          width="360"
+          height="204"
+          rx="10"
+          fill={cladding.swatch}
+          stroke="#2c2825"
+          strokeWidth="3"
+          style={{ transition: "fill 0.45s ease" }}
+        />
+        <g stroke={darkCladding ? "#ffffff" : "#2c2825"} strokeOpacity="0.08" strokeWidth="1.5">
+          {[160, 177, 194, 211, 228, 245, 262, 279, 296, 313, 330].map((y) => (
+            <path key={y} d={`M84 ${y}h352`} />
+          ))}
+        </g>
+        {/* Feet, a nod to the logo's little wheels */}
+        <g fill="#2c2825">
+          <circle cx="126" cy="346" r="8" />
+          <circle cx="260" cy="346" r="8" />
+          <circle cx="394" cy="346" r="8" />
+        </g>
       </g>
 
       {/* Skillion roof, higher on the left — same silhouette as the logo */}
       <path
+        className="sp-stage sp-d2"
         d="M62 144 458 116"
         stroke="#2c2825"
         strokeWidth="13"
         strokeLinecap="round"
       />
 
-      {/* Feet, a nod to the logo's little wheels */}
-      <g fill="#2c2825">
-        <circle cx="126" cy="346" r="8" />
-        <circle cx="260" cy="346" r="8" />
-        <circle cx="394" cy="346" r="8" />
-      </g>
-
       {/* Windows — left wall */}
       {windowId === "feature" ? (
-        <g>
+        <g className="sp-stage sp-d3">
           <rect x="104" y="166" width="128" height="116" rx="4" fill="#1f1c1a" />
           <rect x="113" y="175" width="110" height="98" rx="2" fill="url(#glass)" />
           <path d="m126 256 58-66M148 262l66-76" stroke="#ffffff" strokeOpacity="0.55" strokeWidth="5" strokeLinecap="round" />
         </g>
       ) : (
-        <g>
+        <g className="sp-stage sp-d3">
           <rect x="118" y="170" width="86" height="104" rx="4" fill="#ffffff" stroke="#2c2825" strokeWidth="2.5" />
           <rect x="126" y="178" width="70" height="40" rx="2" fill="url(#glass)" />
           <rect x="126" y="226" width="70" height="40" rx="2" fill="url(#glass)" />
@@ -94,7 +94,7 @@ export function StudioPreview({ config }: { config: StudioConfig }) {
 
       {/* Doors — right wall */}
       {doorId === "sliding" ? (
-        <g>
+        <g className="sp-stage sp-d4">
           <rect x="288" y="162" width="126" height="182" rx="4" fill="#2c2825" />
           <rect x="295" y="169" width="54" height="168" rx="2" fill="url(#glass)" />
           <rect x="351" y="169" width="56" height="168" rx="2" fill="url(#glass)" opacity="0.92" />
@@ -103,7 +103,7 @@ export function StudioPreview({ config }: { config: StudioConfig }) {
         </g>
       ) : null}
       {doorId === "french" ? (
-        <g>
+        <g className="sp-stage sp-d4">
           <rect x="292" y="162" width="118" height="182" rx="4" fill="#ffffff" stroke="#2c2825" strokeWidth="2.5" />
           {[0, 1].map((side) => {
             const x = 299 + side * 56;
@@ -121,7 +121,7 @@ export function StudioPreview({ config }: { config: StudioConfig }) {
         </g>
       ) : null}
       {doorId === "barn" ? (
-        <g>
+        <g className="sp-stage sp-d4">
           <path d="M276 156h150" stroke="#2c2825" strokeWidth="9" strokeLinecap="round" />
           <path d="M310 161v14M392 161v14" stroke="#2c2825" strokeWidth="5" strokeLinecap="round" />
           <rect x="296" y="172" width="110" height="172" rx="4" fill="#c89b72" stroke="#2c2825" strokeWidth="3" />
@@ -131,7 +131,7 @@ export function StudioPreview({ config }: { config: StudioConfig }) {
       ) : null}
 
       {/* Planter */}
-      <g>
+      <g className="sp-stage sp-d5">
         <path d="M452 318c-10-16 2-30 14-34-2 14-2 26-14 34Z" fill="var(--accent)" opacity="0.55" />
         <path d="M468 320c-2-12 6-22 16-24-4 10-6 18-16 24Z" fill="var(--accent)" opacity="0.4" />
         <path d="M448 322h40l-5 24h-30l-5-24Z" fill="#2c2825" />

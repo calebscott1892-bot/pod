@@ -32,12 +32,16 @@ const sophistica = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
+  ),
   title: {
     default: "Spare Space — Premium Lifestyle Studios",
     template: "%s | Spare Space",
   },
   description:
     "Premium modular lifestyle studios for home gyms, offices, creative spaces and wellness retreats. Delivered and installed from the Northern Rivers NSW to the Sunshine Coast QLD.",
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {

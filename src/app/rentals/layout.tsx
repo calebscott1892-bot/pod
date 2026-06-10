@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     absolute: "Spare Space Rentals — Premium Lifestyle Studios, Delivered",
   },
   description: `Rent a premium backyard studio — home gym, office, creative space or wellness retreat. Delivered and installed, ${business.serviceArea}. Call ${business.phone}.`,
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RentalsLayout({

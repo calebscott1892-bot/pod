@@ -65,6 +65,29 @@ html {
   color: var(--ss-dark);
 }
 
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Barely-there paper grain over everything — tactile, print-like warmth. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  mix-blend-mode: multiply;
+}
+
 :focus-visible {
   outline: 2px solid var(--accent-strong);
   outline-offset: 2px;
@@ -184,6 +207,52 @@ html {
 /* Accordion: hide the native disclosure marker, we draw our own. */
 .faq-summary::-webkit-details-marker {
   display: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Studio preview entrance — when the configurator reveals, the illustration
+   assembles in stages: body, roof, window, door, then the greenery.
+   Replacing a door/window option remounts that group, replaying its pop.
+--------------------------------------------------------------------------- */
+
+.sp-stage {
+  transform-box: fill-box;
+  transform-origin: 50% 85%;
+}
+
+.reveal-in .sp-stage {
+  animation: sp-pop 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.reveal-in .sp-d1 {
+  animation-delay: 0.05s;
+}
+
+.reveal-in .sp-d2 {
+  animation-delay: 0.2s;
+}
+
+.reveal-in .sp-d3 {
+  animation-delay: 0.38s;
+}
+
+.reveal-in .sp-d4 {
+  animation-delay: 0.54s;
+}
+
+.reveal-in .sp-d5 {
+  animation-delay: 0.7s;
+}
+
+@keyframes sp-pop {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

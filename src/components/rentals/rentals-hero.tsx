@@ -1,3 +1,7 @@
+import Image from "next/image";
+
+import { Drift } from "@/components/shared/drift";
+
 export function RentalsHero() {
   return (
     <section
@@ -7,6 +11,36 @@ export function RentalsHero() {
     >
       {/* Video placeholder — swap for a muted, looping <video> when supplied. */}
       <div className="video-placeholder" aria-hidden="true" />
+
+      {/* Floating lifestyle chips, drifting on scroll. Wide screens only. */}
+      <div className="pointer-events-none absolute inset-0 hidden 2xl:block" aria-hidden="true">
+        <Drift speed={0.14} className="absolute top-[14%] left-[3.5%]">
+          <div className="shape-arch relative aspect-[3/3.7] w-56 -rotate-3 overflow-hidden border border-line shadow-[0_36px_80px_-50px_rgba(44,40,37,0.55)]">
+            <Image
+              src="/assets/images/studios-real.jpg"
+              alt=""
+              fill
+              sizes="224px"
+              className="object-cover"
+            />
+          </div>
+          <p className="shape-soft mt-4 ml-6 w-max -rotate-2 border border-line bg-white/85 px-4 py-2 font-heading text-[11px] tracking-[0.14em] text-dark uppercase backdrop-blur">
+            Installed · Southeast QLD
+          </p>
+        </Drift>
+        <Drift speed={-0.09} className="absolute right-[4%] bottom-[18%]">
+          <div
+            className="shape-oblong aspect-[4/2.6] w-60 rotate-2 border border-line shadow-[0_30px_70px_-50px_rgba(44,40,37,0.5)]"
+            style={{
+              background:
+                "linear-gradient(150deg, #f9efe6 8%, #efd2bb 56%, #e2ae8d 100%)",
+            }}
+          />
+          <p className="shape-soft mt-4 ml-10 w-max rotate-1 border border-line bg-white/85 px-4 py-2 font-script text-[19px] text-accent-strong backdrop-blur">
+            your sanctuary, steps away
+          </p>
+        </Drift>
+      </div>
 
       <div className="relative mx-auto w-full max-w-[1280px] px-4 py-20 text-center sm:px-6 lg:px-8">
         <p className="font-heading text-[13px] tracking-[0.3em] text-accent-strong uppercase">

@@ -64,7 +64,7 @@ function StyleCard({
 }) {
   const media = (
     <div
-      className={`${wide ? "shape-oblong lg:aspect-auto lg:h-full" : "shape-arch"} relative aspect-[4/3.4] overflow-hidden border border-line shadow-[0_30px_70px_-55px_rgba(44,40,37,0.55)]`}
+      className={`${wide ? "shape-oblong lg:aspect-auto lg:h-full lg:min-h-[280px]" : "shape-arch"} relative aspect-[4/3.4] overflow-hidden border border-line shadow-[0_30px_70px_-55px_rgba(44,40,37,0.55)]`}
       style={{ background: style.gradient }}
     >
       <div className="absolute inset-0 grid place-items-center text-dark/30">
