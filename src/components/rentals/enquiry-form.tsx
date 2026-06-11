@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 import { sendEnquiry } from "@/app/rentals/actions";
 import { Reveal } from "@/components/shared/reveal";
@@ -17,9 +17,57 @@ const heardAboutOptions = [
   "Other",
 ];
 
+/** Rough postcode bands for instant service-area feedback. */
+function postcodeRegion(value: string): "qld" | "nsw" | "outside" | null {
+  if (!/^\d{4}$/.test(value)) return null;
+  const code = Number(value);
+  if (code >= 4000 && code <= 4699) return "qld";
+  if (code >= 2460 && code <= 2490) return "nsw";
+  return "outside";
+}
+
+const regionHints: Record<"qld" | "nsw" | "outside", { text: string; inArea: boolean }> = {
+  qld: { text: "Southeast QLD — you're in our delivery area.", inArea: true },
+  nsw: { text: "Northern Rivers — you're in our delivery area.", inArea: true },
+  outside: {
+    text: "Outside our usual area — send through and we'll review your site individually.",
+    inArea: false,
+  },
+};
+
 export function EnquiryForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [intendedUse, setIntendedUse] = useState("");
+  const [postcode, setPostcode] = useState("");
   const [, startTransition] = useTransition();
+
+  // Pre-select the space the visitor came from — a category card click
+  // (custom event) or a shared link with ?use=<category>.
+  useEffect(() => {
+    const applyFromQuery = window.setTimeout(() => {
+      const fromQuery = new URLSearchParams(window.location.search).get("use");
+      if (!fromQuery) return;
+      const match = lifestyleCategories.find(
+        (category) =>
+          category.id === fromQuery.toLowerCase() ||
+          category.name.toLowerCase() === fromQuery.toLowerCase(),
+      );
+      if (match) setIntendedUse(match.name);
+    }, 0);
+
+    const onIntendedUse = (event: Event) => {
+      const detail = (event as CustomEvent<string>).detail;
+      if (typeof detail === "string") setIntendedUse(detail);
+    };
+    window.addEventListener("ss:intended-use", onIntendedUse);
+    return () => {
+      window.clearTimeout(applyFromQuery);
+      window.removeEventListener("ss:intended-use", onIntendedUse);
+    };
+  }, []);
+
+  const region = postcodeRegion(postcode);
+  const hint = region ? regionHints[region] : null;
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -120,18 +168,39 @@ export function EnquiryForm() {
                   <Field label="Name" name="name" required autoComplete="name" />
                   <Field label="Email" name="email" type="email" required autoComplete="email" />
                   <Field label="Phone (optional)" name="phone" type="tel" autoComplete="tel" />
-                  <Field
-                    label="Postcode"
-                    name="postcode"
-                    required
-                    autoComplete="postal-code"
-                    inputMode="numeric"
-                    pattern="[0-9]{4}"
-                    title="Four-digit Australian postcode"
-                  />
+                  <label className="grid content-start gap-2">
+                    <span className="font-heading text-[13px] tracking-[0.16em] text-mid uppercase">
+                      Postcode
+                    </span>
+                    <input
+                      name="postcode"
+                      required
+                      autoComplete="postal-code"
+                      inputMode="numeric"
+                      pattern="[0-9]{4}"
+                      title="Four-digit Australian postcode"
+                      value={postcode}
+                      onChange={(event) => setPostcode(event.target.value)}
+                      className="min-h-13 rounded-2xl border border-line bg-cream-soft px-4 text-[15px] text-dark outline-none transition placeholder:text-mid/60 focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
+                    />
+                    <span aria-live="polite" className="-mt-0.5 min-h-4 text-[12px] leading-4">
+                      {hint ? (
+                        <span className={hint.inArea ? "text-accent-strong" : "text-mid"}>
+                          {hint.inArea ? "✓ " : ""}
+                          {hint.text}
+                        </span>
+                      ) : null}
+                    </span>
+                  </label>
                 </div>
 
-                <SelectField label="Intended use" name="intended-use" required>
+                <SelectField
+                  label="Intended use"
+                  name="intended-use"
+                  required
+                  value={intendedUse}
+                  onChange={(event) => setIntendedUse(event.target.value)}
+                >
                   <option value="">Choose a lifestyle space…</option>
                   {lifestyleCategories.map((category) => (
                     <option key={category.id} value={category.name}>
@@ -240,13 +309,20 @@ function SelectField({
   label,
   name,
   required,
+  value,
+  onChange,
   children,
 }: {
   label: string;
   name: string;
   required?: boolean;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   children: React.ReactNode;
 }) {
+  const controlProps =
+    value !== undefined ? { value, onChange } : { defaultValue: "" };
+
   return (
     <label className="grid gap-2">
       <span className="font-heading text-[13px] tracking-[0.16em] text-mid uppercase">
@@ -256,7 +332,7 @@ function SelectField({
         <select
           name={name}
           required={required}
-          defaultValue=""
+          {...controlProps}
           className="min-h-13 w-full appearance-none rounded-2xl border border-line bg-cream-soft px-4 pr-11 text-[15px] text-dark outline-none transition focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
         >
           {children}

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { business, type SiteConfig } from "@/lib/site-config";
 
@@ -13,10 +13,34 @@ const logoDimensions: Record<string, { width: number; height: number }> = {
 
 export function SiteHeader({ site }: { site: SiteConfig }) {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const dims = logoDimensions[site.id];
 
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      setScrolled(window.scrollY > 8);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
+
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-cream/85 backdrop-blur">
+    <header
+      className={`sticky top-0 z-40 border-b bg-cream/85 backdrop-blur transition-[border-color,box-shadow] duration-300 ${
+        scrolled
+          ? "border-line shadow-[0_16px_40px_-32px_rgba(44,40,37,0.5)]"
+          : "border-transparent"
+      }`}
+    >
       <div className="mx-auto flex h-20 w-full max-w-[1280px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link
           href={`/${site.id}`}

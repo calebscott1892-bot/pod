@@ -1,6 +1,13 @@
+"use client";
+
 import { Reveal } from "@/components/shared/reveal";
 
 import { lifestyleCategories, type LifestyleCategory } from "./categories";
+
+/** Tells the enquiry form which space the visitor was looking at. */
+function announceIntendedUse(name: string) {
+  window.dispatchEvent(new CustomEvent("ss:intended-use", { detail: name }));
+}
 
 export function LifestyleCategories() {
   return (
@@ -43,6 +50,7 @@ export function LifestyleCategories() {
                 </p>
                 <a
                   href="#enquire"
+                  onClick={() => announceIntendedUse(category.name)}
                   className="mt-2 inline-flex min-h-11 items-center gap-1.5 font-heading text-[13px] tracking-[0.14em] text-accent-strong uppercase transition hover:gap-2.5"
                 >
                   Enquire about this space

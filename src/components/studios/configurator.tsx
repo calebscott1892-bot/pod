@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Reveal } from "@/components/shared/reveal";
 import { business } from "@/lib/site-config";
@@ -36,6 +36,24 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
   const resolved = resolveConfig(config);
   const total = configTotal(config);
   const stepIndex = steps.findIndex((item) => item.id === step);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [barVisible, setBarVisible] = useState(false);
+
+  // The mobile total bar only shows while the configurator is on screen.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          setBarVisible(entry.isIntersecting);
+        }
+      },
+      { rootMargin: "-25% 0px -10% 0px" },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   function update(partial: Partial<StudioConfig>) {
     onConfigChange({ ...config, ...partial });
@@ -43,6 +61,7 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
 
   return (
     <section
+      ref={sectionRef}
       id="configurator"
       className="scroll-mt-24 bg-cream-soft"
       aria-labelledby="configurator-heading"
@@ -77,7 +96,10 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
               </div>
             </Reveal>
 
-            <div className="shape-soft mt-5 border border-line bg-white p-6 shadow-[0_36px_90px_-65px_rgba(44,40,37,0.6)]">
+            <div
+              id="studio-summary"
+              className="shape-soft mt-5 scroll-mt-28 border border-line bg-white p-6 shadow-[0_36px_90px_-65px_rgba(44,40,37,0.6)]"
+            >
               <p className="font-heading text-[13px] tracking-[0.18em] text-accent-strong uppercase">
                 Your studio
               </p>
@@ -103,11 +125,13 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
                 <span className="font-heading text-[14px] tracking-[0.14em] text-mid uppercase">
                   Total
                 </span>
-                <span className="font-heading text-[30px] tracking-tight text-dark">
-                  {formatAud(total)}
-                </span>
+                <AnimatedPrice
+                  value={total}
+                  className="font-heading text-[30px] tracking-tight text-dark"
+                />
               </div>
               <CheckoutButton config={config} total={total} />
+              <CopyDesignLink config={config} />
             </div>
           </aside>
 
@@ -182,6 +206,38 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Mobile: running total pinned to the thumb zone while configuring. */}
+      <div
+        aria-hidden={!barVisible}
+        inert={!barVisible || undefined}
+        className={`fixed inset-x-0 bottom-0 z-30 border-t border-line bg-white/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur transition-transform duration-300 md:hidden ${
+          barVisible ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
+        <div className="mx-auto flex w-full max-w-[640px] items-center justify-between gap-4">
+          <div>
+            <p className="font-heading text-[11px] tracking-[0.14em] text-mid uppercase">
+              Your studio
+            </p>
+            <AnimatedPrice
+              value={total}
+              className="font-heading text-[22px] leading-tight tracking-tight text-dark"
+            />
+          </div>
+          <button
+            type="button"
+            onClick={() =>
+              document
+                .getElementById("studio-summary")
+                ?.scrollIntoView({ behavior: "smooth", block: "center" })
+            }
+            className="inline-flex min-h-12 items-center rounded-full bg-dark px-6 font-heading text-[12px] tracking-[0.1em] text-cream uppercase transition hover:bg-accent-strong"
+          >
+            Review &amp; order
+          </button>
         </div>
       </div>
     </section>
@@ -410,6 +466,79 @@ function SummaryRow({ label, value }: { label: string; value: string }) {
 
 function priceLabel(price: number): string {
   return price === 0 ? "Included" : `+${formatAud(price)}`;
+}
+
+/** Tweens between totals so price changes read as motion, not a jump. */
+function AnimatedPrice({ value, className }: { value: number; className?: string }) {
+  const [display, setDisplay] = useState(value);
+  const prevRef = useRef(value);
+
+  useEffect(() => {
+    const from = prevRef.current;
+    if (from === value) return;
+    prevRef.current = value;
+
+    const start = performance.now();
+    const duration = window.matchMedia("(prefers-reduced-motion: reduce)")
+      .matches
+      ? 0
+      : 420;
+    let frame = 0;
+    const tick = (now: number) => {
+      const t = duration === 0 ? 1 : Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setDisplay(Math.round(from + (value - from) * eased));
+      if (t < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [value]);
+
+  return <span className={className}>{formatAud(display)}</span>;
+}
+
+/** Builds a shareable URL for the current design and copies it. */
+function CopyDesignLink({ config }: { config: StudioConfig }) {
+  const [state, setState] = useState<"idle" | "copied" | "error">("idle");
+
+  async function copy() {
+    const params = new URLSearchParams({
+      style: config.styleId,
+      windows: config.windowId,
+      doors: config.doorId,
+      cladding: config.claddingId,
+    });
+    const url = `${window.location.origin}/studios?${params.toString()}#configurator`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setState("copied");
+    } catch {
+      setState("error");
+    }
+    window.setTimeout(() => setState("idle"), 2400);
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-line bg-cream-soft px-5 font-heading text-[12px] tracking-[0.1em] text-dark uppercase transition hover:border-accent-strong hover:text-accent-strong"
+    >
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+        <path
+          d="M6.2 8.8a3 3 0 0 0 4.2 0l2.4-2.4a3 3 0 1 0-4.2-4.2l-1 1M8.8 6.2a3 3 0 0 0-4.2 0L2.2 8.6a3 3 0 1 0 4.2 4.2l1-1"
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+        />
+      </svg>
+      {state === "copied"
+        ? "Link copied — share your design"
+        : state === "error"
+          ? "Copy blocked — try again"
+          : "Copy design link"}
+    </button>
+  );
 }
 
 function CheckoutButton({

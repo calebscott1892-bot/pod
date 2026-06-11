@@ -4,6 +4,7 @@ import { LifestyleCategories } from "@/components/rentals/lifestyle-categories";
 import { LifestyleStrip } from "@/components/rentals/lifestyle-strip";
 import { RentalsHero } from "@/components/rentals/rentals-hero";
 import { ServiceArea } from "@/components/rentals/service-area";
+import { BackToTop } from "@/components/shared/back-to-top";
 import { Curve } from "@/components/shared/curve";
 import { HowItWorks, type ProcessStep } from "@/components/shared/how-it-works";
 import { SiteFooter } from "@/components/shared/site-footer";
@@ -37,7 +38,7 @@ export default function RentalsPage() {
   return (
     <>
       <SiteHeader site={sites.rentals} />
-      <main>
+      <main id="main-content">
         <RentalsHero />
         <LifestyleCategories />
         <HowItWorks
@@ -53,6 +54,7 @@ export default function RentalsPage() {
         <EnquiryForm />
       </main>
       <SiteFooter site={sites.rentals} />
+      <BackToTop />
     </>
   );
 }

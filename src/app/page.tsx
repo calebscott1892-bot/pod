@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="relative flex min-h-screen flex-col">
+    <main id="main-content" className="relative flex min-h-screen flex-col">
       <div className="video-placeholder" aria-hidden="true" />
 
       <div className="relative mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-center px-4 py-16 text-center sm:px-6">

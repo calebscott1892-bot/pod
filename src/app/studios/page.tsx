@@ -3,6 +3,7 @@ import { StudioJourney } from "@/components/studios/studio-journey";
 import { StudiosFaq } from "@/components/studios/studios-faq";
 import { StudiosHero } from "@/components/studios/studios-hero";
 import { StudiosShell } from "@/components/studios/studios-shell";
+import { BackToTop } from "@/components/shared/back-to-top";
 import { Curve } from "@/components/shared/curve";
 import { SiteFooter } from "@/components/shared/site-footer";
 import { SiteHeader } from "@/components/shared/site-header";
@@ -12,7 +13,7 @@ export default function StudiosPage() {
   return (
     <>
       <SiteHeader site={sites.studios} />
-      <main>
+      <main id="main-content">
         <StudiosHero />
         <StudiosShell />
         <StudioJourney />
@@ -22,6 +23,7 @@ export default function StudiosPage() {
         <StudiosFaq />
       </main>
       <SiteFooter site={sites.studios} />
+      <BackToTop />
     </>
   );
 }

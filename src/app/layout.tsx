@@ -59,6 +59,12 @@ export default function RootLayout({
       className={`${arcon.variable} ${corbel.variable} ${haroldGraham.variable} ${sophistica.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-cream font-sans text-dark">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-dark focus:px-6 focus:py-3 focus:font-heading focus:text-[13px] focus:tracking-[0.1em] focus:text-cream focus:uppercase"
+        >
+          Skip to content
+        </a>
         {children}
       </body>
     </html>

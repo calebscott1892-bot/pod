@@ -21,7 +21,7 @@ export default async function OrderSuccessPage({
   return (
     <>
       <SiteHeader site={sites.studios} />
-      <main className="relative flex flex-1 items-center overflow-hidden">
+      <main id="main-content" className="relative flex flex-1 items-center overflow-hidden">
         <div className="video-placeholder" aria-hidden="true" />
         <div className="relative mx-auto w-full max-w-[720px] px-4 py-20 text-center sm:px-6">
           <span className="mx-auto grid size-20 place-items-center rounded-full bg-accent-soft text-accent-strong">
