@@ -44,7 +44,7 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
   return (
     <section
       id="configurator"
-      className="scroll-mt-24 border-y border-line bg-cream-soft"
+      className="scroll-mt-24 bg-cream-soft"
       aria-labelledby="configurator-heading"
     >
       <div className="mx-auto w-full max-w-[1280px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">

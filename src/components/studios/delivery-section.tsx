@@ -34,7 +34,7 @@ export function DeliverySection() {
   return (
     <section
       id="delivery"
-      className="border-y border-line bg-cream-soft"
+      className="bg-cream-soft"
       aria-labelledby="delivery-heading"
     >
       <div className="mx-auto grid w-full max-w-[1280px] gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:gap-16 lg:px-8 lg:py-24">

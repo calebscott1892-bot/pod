@@ -52,7 +52,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-corbel), "Corbel", system-ui, sans-serif;
-  overflow-x: hidden;
+  /* clip, not hidden — hidden creates a scroll container and silently
+     disables every position: sticky descendant (header, journey pin). */
+  overflow-x: clip;
 }
 
 html {
@@ -252,6 +254,189 @@ body::after {
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Studio journey — pinned scroll sequence on the Studios page. JS sets
+   --journey (0–1), data-stage (0–3), data-clad and data-door on the track;
+   everything below is driven from those. Server-rendered defaults show the
+   finished studio, so no-JS and reduced-motion visitors see the full story.
+--------------------------------------------------------------------------- */
+
+.j-s1,
+.j-s2,
+.j-s3 {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.journey-track.ge1 .j-s1,
+.journey-track.ge2 .j-s2,
+.journey-track.ge3 .j-s3 {
+  opacity: 1;
+  transform: none;
+}
+
+/* Sun rises as the journey progresses. */
+.j-sun {
+  transform: translateY(calc((1 - var(--journey, 1)) * 64px));
+}
+
+/* Cladding colour follows the cycling combo. */
+.j-cladding {
+  fill: #8faf8a;
+  transition: fill 0.5s ease;
+}
+
+.journey-track[data-clad="cream"] .j-cladding {
+  fill: #f0e3db;
+}
+
+.journey-track[data-clad="coastal"] .j-cladding {
+  fill: #7eb4c4;
+}
+
+.journey-track[data-clad="charcoal"] .j-cladding {
+  fill: #4a4a4a;
+}
+
+.journey-track[data-clad="warm-white"] .j-cladding {
+  fill: #f5f0ea;
+}
+
+.journey-track[data-clad="sage"] .j-cladding {
+  fill: #8faf8a;
+}
+
+.j-boards {
+  stroke: #2c2825;
+  transition: stroke 0.5s ease;
+}
+
+.journey-track[data-clad="charcoal"] .j-boards {
+  stroke: #ffffff;
+}
+
+/* Door options crossfade while the combos cycle. A door renders only
+   when the stage has reached "customise" AND its variant is selected. */
+.j-door {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+.journey-track.ge1[data-door="sliding"] .j-door-sliding,
+.journey-track.ge1[data-door="french"] .j-door-french,
+.journey-track.ge1[data-door="barn"] .j-door-barn {
+  opacity: 1;
+  transform: none;
+}
+
+/* Move-in moment: warm light glows through the glass. */
+.j-warm {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.journey-track[data-stage="3"] .j-warm {
+  opacity: 1;
+}
+
+/* Captions: dimmed until their stage is active. */
+.j-cap {
+  opacity: 0.4;
+  transition: opacity 0.5s ease;
+}
+
+.j-mcap {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.journey-track[data-stage="0"] .j-cap-0,
+.journey-track[data-stage="1"] .j-cap-1,
+.journey-track[data-stage="2"] .j-cap-2,
+.journey-track[data-stage="3"] .j-cap-3 {
+  opacity: 1;
+}
+
+.j-cap-dot {
+  background: var(--ss-cream);
+  border: 2px solid var(--ss-line);
+  transition:
+    background 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.journey-track[data-stage="0"] .j-cap-0 .j-cap-dot,
+.journey-track[data-stage="1"] .j-cap-1 .j-cap-dot,
+.journey-track[data-stage="2"] .j-cap-2 .j-cap-dot,
+.journey-track[data-stage="3"] .j-cap-3 .j-cap-dot {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+
+.j-dot {
+  background: var(--ss-line);
+  transition: background 0.4s ease;
+}
+
+.journey-track[data-stage="0"] .j-dot-0,
+.journey-track[data-stage="1"] .j-dot-1,
+.journey-track[data-stage="2"] .j-dot-2,
+.journey-track[data-stage="3"] .j-dot-3 {
+  background: var(--accent-strong);
+}
+
+/* Progress rail beside the captions. */
+.j-rail::before,
+.j-rail::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 0;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--ss-line);
+}
+
+.j-rail::after {
+  background: var(--accent-strong);
+  transform-origin: top;
+  transform: scaleY(var(--journey, 1));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Unpin the journey: a single static frame of the finished studio. */
+  .journey-track {
+    height: auto !important;
+  }
+
+  .journey-stage {
+    position: static !important;
+    height: auto !important;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .j-s1,
+  .j-s2,
+  .j-s3,
+  .j-cap,
+  .j-mcap {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .j-mcap {
+    position: static !important;
   }
 }
 

@@ -6,7 +6,7 @@ const livingChips = ["Work", "Retreat", "Hobby", "Storage", "Property value"];
 
 export function LifestyleStrip() {
   return (
-    <section className="border-y border-line bg-cream-soft" aria-labelledby="strip-heading">
+    <section className="bg-cream-soft" aria-labelledby="strip-heading">
       <div className="mx-auto grid w-full max-w-[1280px] items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:px-8 lg:py-24">
         <Reveal>
           <div className="shape-arch relative aspect-[4/3] overflow-hidden border border-line shadow-[0_40px_90px_-60px_rgba(44,40,37,0.6)]">

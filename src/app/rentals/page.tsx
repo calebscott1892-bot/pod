@@ -1,8 +1,10 @@
+import { BrandStatement } from "@/components/rentals/brand-statement";
 import { EnquiryForm } from "@/components/rentals/enquiry-form";
 import { LifestyleCategories } from "@/components/rentals/lifestyle-categories";
 import { LifestyleStrip } from "@/components/rentals/lifestyle-strip";
 import { RentalsHero } from "@/components/rentals/rentals-hero";
 import { ServiceArea } from "@/components/rentals/service-area";
+import { Curve } from "@/components/shared/curve";
 import { HowItWorks, type ProcessStep } from "@/components/shared/how-it-works";
 import { SiteFooter } from "@/components/shared/site-footer";
 import { SiteHeader } from "@/components/shared/site-header";
@@ -43,8 +45,11 @@ export default function RentalsPage() {
           intro="A considered process with one team from start to finish — no subcontractors, no surprises."
           steps={processSteps}
         />
+        <Curve />
         <LifestyleStrip />
+        <Curve flip />
         <ServiceArea />
+        <BrandStatement />
         <EnquiryForm />
       </main>
       <SiteFooter site={sites.rentals} />

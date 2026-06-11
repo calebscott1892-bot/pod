@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { Curve } from "@/components/shared/curve";
+
 import { Configurator } from "./configurator";
 import { StyleGrid } from "./style-grid";
 import { defaultConfig, type StudioConfig } from "./studio-data";
@@ -28,12 +30,14 @@ export function StudiosShell() {
   return (
     <>
       <StyleGrid selectedStyleId={config.styleId} onChoose={handleStyleChosen} />
+      <Curve />
       <Configurator
         config={config}
         onConfigChange={setConfig}
         step={step}
         onStepChange={setStep}
       />
+      <Curve flip />
     </>
   );
 }
