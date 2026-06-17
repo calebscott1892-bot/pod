@@ -9,6 +9,17 @@
   --ss-mid: #6b5e58;
   --ss-line: #e0d0c8;
 
+  /* Supporting natural palette — revived from the original Space Sheds
+     design. Used for illustrations (studio previews, landscaping) and
+     organic accents; the brand accents above stay the lead identity. */
+  --ss-sage: #b8c7a3;
+  --ss-pistachio: #d7e2c0;
+  --ss-eucalyptus: #6f8067;
+  --ss-olive: #3d4636;
+  --ss-clay: #d8c4ad;
+  --ss-blush: #edc3c0;
+  --ss-glass: #31494d;
+
   /* Accent defaults to Rentals blue; each site overrides via data-site */
   --accent: #4093d9;
   --accent-soft: #ddeaf6;
@@ -41,6 +52,10 @@
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
   --color-accent-strong: var(--accent-strong);
+  --color-sage: var(--ss-sage);
+  --color-eucalyptus: var(--ss-eucalyptus);
+  --color-olive: var(--ss-olive);
+  --color-clay: var(--ss-clay);
   --font-sans: var(--font-corbel);
   --font-heading: var(--font-arcon);
   --font-script: var(--font-harold);
