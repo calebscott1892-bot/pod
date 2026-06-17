@@ -11,6 +11,8 @@ export type StudioStyle = {
   basePrice: number;
   gradient: string;
   icon: "gym" | "office" | "creative" | "craft" | "wellness" | "cabana" | "business";
+  /** Signature finish shown on the card and pre-selected on "Customise & buy". */
+  signature: { windowId: string; doorId: string; claddingId: string };
 };
 
 export const studioStyles: StudioStyle[] = [
@@ -21,6 +23,7 @@ export const studioStyles: StudioStyle[] = [
     basePrice: 18500,
     gradient: "linear-gradient(150deg, #f8e7da 8%, #eec3a8 56%, #e2a583 100%)",
     icon: "gym",
+    signature: { windowId: "feature", doorId: "sliding", claddingId: "charcoal" },
   },
   {
     id: "office",
@@ -29,6 +32,7 @@ export const studioStyles: StudioStyle[] = [
     basePrice: 17500,
     gradient: "linear-gradient(155deg, #f9eee2 6%, #ecd2b8 55%, #d9b894 100%)",
     icon: "office",
+    signature: { windowId: "standard", doorId: "french", claddingId: "warm-white" },
   },
   {
     id: "creative",
@@ -37,6 +41,7 @@ export const studioStyles: StudioStyle[] = [
     basePrice: 18000,
     gradient: "linear-gradient(145deg, #fae9e0 8%, #f2c9b6 54%, #e6a98e 100%)",
     icon: "creative",
+    signature: { windowId: "feature", doorId: "sliding", claddingId: "coastal" },
   },
   {
     id: "craft",
@@ -45,6 +50,7 @@ export const studioStyles: StudioStyle[] = [
     basePrice: 17000,
     gradient: "linear-gradient(150deg, #f7eadf 6%, #e9cdb4 55%, #d8af90 100%)",
     icon: "craft",
+    signature: { windowId: "standard", doorId: "barn", claddingId: "cream" },
   },
   {
     id: "wellness",
@@ -53,6 +59,7 @@ export const studioStyles: StudioStyle[] = [
     basePrice: 19500,
     gradient: "linear-gradient(155deg, #fbeee6 8%, #f3d3c0 52%, #e8b29a 100%)",
     icon: "wellness",
+    signature: { windowId: "feature", doorId: "french", claddingId: "sage" },
   },
   {
     id: "cabana",
@@ -61,6 +68,7 @@ export const studioStyles: StudioStyle[] = [
     basePrice: 19000,
     gradient: "linear-gradient(150deg, #f7e9da 6%, #eccdb0 55%, #dfae8c 100%)",
     icon: "cabana",
+    signature: { windowId: "feature", doorId: "sliding", claddingId: "coastal" },
   },
   {
     id: "business",
@@ -69,6 +77,7 @@ export const studioStyles: StudioStyle[] = [
     basePrice: 17500,
     gradient: "linear-gradient(160deg, #f6ecdf 6%, #e7d0ba 55%, #d3b394 100%)",
     icon: "business",
+    signature: { windowId: "standard", doorId: "french", claddingId: "charcoal" },
   },
 ];
 

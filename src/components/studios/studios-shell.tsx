@@ -31,8 +31,8 @@ export function StudiosShell() {
     setConfig(next);
   }
 
-  function handleStyleChosen(styleId: string) {
-    changeConfig({ ...config, styleId });
+  function handleStyleChosen(next: StudioConfig) {
+    changeConfig(next);
     setStep("customise");
     document
       .getElementById("configurator")
