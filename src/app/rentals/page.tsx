@@ -1,4 +1,5 @@
 import { BrandStatement } from "@/components/rentals/brand-statement";
+import { DayJourney } from "@/components/rentals/day-journey";
 import { EnquiryForm } from "@/components/rentals/enquiry-form";
 import { LifestyleCategories } from "@/components/rentals/lifestyle-categories";
 import { LifestyleStrip } from "@/components/rentals/lifestyle-strip";
@@ -41,6 +42,7 @@ export default function RentalsPage() {
       <main id="main-content">
         <RentalsHero />
         <LifestyleCategories />
+        <DayJourney />
         <HowItWorks
           title="From first look to move-in day."
           intro="A considered process with one team from start to finish — no subcontractors, no surprises."

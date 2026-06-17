@@ -440,6 +440,160 @@ body::after {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Rentals day-in-the-life journey — the same studio carried through a day:
+   dawn gym, daylight office, dusk retreat with the lights on. JS sets
+   --journey (0–1), data-stage (0–2) and --dj-sun-x/y on the track. Server
+   renders the dusk frame, so no-JS and reduced-motion visitors see the
+   warm, lit "sanctuary" moment as a single frame.
+--------------------------------------------------------------------------- */
+
+/* Sky layers crossfade between times of day. */
+.dj-sky {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.dj-track[data-stage="0"] .dj-sky-dawn,
+.dj-track[data-stage="1"] .dj-sky-day,
+.dj-track[data-stage="2"] .dj-sky-dusk {
+  opacity: 1;
+}
+
+/* Sun/celestial body arcs across (position driven from JS). */
+.dj-sun {
+  transform: translate(var(--dj-sun-x, 392px), var(--dj-sun-y, 122px));
+}
+
+.dj-sun circle {
+  fill: #f5b95a;
+  transition: fill 0.9s ease;
+}
+
+.dj-track[data-stage="2"] .dj-sun circle {
+  fill: #ec8f6a;
+}
+
+/* Stars only at dusk. */
+.dj-stars {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.dj-track[data-stage="2"] .dj-stars {
+  opacity: 1;
+}
+
+/* Interior scenes crossfade with the time of day. */
+.dj-scene {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.dj-track[data-stage="0"] .dj-scene-gym,
+.dj-track[data-stage="1"] .dj-scene-office,
+.dj-track[data-stage="2"] .dj-scene-retreat {
+  opacity: 1;
+}
+
+/* Warm window glow builds toward dusk. */
+.dj-warm {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.dj-track[data-stage="1"] .dj-warm {
+  opacity: 0.35;
+}
+
+.dj-track[data-stage="2"] .dj-warm {
+  opacity: 1;
+}
+
+/* Captions: dimmed until their stage is active (desktop list). */
+.dj-cap {
+  opacity: 0.4;
+  transition: opacity 0.5s ease;
+}
+
+.dj-mcap {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.dj-track[data-stage="0"] .dj-cap-0,
+.dj-track[data-stage="1"] .dj-cap-1,
+.dj-track[data-stage="2"] .dj-cap-2 {
+  opacity: 1;
+}
+
+.dj-cap-dot {
+  background: var(--ss-cream);
+  border: 2px solid var(--ss-line);
+  transition:
+    background 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.dj-track[data-stage="0"] .dj-cap-0 .dj-cap-dot,
+.dj-track[data-stage="1"] .dj-cap-1 .dj-cap-dot,
+.dj-track[data-stage="2"] .dj-cap-2 .dj-cap-dot {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+
+.dj-dot {
+  background: var(--ss-line);
+  transition: background 0.4s ease;
+}
+
+.dj-track[data-stage="0"] .dj-dot-0,
+.dj-track[data-stage="1"] .dj-dot-1,
+.dj-track[data-stage="2"] .dj-dot-2 {
+  background: var(--accent-strong);
+}
+
+.dj-rail::before,
+.dj-rail::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 0;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--ss-line);
+}
+
+.dj-rail::after {
+  background: var(--accent-strong);
+  transform-origin: top;
+  transform: scaleY(var(--journey, 1));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Unpin: a single static frame of the dusk "lights on" moment. */
+  .dj-track {
+    height: auto !important;
+  }
+
+  .dj-stage {
+    position: static !important;
+    height: auto !important;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .dj-cap,
+  .dj-mcap {
+    opacity: 1 !important;
+  }
+
+  .dj-mcap {
+    position: static !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
