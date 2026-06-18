@@ -136,7 +136,7 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
           </aside>
 
           <div>
-            <div className="flex flex-wrap gap-2.5" role="tablist" aria-label="Configurator steps">
+            <nav className="flex flex-wrap gap-2.5" aria-label="Configurator steps">
               {steps.map((item, index) => {
                 const active = item.id === step;
                 const complete = index < stepIndex;
@@ -144,8 +144,7 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
                   <button
                     key={item.id}
                     type="button"
-                    role="tab"
-                    aria-selected={active}
+                    aria-current={active ? "step" : undefined}
                     onClick={() => onStepChange(item.id)}
                     className={`inline-flex min-h-12 items-center gap-2.5 rounded-full border px-5 font-heading text-[13px] tracking-[0.1em] uppercase transition ${
                       active
@@ -172,7 +171,7 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
                   </button>
                 );
               })}
-            </div>
+            </nav>
 
             <div className="shape-soft mt-5 border border-line bg-white p-5 sm:p-7">
               {step === "style" ? (

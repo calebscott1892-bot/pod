@@ -144,7 +144,11 @@ export function EnquiryForm() {
         <Reveal delay={100}>
           <div className="shape-soft border border-line bg-white p-5 shadow-[0_40px_100px_-70px_rgba(44,40,37,0.65)] sm:p-8">
             {submitted ? (
-              <div className="flex min-h-[420px] flex-col items-center justify-center py-10 text-center">
+              <div
+                role="status"
+                aria-live="polite"
+                className="flex min-h-[420px] flex-col items-center justify-center py-10 text-center"
+              >
                 <span className="grid size-16 place-items-center rounded-full bg-accent-soft text-accent-strong">
                   <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
                     <path d="m7 15.5 5.5 5.5L23 9.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
