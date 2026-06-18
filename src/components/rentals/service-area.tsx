@@ -69,105 +69,175 @@ export function ServiceArea() {
   );
 }
 
-/** Stylised east-coast illustration — not to scale, purely indicative. */
+/* ───────────────────────────────────────────────────────────────────────────
+   Coverage map — the southeast-QLD / northern-NSW coast drawn from real
+   coastal waypoints (lon/lat) projected into the viewBox and smoothed with
+   Catmull-Rom splines, the same approach used for the full-Australia map.
+   East–west is exaggerated ~2.4× so the features of a narrow coastal strip
+   read at this size: Moreton Bay behind its sand islands, the Gold Coast,
+   and Cape Byron jutting east as the mainland's easternmost point.
+─────────────────────────────────────────────────────────────────────────── */
+
+type Pt = [number, number];
+
+// Projection: lon east, lat as positive degrees south.
+const project = ([lon, lat]: Pt): Pt => [
+  Number(((lon - 152.5) * 285).toFixed(1)),
+  Number(((lat - 26.0) * 135 + 40).toFixed(1)),
+];
+
+// Catmull-Rom through points → smooth cubic-bezier path (open).
+function spline(points: Pt[]): string {
+  if (points.length < 2) return "";
+  let d = `M ${points[0][0]} ${points[0][1]}`;
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = points[i - 1] ?? points[i];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = points[i + 2] ?? points[i + 1];
+    const c1x = p1[0] + (p2[0] - p0[0]) / 6;
+    const c1y = p1[1] + (p2[1] - p0[1]) / 6;
+    const c2x = p2[0] - (p3[0] - p1[0]) / 6;
+    const c2y = p2[1] - (p3[1] - p1[1]) / 6;
+    d += ` C ${c1x.toFixed(1)} ${c1y.toFixed(1)}, ${c2x.toFixed(1)} ${c2y.toFixed(1)}, ${p2[0]} ${p2[1]}`;
+  }
+  return d;
+}
+
+// Mainland ocean/bay shore, north → south (lon, °south).
+const MAINLAND: Pt[] = [
+  [153.19, 26.05], // north of Noosa (off top)
+  [153.1, 26.39], // Noosa
+  [153.09, 26.66], // Maroochydore — Sunshine Coast
+  [153.14, 26.8], // Caloundra
+  [153.05, 27.07], // into Moreton Bay (Pumicestone)
+  [153.1, 27.23], // Redcliffe
+  [153.18, 27.4], // Brisbane river mouth / Wynnum
+  [153.26, 27.58], // Redland Bay
+  [153.31, 27.78], // southern bay
+  [153.42, 27.96], // Southport — back to the ocean
+  [153.43, 28.03], // Surfers Paradise
+  [153.45, 28.1], // Burleigh
+  [153.55, 28.17], // Coolangatta / Tweed Heads
+  [153.57, 28.34], // Pottsville
+  [153.59, 28.45], // Cabarita
+  [153.64, 28.64], // Cape Byron — easternmost point
+  [153.58, 28.87], // Ballina
+  [153.45, 29.07], // Evans Head
+  [153.4, 29.27], // Iluka
+  [153.37, 29.43], // Yamba (off bottom)
+];
+
+// Sand islands enclosing Moreton Bay.
+const MORETON: Pt[] = [
+  [153.4, 27.02],
+  [153.46, 27.1],
+  [153.46, 27.26],
+  [153.42, 27.34],
+  [153.385, 27.24],
+  [153.38, 27.08],
+];
+const STRADBROKE: Pt[] = [
+  [153.42, 27.43],
+  [153.52, 27.52],
+  [153.53, 27.63],
+  [153.46, 27.74],
+  [153.41, 27.62],
+  [153.4, 27.49],
+];
+
+const CITIES: { name: string; at: Pt; dx: number; anchor: "start" | "end" }[] = [
+  { name: "Sunshine Coast", at: [153.09, 26.66], dx: -10, anchor: "end" },
+  { name: "Brisbane", at: [153.02, 27.47], dx: -10, anchor: "end" },
+  { name: "Gold Coast", at: [153.42, 28.0], dx: 12, anchor: "start" },
+  { name: "Byron Bay", at: [153.64, 28.64], dx: -12, anchor: "end" },
+  { name: "Lismore", at: [153.28, 28.81], dx: -10, anchor: "end" },
+];
+
 function CoverageMap() {
+  const mainland = MAINLAND.map(project);
+  const coast = spline(mainland);
+  const land = `${coast} L 0 520 L 0 30 Z`;
+  const moreton = `${spline(MORETON.map(project))} Z`;
+  const stradbroke = `${spline(STRADBROKE.map(project))} Z`;
+  const corridor = spline(mainland.slice(1, 17)); // Noosa → Ballina (served)
+  const borderY = (28.16 - 26.0) * 135 + 40;
+
   return (
     <svg
-      viewBox="0 0 440 560"
+      viewBox="0 0 372 560"
       role="img"
-      aria-label="Stylised map showing coverage from the Sunshine Coast in Queensland down to the Northern Rivers in New South Wales"
+      aria-label="Map of the service area along the coast from the Sunshine Coast in Queensland, past Brisbane, the Gold Coast and Byron Bay, down to the Northern Rivers in New South Wales"
       className="h-auto w-full"
     >
-      <rect width="440" height="560" rx="40" fill="var(--accent-soft)" />
+      {/* Ocean */}
+      <rect width="372" height="560" rx="26" fill="var(--accent-soft)" />
+      <g stroke="var(--accent-strong)" strokeOpacity="0.22" strokeWidth="2" strokeLinecap="round" fill="none">
+        <path d="M338 150c8-6 16-6 24 0" />
+        <path d="M340 250c8-6 16-6 24 0" />
+        <path d="M336 360c8-6 16-6 24 0" />
+      </g>
+      <text
+        x="350"
+        y="300"
+        fontSize="13"
+        fill="var(--accent-strong)"
+        fillOpacity="0.45"
+        fontFamily="var(--font-arcon)"
+        letterSpacing="3"
+        textAnchor="middle"
+        transform="rotate(90 350 300)"
+      >
+        PACIFIC OCEAN
+      </text>
 
-      {/* Land mass */}
-      <path
-        d="M0 40C0 17.9 17.9 0 40 0h250c-14 38 16 62 6 102 26 50-10 96 12 148-18 56 14 96-10 148 16 44-18 76-4 122H40c-22.1 0-40-17.9-40-40V40Z"
-        fill="var(--ss-cream-soft)"
-        stroke="var(--ss-line)"
-        strokeWidth="2"
-      />
+      {/* Land */}
+      <path d={land} fill="var(--ss-cream-soft)" />
+      <path d={moreton} fill="var(--ss-cream-soft)" stroke="var(--ss-olive)" strokeWidth="1.5" strokeOpacity="0.5" />
+      <path d={stradbroke} fill="var(--ss-cream-soft)" stroke="var(--ss-olive)" strokeWidth="1.5" strokeOpacity="0.5" />
 
-      {/* Coastal corridor highlight */}
-      <path
-        d="M288 96c4 44-16 78 4 126-14 52 12 92-6 142-6 18-2 36 2 50"
-        fill="none"
-        stroke="var(--accent)"
-        strokeOpacity="0.32"
-        strokeWidth="58"
-        strokeLinecap="round"
-      />
+      {/* Served corridor highlight + the coastline */}
+      <path d={corridor} fill="none" stroke="var(--accent-strong)" strokeOpacity="0.18" strokeWidth="22" strokeLinecap="round" />
+      <path d={coast} fill="none" stroke="var(--ss-olive)" strokeWidth="2.5" strokeOpacity="0.85" strokeLinejoin="round" />
 
       {/* QLD / NSW border */}
-      <path
-        d="M12 348h292"
-        stroke="var(--ss-mid)"
-        strokeWidth="1.6"
-        strokeDasharray="7 7"
-        strokeOpacity="0.55"
-      />
-      <text x="24" y="334" fontSize="15" fill="var(--ss-mid)" fontFamily="var(--font-arcon)" letterSpacing="2">
+      <path d={`M0 ${borderY.toFixed(1)} L 300 ${borderY.toFixed(1)}`} stroke="var(--ss-mid)" strokeWidth="1.4" strokeDasharray="6 7" strokeOpacity="0.55" />
+      <text x="20" y={borderY - 12} fontSize="14" fill="var(--ss-mid)" fontFamily="var(--font-arcon)" letterSpacing="2">
         QLD
       </text>
-      <text x="24" y="376" fontSize="15" fill="var(--ss-mid)" fontFamily="var(--font-arcon)" letterSpacing="2">
+      <text x="20" y={borderY + 26} fontSize="14" fill="var(--ss-mid)" fontFamily="var(--font-arcon)" letterSpacing="2">
         NSW
       </text>
 
-      {/* Route through the corridor */}
-      <path
-        d="M284 122c-10 36 8 60-2 96-8 32 10 56 0 92-6 26 8 44 0 72-4 16-6 28-8 40"
-        fill="none"
-        stroke="var(--accent-strong)"
-        strokeWidth="2"
-        strokeDasharray="2 8"
-        strokeLinecap="round"
-      />
-
-      <CityDot x={284} y={122} label="Sunshine Coast" />
-      <CityDot x={266} y={222} label="Brisbane" />
-      <CityDot x={282} y={312} label="Gold Coast" />
-      <CityDot x={282} y={416} label="Byron Bay" />
-      <CityDot x={222} y={462} label="Lismore" labelSide="left" />
-
-      {/* Ocean waves */}
-      <g stroke="var(--accent-strong)" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round" fill="none">
-        <path d="M376 150c8-6 16-6 24 0" />
-        <path d="M386 230c8-6 16-6 24 0" />
-        <path d="M372 330c8-6 16-6 24 0" />
-        <path d="M384 430c8-6 16-6 24 0" />
+      {/* Compass */}
+      <g transform="translate(346 34)">
+        <path d="M0 12 L0 -12 M0 -12 L-4 -5 M0 -12 L4 -5" stroke="var(--ss-mid)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        <text x="0" y="24" fontSize="11" fill="var(--ss-mid)" fontFamily="var(--font-arcon)" textAnchor="middle">
+          N
+        </text>
       </g>
+
+      {/* Cities */}
+      {CITIES.map((city) => {
+        const [x, y] = project(city.at);
+        return (
+          <g key={city.name}>
+            <circle cx={x} cy={y} r="9" fill="var(--accent)" fillOpacity="0.4" />
+            <circle cx={x} cy={y} r="4.5" fill="var(--accent-strong)" />
+            <text
+              x={x + city.dx}
+              y={y + 4}
+              fontSize="13.5"
+              textAnchor={city.anchor}
+              fill="var(--ss-dark)"
+              fontFamily="var(--font-arcon)"
+              style={{ paintOrder: "stroke", stroke: "var(--ss-cream)", strokeWidth: 3.5, strokeLinejoin: "round" }}
+            >
+              {city.name}
+            </text>
+          </g>
+        );
+      })}
     </svg>
-  );
-}
-
-function CityDot({
-  x,
-  y,
-  label,
-  labelSide = "right",
-}: {
-  x: number;
-  y: number;
-  label: string;
-  labelSide?: "left" | "right";
-}) {
-  const anchor = labelSide === "right" ? "start" : "end";
-  const textX = labelSide === "right" ? x + 16 : x - 16;
-
-  return (
-    <g>
-      <circle cx={x} cy={y} r="10" fill="var(--accent)" fillOpacity="0.35" />
-      <circle cx={x} cy={y} r="5" fill="var(--accent-strong)" />
-      <text
-        x={textX}
-        y={y + 5}
-        fontSize="15"
-        textAnchor={anchor}
-        fill="var(--ss-dark)"
-        fontFamily="var(--font-arcon)"
-      >
-        {label}
-      </text>
-    </g>
   );
 }
