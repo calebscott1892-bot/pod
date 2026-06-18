@@ -1,5 +1,19 @@
 export type SiteId = "rentals" | "studios";
 
+/**
+ * Canonical site origin for metadata, sitemap and robots. Prefers an
+ * explicit NEXT_PUBLIC_APP_URL, then Vercel's auto-injected production
+ * domain, then localhost. Trimmed and de-slashed so a stray newline in an
+ * env value can never produce an invalid URL at build time.
+ */
+export const siteUrl = (() => {
+  const explicit = process.env.NEXT_PUBLIC_APP_URL?.trim();
+  if (explicit) return explicit.replace(/\/+$/, "");
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
+  if (vercel) return `https://${vercel.replace(/\/+$/, "")}`;
+  return "http://localhost:3000";
+})();
+
 export const business = {
   legalName: "Kiwi Kiwi Industries Pty Ltd",
   abn: "36 149 338 018",

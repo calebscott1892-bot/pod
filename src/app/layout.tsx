@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+
+import { siteUrl } from "@/lib/site-config";
 import "./globals.css";
 
 const arcon = localFont({
@@ -32,9 +34,7 @@ const sophistica = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Spare Space — Premium Lifestyle Studios",
     template: "%s | Spare Space",

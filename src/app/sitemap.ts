@@ -1,23 +1,23 @@
 import type { MetadataRoute } from "next";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+import { siteUrl } from "@/lib/site-config";
 
+export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: `${base}/`,
+      url: `${siteUrl}/`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.6,
     },
     {
-      url: `${base}/rentals`,
+      url: `${siteUrl}/rentals`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${base}/studios`,
+      url: `${siteUrl}/studios`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
