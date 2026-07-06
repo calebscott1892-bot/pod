@@ -5,6 +5,11 @@ import { Reveal } from "@/components/shared/reveal";
 import { lifestyleCategories } from "./categories";
 import { CategoryScene } from "./category-scene";
 
+// Indicative entry rate (long-term weekly). Full pricing varies by door,
+// window and hire length — see the enquiry for a quote.
+const rentalFromWeekly = "$140";
+const rentalDeliveryFrom = "$250";
+
 /** Tells the enquiry form which space the visitor was looking at. */
 function announceIntendedUse(name: string) {
   window.dispatchEvent(new CustomEvent("ss:intended-use", { detail: name }));
@@ -48,6 +53,10 @@ export function LifestyleCategories() {
                 <p className="mt-1 text-[15px] leading-7 text-mid">
                   {category.line}
                 </p>
+                <p className="mt-2 font-heading text-[16px] tracking-tight text-dark">
+                  From {rentalFromWeekly}
+                  <span className="text-[13px] font-normal text-mid"> / week</span>
+                </p>
                 <a
                   href="#enquire"
                   onClick={() => announceIntendedUse(category.name)}
@@ -62,6 +71,12 @@ export function LifestyleCategories() {
             </Reveal>
           ))}
         </div>
+
+        <p className="mt-8 max-w-[720px] text-[14px] leading-6 text-mid">
+          Indicative long-term weekly rate. Rates vary by door, window and hire
+          length, with short and long-term hire available — send an enquiry for
+          a full quote. Delivery from {rentalDeliveryFrom}.
+        </p>
       </div>
     </section>
   );
