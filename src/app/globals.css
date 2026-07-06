@@ -41,6 +41,12 @@
   --accent-strong: #a0522d;
 }
 
+[data-site="living"] {
+  --accent: #8faf8a;
+  --accent-soft: #dfe7d6;
+  --accent-strong: #4c5a44;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

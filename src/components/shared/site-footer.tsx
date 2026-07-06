@@ -1,22 +1,19 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { business, group, sites, type SiteConfig } from "@/lib/site-config";
 
+import { BrandMark } from "./brand-mark";
+
 export function SiteFooter({ site }: { site: SiteConfig }) {
-  const otherSite = site.id === "rentals" ? sites.studios : sites.rentals;
+  const others = (["studios", "rentals", "living"] as const)
+    .filter((id) => id !== site.id)
+    .map((id) => sites[id]);
 
   return (
     <footer className="border-t border-line bg-cream-soft">
       <div className="mx-auto grid w-full max-w-[1280px] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_0.9fr_1fr] lg:gap-8 lg:px-8 lg:py-16">
         <div>
-          <Image
-            src={site.logo}
-            alt={site.logoAlt}
-            width={300}
-            height={220}
-            className="h-16 w-auto"
-          />
+          <BrandMark site={site} size="md" />
           <p className="mt-4 max-w-[340px] text-[15px] leading-7 text-mid">
             {site.tagline}
           </p>
@@ -35,14 +32,16 @@ export function SiteFooter({ site }: { site: SiteConfig }) {
             Get in touch
           </p>
           <ul className="mt-4 space-y-3 text-[15px] leading-6">
-            <li>
-              <a
-                href={business.phoneHref}
-                className="text-dark transition hover:text-accent-strong"
-              >
-                {business.phone}
-              </a>
-            </li>
+            {site.id === "rentals" ? (
+              <li>
+                <a
+                  href={business.phoneHref}
+                  className="text-dark transition hover:text-accent-strong"
+                >
+                  {business.phone}
+                </a>
+              </li>
+            ) : null}
             <li>
               <a
                 href={`mailto:${site.email}`}
@@ -68,15 +67,18 @@ export function SiteFooter({ site }: { site: SiteConfig }) {
           <p className="font-heading text-[13px] tracking-[0.18em] text-accent-strong uppercase">
             Spare Space family
           </p>
-          <p className="mt-4 text-[15px] leading-6 text-mid">
-            Looking to {site.id === "rentals" ? "own" : "rent"} instead?{" "}
-            <Link
-              href={`/${otherSite.id}`}
-              className="text-dark underline decoration-line underline-offset-4 transition hover:text-accent-strong"
-            >
-              Visit {otherSite.name}
-            </Link>
-          </p>
+          <ul className="mt-4 space-y-2 text-[15px] leading-6">
+            {others.map((other) => (
+              <li key={other.id}>
+                <Link
+                  href={`/${other.id}`}
+                  className="text-dark underline decoration-line underline-offset-4 transition hover:text-accent-strong"
+                >
+                  Visit {other.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
           <div className="mt-6 space-y-1 text-[13px] leading-6 text-mid">
             <p>
               © 2026 {site.legalEntity} · ABN {site.abn}

@@ -1,20 +1,15 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { business, type SiteConfig } from "@/lib/site-config";
 
-const logoDimensions: Record<string, { width: number; height: number }> = {
-  rentals: { width: 1024, height: 1024 },
-  studios: { width: 1890, height: 1417 },
-};
+import { BrandMark } from "./brand-mark";
 
 export function SiteHeader({ site }: { site: SiteConfig }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const dims = logoDimensions[site.id];
 
   useEffect(() => {
     let frame = 0;
@@ -47,14 +42,7 @@ export function SiteHeader({ site }: { site: SiteConfig }) {
           className="flex shrink-0 items-center"
           onClick={() => setOpen(false)}
         >
-          <Image
-            src={site.logo}
-            alt={site.logoAlt}
-            width={dims.width}
-            height={dims.height}
-            priority
-            className="h-12 w-auto sm:h-14"
-          />
+          <BrandMark site={site} priority />
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
@@ -70,12 +58,14 @@ export function SiteHeader({ site }: { site: SiteConfig }) {
         </nav>
 
         <div className="hidden items-center gap-5 md:flex">
-          <a
-            href={business.phoneHref}
-            className="font-heading text-[15px] tracking-[0.04em] text-dark transition hover:text-accent-strong"
-          >
-            {business.phone}
-          </a>
+          {site.id === "rentals" ? (
+            <a
+              href={business.phoneHref}
+              className="font-heading text-[15px] tracking-[0.04em] text-dark transition hover:text-accent-strong"
+            >
+              {business.phone}
+            </a>
+          ) : null}
           <a
             href={site.cta.href}
             className="inline-flex min-h-12 items-center rounded-full bg-dark px-6 font-heading text-[13px] tracking-[0.12em] text-cream uppercase transition hover:bg-accent-strong"
@@ -115,12 +105,14 @@ export function SiteHeader({ site }: { site: SiteConfig }) {
                 {item.label}
               </a>
             ))}
-            <a
-              href={business.phoneHref}
-              className="flex min-h-12 items-center border-b border-line font-heading text-[15px] tracking-[0.04em] text-dark"
-            >
-              Call {business.phone}
-            </a>
+            {site.id === "rentals" ? (
+              <a
+                href={business.phoneHref}
+                className="flex min-h-12 items-center border-b border-line font-heading text-[15px] tracking-[0.04em] text-dark"
+              >
+                Call {business.phone}
+              </a>
+            ) : null}
             <a
               href={site.cta.href}
               onClick={() => setOpen(false)}
