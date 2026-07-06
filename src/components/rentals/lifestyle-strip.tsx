@@ -12,7 +12,7 @@ export function LifestyleStrip() {
           <div className="shape-arch relative aspect-[4/3] overflow-hidden border border-line shadow-[0_40px_90px_-60px_rgba(44,40,37,0.6)]">
             <Image
               src="/assets/images/studios-real.jpg"
-              alt="Two Spare Space studios — charcoal and warm white with black-framed glass sliding doors — installed in a Queensland backyard"
+              alt="Two Spare Space studios, charcoal and warm white with black-framed glass sliding doors, installed in a Queensland backyard"
               fill
               sizes="(min-width: 1024px) 620px, 100vw"
               className="object-cover"
@@ -32,7 +32,7 @@ export function LifestyleStrip() {
           </h2>
           <p className="mt-5 max-w-[520px] text-[16px] leading-8 text-mid">
             These aren&apos;t renders. Our studios are already working hard
-            across Southeast Queensland — as gyms before sunrise, offices by
+            across Southeast Queensland, as gyms before sunrise, offices by
             day and retreats by the weekend. Portable lifestyle spaces that
             add flexibility, function and value to your property.
           </p>

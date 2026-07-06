@@ -4,9 +4,9 @@ import { business, sites } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Spare Space Rentals — Premium Lifestyle Studios, Delivered",
+    absolute: "Spare Space Rentals, Premium Lifestyle Studios, Delivered",
   },
-  description: `Rent a premium backyard studio — home gym, office, creative space or wellness retreat. Delivered and installed, ${business.serviceArea}. Call ${business.phone}.`,
+  description: `Rent a premium backyard studio, home gym, office, creative space or wellness retreat. Delivered and installed, ${business.serviceArea}. Call ${business.phone}.`,
   twitter: { card: "summary_large_image" },
 };
 

@@ -27,10 +27,10 @@ function postcodeRegion(value: string): "qld" | "nsw" | "outside" | null {
 }
 
 const regionHints: Record<"qld" | "nsw" | "outside", { text: string; inArea: boolean }> = {
-  qld: { text: "Southeast QLD — you're in our delivery area.", inArea: true },
-  nsw: { text: "Northern Rivers — you're in our delivery area.", inArea: true },
+  qld: { text: "Southeast QLD, you're in our delivery area.", inArea: true },
+  nsw: { text: "Northern Rivers, you're in our delivery area.", inArea: true },
   outside: {
-    text: "Outside our usual area — send through and we'll review your site individually.",
+    text: "Outside our usual area, send through and we'll review your site individually.",
     inArea: false,
   },
 };
@@ -41,7 +41,7 @@ export function EnquiryForm() {
   const [postcode, setPostcode] = useState("");
   const [, startTransition] = useTransition();
 
-  // Pre-select the space the visitor came from — a category card click
+  // Pre-select the space the visitor came from, a category card click
   // (custom event) or a shared link with ?use=<category>.
   useEffect(() => {
     const applyFromQuery = window.setTimeout(() => {
@@ -72,7 +72,7 @@ export function EnquiryForm() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // Optimistic UI — confirm immediately, deliver in the background.
+    // Optimistic UI, confirm immediately, deliver in the background.
     setSubmitted(true);
     startTransition(() => {
       void sendEnquiry(data);
@@ -80,13 +80,8 @@ export function EnquiryForm() {
   }
 
   return (
-    <section id="enquire" className="relative overflow-hidden bg-cream" aria-labelledby="enquire-heading">
-      <div
-        aria-hidden="true"
-        className="shape-blob absolute -bottom-40 -left-32 size-[420px] bg-accent-soft opacity-60"
-      />
-
-      <div className="relative mx-auto grid w-full max-w-[1280px] gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:px-8 lg:py-24">
+    <section id="enquire" className="bg-cream" aria-labelledby="enquire-heading">
+      <div className="mx-auto grid w-full max-w-[1280px] gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:px-8 lg:py-24">
         <Reveal>
           <p className="font-heading text-[13px] tracking-[0.22em] text-accent-strong uppercase">
             Make an enquiry
@@ -99,7 +94,7 @@ export function EnquiryForm() {
           </h2>
           <p className="mt-4 max-w-[440px] text-[16px] leading-8 text-mid">
             Tell us a little about your property and how you&apos;d use the
-            studio. We&apos;ll come back to you within one business day — no
+            studio. We&apos;ll come back to you within one business day, no
             pressure, no obligation.
           </p>
 
@@ -158,7 +153,7 @@ export function EnquiryForm() {
                   Your enquiry is on its way.
                 </h3>
                 <p className="mt-3 max-w-[380px] text-[15px] leading-7 text-mid">
-                  Thanks for reaching out — we&apos;ll reply within one
+                  Thanks for reaching out, we&apos;ll reply within one
                   business day. If it&apos;s urgent, call{" "}
                   <a href={business.phoneHref} className="text-dark underline decoration-line underline-offset-4">
                     {business.phone}
@@ -185,7 +180,7 @@ export function EnquiryForm() {
                       title="Four-digit Australian postcode"
                       value={postcode}
                       onChange={(event) => setPostcode(event.target.value)}
-                      className="min-h-13 rounded-2xl border border-line bg-cream-soft px-4 text-[15px] text-dark outline-none transition placeholder:text-mid/60 focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
+                      className="min-h-13 rounded-2xl border border-line bg-cream-soft px-4 text-[15px] text-dark outline-none transition placeholder:text-mid focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
                     />
                     <span aria-live="polite" className="-mt-0.5 min-h-4 text-[12px] leading-4">
                       {hint ? (
@@ -230,12 +225,12 @@ export function EnquiryForm() {
                   <textarea
                     name="message"
                     rows={4}
-                    placeholder="Tell us about your block, access, timing — anything useful."
-                    className="rounded-2xl border border-line bg-cream-soft px-4 py-3 text-[15px] leading-7 text-dark outline-none transition placeholder:text-mid/60 focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
+                    placeholder="Tell us about your block, access, timing, anything useful."
+                    className="rounded-2xl border border-line bg-cream-soft px-4 py-3 text-[15px] leading-7 text-dark outline-none transition placeholder:text-mid focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
                   />
                 </label>
 
-                {/* Honeypot — hidden from people, irresistible to bots. */}
+                {/* Honeypot, hidden from people, irresistible to bots. */}
                 <div className="hidden" aria-hidden="true">
                   <label>
                     Website
@@ -250,7 +245,7 @@ export function EnquiryForm() {
                   Send my enquiry
                 </button>
                 <p className="text-center text-[13px] leading-6 text-mid">
-                  Your details go straight to our team — never to a mailing
+                  Your details go straight to our team, never to a mailing
                   list.
                 </p>
               </form>
@@ -303,7 +298,7 @@ function Field({ label, name, type = "text", ...rest }: FieldProps) {
         name={name}
         type={type}
         {...rest}
-        className="min-h-13 rounded-2xl border border-line bg-cream-soft px-4 text-[15px] text-dark outline-none transition placeholder:text-mid/60 focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
+        className="min-h-13 rounded-2xl border border-line bg-cream-soft px-4 text-[15px] text-dark outline-none transition placeholder:text-mid focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
       />
     </label>
   );

@@ -3,21 +3,21 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Pinned day-in-the-life journey — one studio carried through a single
+ * Pinned day-in-the-life journey, one studio carried through a single
  * day: dawn gym, daylight office, dusk retreat with the lights on.
  *
  * Scroll progress drives --journey (0–1), data-stage (0–2) and the sun's
  * arc (--dj-sun-x/y) on the track; globals.css turns those into the sky,
  * sun, interior scene and window-glow transitions. The server renders the
- * dusk "lights on" frame, so visitors without JavaScript — and
- * reduced-motion visitors, for whom CSS unpins the section — see the
+ * dusk "lights on" frame, so visitors without JavaScript, and
+ * reduced-motion visitors, for whom CSS unpins the section, see the
  * warmest, most aspirational moment as a single still.
  */
 
 const captions = [
   {
     title: "Train before the world wakes",
-    body: "Roll out of bed and into your own gym. No drive, no queue — just you and the morning.",
+    body: "Roll out of bed and into your own gym. No drive, no queue, just you and the morning.",
   },
   {
     title: "Focus, uninterrupted",
@@ -25,7 +25,7 @@ const captions = [
   },
   {
     title: "Unwind in your retreat",
-    body: "As the light fades, your space becomes a sanctuary — yoga, a book, a quiet moment that's yours.",
+    body: "As the light fades, your space becomes a sanctuary, yoga, a book, a quiet moment that's yours.",
   },
 ];
 
@@ -156,7 +156,7 @@ function DayStudio() {
     <svg
       viewBox="0 0 520 400"
       role="img"
-      aria-label="A Spare Space studio through one day — a morning gym, a daytime office, and an evening retreat with the lights on"
+      aria-label="A Spare Space studio through one day, a morning gym, a daytime office, and an evening retreat with the lights on"
       className="mx-auto h-auto w-full max-w-[460px] lg:max-w-none"
     >
       <defs>

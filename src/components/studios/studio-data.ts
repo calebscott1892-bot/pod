@@ -1,5 +1,5 @@
 /**
- * Product catalogue for Spare Space Studios — the real product model from
+ * Product catalogue for Spare Space Studios, the real product model from
  * Paul (Jul 2026): one base build plus individually-priced options, with
  * named presets that pre-fill the configurator.
  *
@@ -62,12 +62,12 @@ export const optionGroups: OptionGroup[] = [
   {
     id: "roof",
     name: "Roof",
-    detail: "A style to match your own — an A-frame or a skillion angle.",
+    detail: "A style to match your own, an A-frame or a skillion angle.",
     layout: "cards",
     options: [
       { id: "a-frame", name: "A-Frame", detail: "Classic gable", price: 0, kind: "a-frame" },
-      { id: "skillion-right", name: "Skillion — right high", detail: "Angled, high on the right", price: 0, kind: "skillion-right" },
-      { id: "skillion-left", name: "Skillion — left high", detail: "Angled, high on the left", price: 0, kind: "skillion-left" },
+      { id: "skillion-right", name: "Skillion, right high", detail: "Angled, high on the right", price: 0, kind: "skillion-right" },
+      { id: "skillion-left", name: "Skillion, left high", detail: "Angled, high on the left", price: 0, kind: "skillion-left" },
     ],
   },
   {
@@ -77,18 +77,18 @@ export const optionGroups: OptionGroup[] = [
     bandBy: "kind",
     layout: "cards",
     options: [
-      { id: "slider-white", name: "Sliding — white", detail: "1510 × 2100", price: 0, swatch: swatches.white, kind: "Sliding door" },
-      { id: "slider-black", name: "Sliding — black", detail: "1510 × 2100", price: 445, swatch: swatches.black, kind: "Sliding door" },
-      { id: "single-vivid-white", name: "Single — Vivid White", detail: "820 × 2040", price: 2595, swatch: swatches.vividWhite, kind: "Single door" },
-      { id: "single-satin-black", name: "Single — Satin Black", detail: "820 × 2040", price: 2695, swatch: swatches.black, kind: "Single door" },
-      { id: "single-pink-sand", name: "Single — Pink Sand", detail: "820 × 2040", price: 2795, swatch: swatches.pink, kind: "Single door" },
-      { id: "single-blue", name: "Single — Blue New Life", detail: "820 × 2040", price: 2795, swatch: swatches.blue, kind: "Single door" },
-      { id: "single-green", name: "Single — Wedgewood Green", detail: "820 × 2040", price: 2795, swatch: swatches.green, kind: "Single door" },
-      { id: "french-vivid-white", name: "French — Vivid White", detail: "2 × 720 × 2040", price: 3995, swatch: swatches.vividWhite, kind: "French doors" },
-      { id: "french-satin-black", name: "French — Satin Black", detail: "2 × 720 × 2040", price: 4095, swatch: swatches.black, kind: "French doors" },
-      { id: "french-pink-sand", name: "French — Pink Sand", detail: "2 × 720 × 2040", price: 4195, swatch: swatches.pink, kind: "French doors" },
-      { id: "french-blue", name: "French — Blue New Life", detail: "2 × 720 × 2040", price: 4195, swatch: swatches.blue, kind: "French doors" },
-      { id: "french-green", name: "French — Wedgewood Green", detail: "2 × 720 × 2040", price: 4195, swatch: swatches.green, kind: "French doors" },
+      { id: "slider-white", name: "Sliding, white", detail: "1510 × 2100", price: 0, swatch: swatches.white, kind: "Sliding door" },
+      { id: "slider-black", name: "Sliding, black", detail: "1510 × 2100", price: 445, swatch: swatches.black, kind: "Sliding door" },
+      { id: "single-vivid-white", name: "Single, Vivid White", detail: "820 × 2040", price: 2595, swatch: swatches.vividWhite, kind: "Single door" },
+      { id: "single-satin-black", name: "Single, Satin Black", detail: "820 × 2040", price: 2695, swatch: swatches.black, kind: "Single door" },
+      { id: "single-pink-sand", name: "Single, Pink Sand", detail: "820 × 2040", price: 2795, swatch: swatches.pink, kind: "Single door" },
+      { id: "single-blue", name: "Single, Blue New Life", detail: "820 × 2040", price: 2795, swatch: swatches.blue, kind: "Single door" },
+      { id: "single-green", name: "Single, Wedgewood Green", detail: "820 × 2040", price: 2795, swatch: swatches.green, kind: "Single door" },
+      { id: "french-vivid-white", name: "French, Vivid White", detail: "2 × 720 × 2040", price: 3995, swatch: swatches.vividWhite, kind: "French doors" },
+      { id: "french-satin-black", name: "French, Satin Black", detail: "2 × 720 × 2040", price: 4095, swatch: swatches.black, kind: "French doors" },
+      { id: "french-pink-sand", name: "French, Pink Sand", detail: "2 × 720 × 2040", price: 4195, swatch: swatches.pink, kind: "French doors" },
+      { id: "french-blue", name: "French, Blue New Life", detail: "2 × 720 × 2040", price: 4195, swatch: swatches.blue, kind: "French doors" },
+      { id: "french-green", name: "French, Wedgewood Green", detail: "2 × 720 × 2040", price: 4195, swatch: swatches.green, kind: "French doors" },
     ],
   },
   {
@@ -154,8 +154,8 @@ export const optionGroups: OptionGroup[] = [
     layout: "cards",
     options: [
       { id: "standard", name: "Standard", price: 0 },
-      { id: "white", name: "Upgrade — White", price: 95 },
-      { id: "black", name: "Upgrade — Matt Black", price: 145 },
+      { id: "white", name: "Upgrade, White", price: 95 },
+      { id: "black", name: "Upgrade, Matt Black", price: 145 },
     ],
   },
   {
@@ -295,7 +295,7 @@ export const presets: Preset[] = [
   {
     id: "he-space",
     name: "He Space Studio",
-    line: "His space — workshop or studio.",
+    line: "His space, workshop or studio.",
     icon: "him",
     config: { roof: "skillion-right", door: "single-satin-black", hardware: "matt-black", trim: "black", wall: "black", window: "small", electrics: "black" },
   },

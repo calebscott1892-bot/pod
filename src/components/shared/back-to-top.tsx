@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-/** Floating back-to-top control for long pages. Desktop only — mobile
+/** Floating back-to-top control for long pages. Desktop only, mobile
  * keeps its thumb space (and, on Studios, the sticky total bar). */
 export function BackToTop() {
   const [visible, setVisible] = useState(false);

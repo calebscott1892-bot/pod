@@ -5,7 +5,7 @@ type Props = {
 };
 
 /**
- * Organic wave divider between cream and cream-soft sections — the soft
+ * Organic wave divider between cream and cream-soft sections, the soft
  * shape language of the brand applied to section boundaries.
  */
 export function Curve({ flip = false, className = "" }: Props) {

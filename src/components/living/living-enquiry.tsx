@@ -29,12 +29,8 @@ export function LivingEnquiry() {
   }
 
   return (
-    <section id="enquire" className="relative overflow-hidden bg-cream" aria-labelledby="living-enquire-heading">
-      <div
-        aria-hidden="true"
-        className="shape-blob absolute -bottom-40 -left-32 size-[420px] bg-accent-soft opacity-60"
-      />
-      <div className="relative mx-auto grid w-full max-w-[1280px] gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:px-8 lg:py-24">
+    <section id="enquire" className="bg-cream" aria-labelledby="living-enquire-heading">
+      <div className="mx-auto grid w-full max-w-[1280px] gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:px-8 lg:py-24">
         <Reveal>
           <p className="font-heading text-[13px] tracking-[0.22em] text-accent-strong uppercase">
             Enquire
@@ -47,7 +43,7 @@ export function LivingEnquiry() {
           </h2>
           <p className="mt-4 max-w-[440px] text-[16px] leading-8 text-mid">
             Send a few details and what you&apos;re after. We&apos;ll come back
-            with product options and a quote — supply only or fully installed.
+            with product options and a quote, supply only or fully installed.
           </p>
           <p className="mt-6 text-[15px] leading-7 text-mid">
             Or email{" "}
@@ -75,7 +71,7 @@ export function LivingEnquiry() {
                   </svg>
                 </span>
                 <h3 className="mt-6 font-heading text-[28px] tracking-tight">
-                  Thanks — enquiry received.
+                  Thanks, enquiry received.
                 </h3>
                 <p className="mt-3 max-w-[380px] text-[15px] leading-7 text-mid">
                   We&apos;ll be in touch with options and a quote for your
@@ -116,8 +112,8 @@ export function LivingEnquiry() {
                   <textarea
                     name="message"
                     rows={4}
-                    placeholder="Tell us about the room, sizes, timing — anything useful."
-                    className="rounded-2xl border border-line bg-cream-soft px-4 py-3 text-[15px] leading-7 text-dark outline-none transition placeholder:text-mid/60 focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
+                    placeholder="Tell us about the room, sizes, timing, anything useful."
+                    className="rounded-2xl border border-line bg-cream-soft px-4 py-3 text-[15px] leading-7 text-dark outline-none transition placeholder:text-mid focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
                   />
                 </label>
 
@@ -165,7 +161,7 @@ function Field({
         name={name}
         type={type}
         {...rest}
-        className="min-h-13 rounded-2xl border border-line bg-cream-soft px-4 text-[15px] text-dark outline-none transition placeholder:text-mid/60 focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
+        className="min-h-13 rounded-2xl border border-line bg-cream-soft px-4 text-[15px] text-dark outline-none transition placeholder:text-mid focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
       />
     </label>
   );

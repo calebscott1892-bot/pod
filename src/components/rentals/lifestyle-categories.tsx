@@ -6,7 +6,7 @@ import { lifestyleCategories } from "./categories";
 import { CategoryScene } from "./category-scene";
 
 // Indicative entry rate (long-term weekly). Full pricing varies by door,
-// window and hire length — see the enquiry for a quote.
+// window and hire length, see the enquiry for a quote.
 const rentalFromWeekly = "$140";
 const rentalDeliveryFrom = "$250";
 
@@ -30,16 +30,15 @@ export function LifestyleCategories() {
             Six ways to use your spare space.
           </h2>
           <p className="mt-4 text-[16px] leading-7 text-mid">
-            Every studio is the same considered build underneath — it&apos;s
+            Every studio is the same considered build underneath, it&apos;s
             the way you live in it that changes. Photography is on its way;
             until then, picture yours.
           </p>
         </Reveal>
 
         <div className="mt-12 grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {lifestyleCategories.map((category, index) => (
-            <Reveal key={category.id} delay={(index % 3) * 80}>
-              <article className="group transition duration-300 hover:-translate-y-1.5">
+          {lifestyleCategories.map((category) => (
+            <article key={category.id} className="group transition duration-300 hover:-translate-y-1.5">
                 <div
                   className={`${category.shape} relative aspect-[4/4.4] overflow-hidden border border-line shadow-[0_30px_70px_-55px_rgba(44,40,37,0.55)] transition duration-300 group-hover:shadow-[0_40px_85px_-50px_rgba(44,40,37,0.6)]`}
                 >
@@ -67,14 +66,13 @@ export function LifestyleCategories() {
                     <path d="M2 7h9.5M8 3.5 11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </a>
-              </article>
-            </Reveal>
+            </article>
           ))}
         </div>
 
         <p className="mt-8 max-w-[720px] text-[14px] leading-6 text-mid">
           Indicative long-term weekly rate. Rates vary by door, window and hire
-          length, with short and long-term hire available — send an enquiry for
+          length, with short and long-term hire available, send an enquiry for
           a full quote. Delivery from {rentalDeliveryFrom}.
         </p>
       </div>

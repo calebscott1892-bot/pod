@@ -28,7 +28,7 @@ const groupIds = optionGroups.map((g) => g.id);
  * Client island connecting the preset grid to the configurator. Choosing a
  * signature style pre-fills the whole build and jumps into the steps.
  *
- * Designs are shareable and durable — every option id lives in the URL and
+ * Designs are shareable and durable, every option id lives in the URL and
  * localStorage, so a shared link or a returning visitor restores the exact
  * build.
  */
@@ -79,7 +79,7 @@ export function StudiosShell() {
           setConfig({ ...defaultConfig, ...stored });
         }
       } catch {
-        // Corrupt storage — start fresh.
+        // Corrupt storage, start fresh.
       }
     }, 0);
     return () => window.clearTimeout(restore);
@@ -91,7 +91,7 @@ export function StudiosShell() {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
     } catch {
-      // Storage unavailable — links still work.
+      // Storage unavailable, links still work.
     }
     const params = new URLSearchParams(window.location.search);
     for (const id of groupIds) params.set(id, config[id as GroupId]);

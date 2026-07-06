@@ -33,21 +33,20 @@ export function StyleGrid({ selectedPresetId, onChoose }: Props) {
           </h2>
           <p className="mt-4 text-[16px] leading-7 text-mid">
             All spaces are the same one-size shell. Each preview shows a
-            signature finish, customisable at every step — pick a style, doors,
+            signature finish, customisable at every step, pick a style, doors,
             windows, wall and trim colour, and watch your studio and price
             update as you go.
           </p>
         </Reveal>
 
         <div className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-          {presets.map((preset, index) => (
-            <Reveal key={preset.id} delay={(index % 3) * 70}>
-              <PresetCard
-                preset={preset}
-                selected={preset.id === selectedPresetId}
-                onChoose={onChoose}
-              />
-            </Reveal>
+          {presets.map((preset) => (
+            <PresetCard
+              key={preset.id}
+              preset={preset}
+              selected={preset.id === selectedPresetId}
+              onChoose={onChoose}
+            />
           ))}
         </div>
       </div>

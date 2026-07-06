@@ -61,7 +61,7 @@ export async function sendStudioOrder(formData: FormData): Promise<OrderResult> 
   const fromEmail = process.env.RESEND_FROM_EMAIL ?? "caleb@c4studios.com.au";
 
   if (!apiKey) {
-    console.warn(`[studio-order] RESEND_API_KEY not set — logged only.\n${text}`);
+    console.warn(`[studio-order] RESEND_API_KEY not set, logged only.\n${text}`);
     return { ok: true };
   }
 
@@ -76,7 +76,7 @@ export async function sendStudioOrder(formData: FormData): Promise<OrderResult> 
         from: `Spare Space Studios <${fromEmail}>`,
         to: [sites.studios.email],
         reply_to: email,
-        subject: `Studio order request — ${formatAud(total)} (${name})`,
+        subject: `Studio order request, ${formatAud(total)} (${name})`,
         text,
       }),
     });

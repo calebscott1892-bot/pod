@@ -118,16 +118,16 @@ export const sites: Record<SiteId, SiteConfig> = {
     id: "living",
     name: "Spare Space Living",
     domain: "sparespaceliving.com.au",
-    // Placeholder inbox — Paul to confirm the Living address.
+    // Placeholder inbox, Paul to confirm the Living address.
     email: "living@sparespaceliving.com.au",
     commercialEmail: "commercial@sparespaceliving.com.au",
     legalEntity: "Kiwi Kiwi Industries (National) Pty Ltd",
     abn: "77 902 819 793",
     tradingAs: "Spare Space Living",
-    // No image logo yet — rendered as a text wordmark.
+    // No image logo yet, rendered as a text wordmark.
     logo: "",
     logoAlt: "Spare Space Living",
-    tagline: "Fit-out your space — flooring, curtains, shelving and tiny-space furniture.",
+    tagline: "Fit-out your space, flooring, curtains, shelving and tiny-space furniture.",
     nav: [
       { href: "#offering", label: "What we offer" },
       { href: "#fitout", label: "Fit-out range" },

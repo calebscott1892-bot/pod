@@ -4,7 +4,7 @@ import { business, sites } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Spare Space Studios — Design and Order Your Lifestyle Studio",
+    absolute: "Spare Space Studios, Design and Order Your Lifestyle Studio",
   },
   description: `Signature studio designs, one size, endlessly customisable. Choose your roof, doors, windows, wall and trim colour, then order online. Built and delivered within weeks, ${business.serviceArea}.`,
   twitter: { card: "summary_large_image" },

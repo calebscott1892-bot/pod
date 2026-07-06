@@ -59,7 +59,7 @@ export function StudioPreview({ config }: { config: StudioConfig }) {
       {/* Contact shadow */}
       <ellipse className="sp-stage sp-d1" cx="262" cy="350" rx="190" ry="12" fill="#2c2825" opacity="0.12" />
 
-      {/* Body — front wall colour, structural outline */}
+      {/* Body, front wall colour, structural outline */}
       <g className="sp-stage sp-d1">
         <rect x="84" y="150" width="352" height="196" rx="8" fill={wall} stroke={structure} strokeWidth="3" style={{ transition: "fill 0.45s ease" }} />
         <g stroke={darkWall ? "#ffffff" : "#2c2825"} strokeOpacity="0.08" strokeWidth="1.4">
@@ -70,7 +70,7 @@ export function StudioPreview({ config }: { config: StudioConfig }) {
         {/* Corner posts in trim colour */}
         <rect x="84" y="150" width="12" height="196" fill={trim} style={{ transition: "fill 0.45s ease" }} />
         <rect x="424" y="150" width="12" height="196" fill={trim} style={{ transition: "fill 0.45s ease" }} />
-        {/* Castor wheels — the 9-wheel mobility story */}
+        {/* Castor wheels, the 9-wheel mobility story */}
         <g fill={structure}>
           {[112, 156, 200, 244, 288, 332, 376, 408].map((cx) => (
             <circle key={cx} cx={cx} cy="350" r="6" />
@@ -78,7 +78,7 @@ export function StudioPreview({ config }: { config: StudioConfig }) {
         </g>
       </g>
 
-      {/* Roof — per selected shape, in trim colour */}
+      {/* Roof, per selected shape, in trim colour */}
       <g className="sp-stage sp-d2">
         {roofKind === "a-frame" ? (
           <path d="M74 152 260 108 446 152" fill="none" stroke={trim} strokeWidth="13" strokeLinecap="round" strokeLinejoin="round" />
@@ -89,7 +89,7 @@ export function StudioPreview({ config }: { config: StudioConfig }) {
         )}
       </g>
 
-      {/* Window — left wall */}
+      {/* Window, left wall */}
       {windowId !== "none" ? (
         <g className="sp-stage sp-d3">
           {windowId === "large" ? (
@@ -108,7 +108,7 @@ export function StudioPreview({ config }: { config: StudioConfig }) {
         </g>
       ) : null}
 
-      {/* Door — right wall, in the door colour */}
+      {/* Door, right wall, in the door colour */}
       <g className="sp-stage sp-d4">
         {doorKind === "Sliding door" ? (
           <>

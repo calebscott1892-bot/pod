@@ -20,7 +20,7 @@ export function ServiceArea() {
           </h2>
           <p className="mt-4 max-w-[540px] text-[16px] leading-8 text-mid">
             We deliver and install along the east coast corridor. Before we
-            arrive, we assess your property with Google Earth — so we know
+            arrive, we assess your property with Google Earth, so we know
             whether it&apos;s a straightforward placement or a crane lift.
           </p>
 
@@ -57,7 +57,7 @@ export function ServiceArea() {
             >
               Ask us anyway
             </a>
-            {" "}— we review every site individually.
+            . We review every site individually.
           </p>
         </Reveal>
 
@@ -70,7 +70,7 @@ export function ServiceArea() {
 }
 
 /* ───────────────────────────────────────────────────────────────────────────
-   Coverage map — the southeast-QLD / northern-NSW coast drawn from real
+   Coverage map, the southeast-QLD / northern-NSW coast drawn from real
    coastal waypoints (lon/lat) projected into the viewBox and smoothed with
    Catmull-Rom splines, the same approach used for the full-Australia map.
    East–west is exaggerated ~2.4× so the features of a narrow coastal strip
@@ -108,20 +108,20 @@ function spline(points: Pt[]): string {
 const MAINLAND: Pt[] = [
   [153.19, 26.05], // north of Noosa (off top)
   [153.1, 26.39], // Noosa
-  [153.09, 26.66], // Maroochydore — Sunshine Coast
+  [153.09, 26.66], // Maroochydore, Sunshine Coast
   [153.14, 26.8], // Caloundra
   [153.05, 27.07], // into Moreton Bay (Pumicestone)
   [153.1, 27.23], // Redcliffe
   [153.18, 27.4], // Brisbane river mouth / Wynnum
   [153.26, 27.58], // Redland Bay
   [153.31, 27.78], // southern bay
-  [153.42, 27.96], // Southport — back to the ocean
+  [153.42, 27.96], // Southport, back to the ocean
   [153.43, 28.03], // Surfers Paradise
   [153.45, 28.1], // Burleigh
   [153.55, 28.17], // Coolangatta / Tweed Heads
   [153.57, 28.34], // Pottsville
   [153.59, 28.45], // Cabarita
-  [153.64, 28.64], // Cape Byron — easternmost point
+  [153.64, 28.64], // Cape Byron, easternmost point
   [153.58, 28.87], // Ballina
   [153.45, 29.07], // Evans Head
   [153.4, 29.27], // Iluka

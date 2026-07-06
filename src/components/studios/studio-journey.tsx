@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Pinned construction sequence — the studio is genuinely built as the
+ * Pinned construction sequence, the studio is genuinely built as the
  * visitor scrolls, in a legible order:
  *
  *   1. a level base is set
@@ -11,19 +11,19 @@ import { useEffect, useRef } from "react";
  *   3. the skillion roof descends and lands
  *   4. windows and the door are fitted, glass fills
  *   5. the cladding colour washes on and cycles through finishes
- *   6. it's delivered — landscaped, lights on, move-in ready
+ *   6. it's delivered, landscaped, lights on, move-in ready
  *
  * A single scroll handler maps overall progress to each beat and writes
  * inline transforms/opacity per frame (smoother than stage snapping). The
- * server renders the finished, lit studio, so no-JS visitors — and
- * reduced-motion visitors, for whom CSS unpins the section — see the
+ * server renders the finished, lit studio, so no-JS visitors, and
+ * reduced-motion visitors, for whom CSS unpins the section, see the
  * completed build as one frame.
  */
 
 const captions = [
   {
     title: "A level base",
-    body: "Every studio starts on a dead-level base — set and checked before anything goes up.",
+    body: "Every studio starts on a dead-level base, set and checked before anything goes up.",
   },
   {
     title: "Insulated walls",
@@ -43,7 +43,7 @@ const captions = [
   },
   {
     title: "Delivered & yours",
-    body: "Landscaped, lights on, move-in ready — delivered to your door within weeks of your order.",
+    body: "Landscaped, lights on, move-in ready, delivered to your door within weeks of your order.",
   },
 ];
 
@@ -89,14 +89,14 @@ export function StudioJourney() {
         track.dataset.stage = String(stage);
       }
 
-      // 1 — base settles in
+      // 1, base settles in
       const f = easeOut(clamp01(p / 0.12));
       if (foundation) {
         foundation.style.opacity = String(f);
         foundation.style.transform = `translateY(${((1 - f) * 16).toFixed(1)}px)`;
       }
 
-      // 2 — walls rise (clip reveal from the floor up)
+      // 2, walls rise (clip reveal from the floor up)
       const w = clamp01((p - 0.15) / 0.19);
       if (wallClip) {
         const top = 156;
@@ -107,21 +107,21 @@ export function StudioJourney() {
       }
       if (walls) walls.style.opacity = String(clamp01(w * 6));
 
-      // 3 — roof descends and lands
+      // 3, roof descends and lands
       const r = easeOut(clamp01((p - 0.34) / 0.16));
       if (roof) {
         roof.style.opacity = String(clamp01(r * 6));
         roof.style.transform = `translateY(${((r - 1) * 150).toFixed(1)}px)`;
       }
 
-      // 4 — windows and door arrive
+      // 4, windows and door arrive
       const o = easeOut(clamp01((p - 0.5) / 0.14));
       if (openings) {
         openings.style.opacity = String(o);
         openings.style.transform = `translateY(${((1 - o) * 14).toFixed(1)}px)`;
       }
 
-      // 5 — cladding colour washes on and cycles
+      // 5, cladding colour washes on and cycles
       const c = clamp01((p - 0.64) / 0.18);
       if (colorWall) {
         colorWall.style.opacity = String(easeOut(c));
@@ -129,7 +129,7 @@ export function StudioJourney() {
         colorWall.style.fill = finishSwatches[idx];
       }
 
-      // 6 — delivered: landscaping in, lights on
+      // 6, delivered: landscaping in, lights on
       const m = easeOut(clamp01((p - 0.82) / 0.18));
       if (site) site.style.opacity = String(m);
       if (warm) warm.style.opacity = String(m);
@@ -262,7 +262,7 @@ function JourneyStudio() {
         <circle cx="430" cy="86" r="44" fill="var(--accent-soft)" />
       </g>
 
-      {/* 6 — site landscaping (delivered) */}
+      {/* 6, site landscaping (delivered) */}
       <g className="j-site" style={{ opacity: 1 }}>
         <path
           d="M36 366 C150 354 230 356 290 362 C380 372 462 358 502 366"
@@ -295,7 +295,7 @@ function JourneyStudio() {
         </g>
       </g>
 
-      {/* 1 — base + feet */}
+      {/* 1, base + feet */}
       <g className="j-foundation" style={{ opacity: 1 }}>
         <ellipse cx="262" cy="352" rx="186" ry="12" fill="#2c2825" opacity="0.12" />
         <rect x="92" y="344" width="336" height="14" rx="4" fill="var(--ss-clay)" stroke={trim} strokeWidth="2.5" />
@@ -306,7 +306,7 @@ function JourneyStudio() {
         </g>
       </g>
 
-      {/* 2 — walls (raw panels + colour layer + boards), revealed bottom-up */}
+      {/* 2, walls (raw panels + colour layer + boards), revealed bottom-up */}
       <g className="j-walls" clipPath="url(#j-wall-clip)" style={{ opacity: 1 }}>
         <rect x="100" y="158" width="320" height="188" rx="10" fill="#d9ccbb" stroke={trim} strokeWidth="3" />
         <rect
@@ -328,12 +328,12 @@ function JourneyStudio() {
         </g>
       </g>
 
-      {/* 3 — skillion roof, descends into place */}
+      {/* 3, skillion roof, descends into place */}
       <g className="j-roof" style={{ opacity: 1 }}>
         <path d="M84 162 436 138" stroke={trim} strokeWidth="13" strokeLinecap="round" />
       </g>
 
-      {/* 4 — windows + door */}
+      {/* 4, windows + door */}
       <g className="j-openings" style={{ opacity: 1 }}>
         {/* Feature picture window */}
         <rect x="124" y="190" width="96" height="104" rx="4" fill={trim} />
@@ -348,7 +348,7 @@ function JourneyStudio() {
         <rect x="345" y="250" width="5" height="26" rx="2.5" fill={trim} />
       </g>
 
-      {/* 6 — warm light through the glass (lights on at move-in) */}
+      {/* 6, warm light through the glass (lights on at move-in) */}
       <g className="j-warm" style={{ opacity: 1 }}>
         <rect x="131" y="197" width="82" height="90" rx="2" fill="url(#j-warm)" />
         <rect x="304" y="182" width="48" height="158" rx="2" fill="url(#j-warm)" />

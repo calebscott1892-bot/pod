@@ -23,7 +23,7 @@
   /* Accent defaults to Rentals blue; each site overrides via data-site */
   --accent: #4093d9;
   --accent-soft: #ddeaf6;
-  --accent-strong: #2d6ca3;
+  --accent-strong: #2a6499;
 
   --background: var(--ss-cream);
   --foreground: var(--ss-dark);
@@ -32,13 +32,13 @@
 [data-site="rentals"] {
   --accent: #4093d9;
   --accent-soft: #ddeaf6;
-  --accent-strong: #2d6ca3;
+  --accent-strong: #2a6499;
 }
 
 [data-site="studios"] {
   --accent: #febfa5;
   --accent-soft: #fbe3d6;
-  --accent-strong: #a0522d;
+  --accent-strong: #964c29;
 }
 
 [data-site="living"] {
@@ -96,19 +96,6 @@ h3 {
 
 p {
   text-wrap: pretty;
-}
-
-/* Barely-there paper grain over everything — tactile, print-like warmth. */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 80;
-  pointer-events: none;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 220px 220px;
-  mix-blend-mode: multiply;
 }
 
 :focus-visible {

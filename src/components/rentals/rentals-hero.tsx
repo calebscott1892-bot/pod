@@ -9,7 +9,7 @@ export function RentalsHero() {
       className="relative flex min-h-[calc(100svh-80px)] items-center overflow-hidden"
       aria-labelledby="hero-heading"
     >
-      {/* Video placeholder — swap for a muted, looping <video> when supplied. */}
+      {/* Video placeholder, swap for a muted, looping <video> when supplied. */}
       <div className="video-placeholder" aria-hidden="true" />
 
       {/* Floating lifestyle chips, drifting on scroll. Wide screens only. */}
@@ -56,7 +56,7 @@ export function RentalsHero() {
           </span>
         </h1>
         <p className="mx-auto mt-7 max-w-[620px] text-[17px] leading-8 text-mid sm:text-[19px]">
-          Premium lifestyle studios — delivered and installed in the Northern
+          Premium lifestyle studios, delivered and installed in the Northern
           Rivers and Sunshine Coast. Designed for the way you actually live.
         </p>
 

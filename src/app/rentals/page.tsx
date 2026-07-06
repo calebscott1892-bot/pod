@@ -20,7 +20,7 @@ const processSteps: ProcessStep[] = [
   },
   {
     title: "We handle delivery",
-    body: "Crane or flat delivery — we assess your site via Google Earth beforehand.",
+    body: "Crane or flat delivery, we assess your site via Google Earth beforehand.",
     icon: "delivery",
   },
   {
@@ -30,7 +30,7 @@ const processSteps: ProcessStep[] = [
   },
   {
     title: "Move in",
-    body: "Fully finished, weather-tight and ready to use — delivered and installed.",
+    body: "Fully finished, weather-tight and ready to use, delivered and installed.",
     icon: "movein",
   },
 ];
@@ -45,7 +45,7 @@ export default function RentalsPage() {
         <DayJourney />
         <HowItWorks
           title="From first look to move-in day."
-          intro="A considered process with one team from start to finish — no subcontractors, no surprises."
+          intro="A considered process with one team from start to finish, no subcontractors, no surprises."
           steps={processSteps}
         />
         <Curve />

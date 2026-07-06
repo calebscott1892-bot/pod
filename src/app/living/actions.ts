@@ -25,7 +25,7 @@ export async function sendLivingEnquiry(
 
   if (!name || !email) return { ok: false };
 
-  const subject = `Living fit-out enquiry — ${interest || "General"} (${name})`;
+  const subject = `Living fit-out enquiry, ${interest || "General"} (${name})`;
   const text = [
     `Name: ${name}`,
     `Email: ${email}`,
@@ -45,7 +45,7 @@ export async function sendLivingEnquiry(
 
   if (!apiKey) {
     console.warn(
-      `[living-enquiry] RESEND_API_KEY not set — logged only.\n${text}`,
+      `[living-enquiry] RESEND_API_KEY not set, logged only.\n${text}`,
     );
     return { ok: true };
   }

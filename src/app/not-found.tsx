@@ -37,7 +37,7 @@ export default function NotFound() {
         This space hasn&apos;t been built.
       </h1>
       <p className="relative mx-auto mt-4 max-w-[440px] text-[16px] leading-7 text-mid">
-        The page you&apos;re after doesn&apos;t exist — but plenty of
+        The page you&apos;re after doesn&apos;t exist, but plenty of
         beautiful spaces do.
       </p>
 

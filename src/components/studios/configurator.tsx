@@ -81,8 +81,8 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
             Design your studio.
           </h2>
           <p className="mt-4 text-[16px] leading-7 text-mid">
-            Follow the steps — roof, doors, windows, wall and trim colour,
-            lighting and extras — and watch your studio and your price update as
+            Follow the steps, roof, doors, windows, wall and trim colour,
+            lighting and extras, and watch your studio and your price update as
             you go.
           </p>
         </Reveal>
@@ -93,7 +93,7 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
               <div className="shape-soft border border-line bg-white p-5 shadow-[0_36px_90px_-65px_rgba(44,40,37,0.6)]">
                 <StudioPreview config={config} />
                 <p className="mt-2 text-center text-[13px] leading-6 text-mid">
-                  Live preview — {resolved?.roof.name}, {resolved?.wall.name.toLowerCase()} wall
+                  Live preview, {resolved?.roof.name}, {resolved?.wall.name.toLowerCase()} wall
                 </p>
               </div>
             </Reveal>
@@ -129,7 +129,7 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
                 <AnimatedPrice value={total} className="font-heading text-[30px] tracking-tight text-dark" />
               </div>
               <p className="mt-2 text-[12px] leading-5 text-mid">
-                Indicative — delivery quoted separately, price confirmed on order.
+                Indicative, delivery quoted separately, price confirmed on order.
               </p>
               {step === "review" ? null : (
                 <button
@@ -140,7 +140,7 @@ export function Configurator({ config, onConfigChange, step, onStepChange }: Pro
                   }}
                   className="mt-5 inline-flex min-h-13 w-full items-center justify-center rounded-full bg-dark px-7 font-heading text-[14px] tracking-[0.1em] text-cream uppercase transition hover:bg-accent-strong"
                 >
-                  Review &amp; order — {formatAud(total)}
+                  Review &amp; order, {formatAud(total)}
                 </button>
               )}
               <CopyDesignLink config={config} />
@@ -440,7 +440,7 @@ function ReviewOrder({ config, total }: { config: StudioConfig; total: number })
           Order request received.
         </h3>
         <p className="mt-3 max-w-[420px] text-[15px] leading-7 text-mid">
-          Thanks — we&apos;ve got your build. Our team will confirm the price
+          Thanks, we&apos;ve got your build. Our team will confirm the price
           and delivery, then send you a secure payment link to complete your
           order.
         </p>
@@ -502,7 +502,7 @@ function ReviewOrder({ config, total }: { config: StudioConfig; total: number })
             name="message"
             rows={3}
             placeholder="Site access, timing, questions…"
-            className="rounded-2xl border border-line bg-cream-soft px-4 py-3 text-[15px] leading-7 text-dark outline-none transition placeholder:text-mid/60 focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
+            className="rounded-2xl border border-line bg-cream-soft px-4 py-3 text-[15px] leading-7 text-dark outline-none transition placeholder:text-mid focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
           />
         </label>
         <div className="hidden" aria-hidden="true">
@@ -515,10 +515,10 @@ function ReviewOrder({ config, total }: { config: StudioConfig; total: number })
           type="submit"
           className="inline-flex min-h-13 w-full items-center justify-center rounded-full bg-dark px-8 font-heading text-[14px] tracking-[0.1em] text-cream uppercase transition hover:bg-accent-strong"
         >
-          Place order request — {formatAud(total)}
+          Place order request, {formatAud(total)}
         </button>
         <p className="text-center text-[12px] leading-5 text-mid">
-          No payment taken now — we confirm price and delivery, then send a
+          No payment taken now, we confirm price and delivery, then send a
           secure payment link.
         </p>
       </form>
@@ -548,7 +548,7 @@ function OrderField({
         name={name}
         type={type}
         {...rest}
-        className="min-h-13 rounded-2xl border border-line bg-cream-soft px-4 text-[15px] text-dark outline-none transition placeholder:text-mid/60 focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
+        className="min-h-13 rounded-2xl border border-line bg-cream-soft px-4 text-[15px] text-dark outline-none transition placeholder:text-mid focus:border-accent-strong focus:ring-2 focus:ring-accent-soft"
       />
     </label>
   );
@@ -615,7 +615,7 @@ function CopyDesignLink({ config }: { config: StudioConfig }) {
       <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
         <path d="M6.2 8.8a3 3 0 0 0 4.2 0l2.4-2.4a3 3 0 1 0-4.2-4.2l-1 1M8.8 6.2a3 3 0 0 0-4.2 0L2.2 8.6a3 3 0 1 0 4.2 4.2l1-1" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
       </svg>
-      {state === "copied" ? "Link copied — share your design" : state === "error" ? "Copy blocked — try again" : "Copy design link"}
+      {state === "copied" ? "Link copied, share your design" : state === "error" ? "Copy blocked, try again" : "Copy design link"}
     </button>
   );
 }

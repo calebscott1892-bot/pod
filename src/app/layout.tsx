@@ -36,7 +36,7 @@ const sophistica = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Spare Space — Premium Lifestyle Studios",
+    default: "Spare Space, Premium Lifestyle Studios",
     template: "%s | Spare Space",
   },
   description:

@@ -16,7 +16,7 @@ const processSteps: ProcessStep[] = [
   },
   {
     title: "We measure & quote",
-    body: "Send us your space; we spec and price it — supply only or fully installed.",
+    body: "Send us your space; we spec and price it, supply only or fully installed.",
     icon: "customise",
   },
   {
@@ -43,7 +43,7 @@ export default function LivingPage() {
         <Curve flip />
         <HowItWorks
           title="From bare space to finished room."
-          intro="One team for the fit-out — supply what you need, or have us install it end to end."
+          intro="One team for the fit-out, supply what you need, or have us install it end to end."
           steps={processSteps}
         />
         <LivingEnquiry />

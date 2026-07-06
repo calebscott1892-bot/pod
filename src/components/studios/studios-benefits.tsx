@@ -13,7 +13,7 @@ const benefits: { title: string; body: string; icon: keyof typeof icons }[] = [
   },
   {
     title: "Prebuilt, no flatpacks",
-    body: "Delivered already constructed — no stressful flatpacks or expensive contractor fees.",
+    body: "Delivered already constructed, no stressful flatpacks or expensive contractor fees.",
     icon: "prebuilt",
   },
   {
@@ -40,7 +40,7 @@ export function StudiosBenefits() {
             id="why-heading"
             className="mt-3 font-heading text-[34px] leading-[1.08] tracking-tight sm:text-[44px]"
           >
-            Not a fixed structure — a lifestyle asset.
+            Not a fixed structure, a lifestyle asset.
           </h2>
           <p className="mt-4 text-[16px] leading-7 text-mid">
             Each studio features castor wheels enabling 360-degree swivel, easy
@@ -49,9 +49,8 @@ export function StudiosBenefits() {
         </Reveal>
 
         <div className="mt-12 grid gap-x-7 gap-y-9 sm:grid-cols-2 lg:grid-cols-3">
-          {benefits.map((benefit, index) => (
-            <Reveal key={benefit.title} delay={(index % 3) * 70}>
-              <article className="flex gap-4">
+          {benefits.map((benefit) => (
+            <article key={benefit.title} className="flex gap-4">
                 <span className="grid size-12 shrink-0 place-items-center rounded-full bg-accent-soft text-accent-strong">
                   <BenefitIcon icon={benefit.icon} />
                 </span>
@@ -63,8 +62,7 @@ export function StudiosBenefits() {
                     {benefit.body}
                   </p>
                 </div>
-              </article>
-            </Reveal>
+            </article>
           ))}
         </div>
       </div>

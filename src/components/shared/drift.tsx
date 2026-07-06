@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 type Props = {
-  /** Vertical parallax factor — positive drifts down, negative drifts up. */
+  /** Vertical parallax factor, positive drifts down, negative drifts up. */
   speed?: number;
   className?: string;
   children: React.ReactNode;

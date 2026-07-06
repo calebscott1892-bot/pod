@@ -1,7 +1,7 @@
 import type { LifestyleCategory } from "./categories";
 
 /**
- * Interior vignette for a lifestyle category — a furnished room scene rather
+ * Interior vignette for a lifestyle category, a furnished room scene rather
  * than the studio exterior, so each use (gym, office, retreat…) reads
  * distinctly. Placeholder illustration until Paul's photography lands; the
  * wall tint and accent come from the category data.

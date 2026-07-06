@@ -10,7 +10,7 @@ export type EnquiryResult = { ok: boolean };
  * development and the client demo keep working end to end.
  */
 export async function sendEnquiry(formData: FormData): Promise<EnquiryResult> {
-  // Honeypot — bots fill every field; humans never see this one.
+  // Honeypot, bots fill every field; humans never see this one.
   if (formData.get("website")) {
     return { ok: true };
   }
@@ -29,7 +29,7 @@ export async function sendEnquiry(formData: FormData): Promise<EnquiryResult> {
     return { ok: false };
   }
 
-  const subject = `New enquiry — ${intendedUse} · ${postcode} (${name})`;
+  const subject = `New enquiry, ${intendedUse} · ${postcode} (${name})`;
   const text = [
     `Name: ${name}`,
     `Email: ${email}`,
@@ -49,7 +49,7 @@ export async function sendEnquiry(formData: FormData): Promise<EnquiryResult> {
 
   if (!apiKey) {
     console.warn(
-      `[enquiry] RESEND_API_KEY not set — enquiry logged only.\n${text}`,
+      `[enquiry] RESEND_API_KEY not set, enquiry logged only.\n${text}`,
     );
     return { ok: true };
   }

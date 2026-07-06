@@ -45,7 +45,7 @@ export function HowItWorks({
             className="absolute top-8 right-[12%] left-[12%] hidden border-t-2 border-dashed border-line lg:block"
           />
           {steps.map((step, index) => (
-            <Reveal key={step.title} delay={index * 90} className="relative">
+            <div key={step.title} className="relative">
               <div className="relative inline-grid size-16 place-items-center rounded-full bg-accent-soft text-accent-strong">
                 <StepIcon icon={step.icon} />
                 <span className="absolute -top-1 -right-1 grid size-6 place-items-center rounded-full bg-dark font-heading text-[12px] text-cream">
@@ -58,7 +58,7 @@ export function HowItWorks({
               <p className="mt-2 max-w-[300px] text-[15px] leading-7 text-mid">
                 {step.body}
               </p>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>

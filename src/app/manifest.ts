@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Spare Space — Premium Lifestyle Studios",
+    name: "Spare Space, Premium Lifestyle Studios",
     short_name: "Spare Space",
     description:
-      "Premium modular lifestyle studios for home gyms, offices, creative spaces and wellness retreats — rent or own, delivered across Northern NSW and Southeast QLD.",
+      "Premium modular lifestyle studios for home gyms, offices, creative spaces and wellness retreats, rent or own, delivered across Northern NSW and Southeast QLD.",
     start_url: "/",
     display: "standalone",
     background_color: "#f0e3db",

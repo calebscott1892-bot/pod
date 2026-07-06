@@ -5,12 +5,12 @@ import { Reveal } from "@/components/shared/reveal";
 const deliveryPoints: { title: string; body: string; icon: keyof typeof icons }[] = [
   {
     title: "Delivered within weeks",
-    body: "Your custom studio is built and delivered to your door within weeks of your order — and we keep you posted along the way.",
+    body: "Your custom studio is built and delivered to your door within weeks of your order, and we keep you posted along the way.",
     icon: "calendar",
   },
   {
     title: "In-house delivery team",
-    body: "Our own crew serves Southeast QLD — Sunshine Coast, Brisbane, Ipswich, Logan, Gold Coast, Tweed, the Northern Rivers and Northern NSW.",
+    body: "Our own crew serves Southeast QLD, Sunshine Coast, Brisbane, Ipswich, Logan, Gold Coast, Tweed, the Northern Rivers and Northern NSW.",
     icon: "truck",
   },
   {
@@ -29,7 +29,7 @@ const deliveryPoints: { title: string; body: string; icon: keyof typeof icons }[
     icon: "crane",
   },
   {
-    title: "Coming soon — Sydney & Melbourne",
+    title: "Coming soon, Sydney & Melbourne",
     body: "We're expanding. Sydney and Melbourne delivery is on its way.",
     icon: "pin",
   },
@@ -55,7 +55,7 @@ export function DeliverySection() {
           </h2>
           <p className="mt-4 max-w-[540px] text-[16px] leading-8 text-mid">
             A studio is a serious investment, so we keep the logistics simple
-            and honest — here&apos;s exactly how your studio gets from our
+            and honest, here&apos;s exactly how your studio gets from our
             workshop to your backyard.
           </p>
 

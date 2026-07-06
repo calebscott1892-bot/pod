@@ -4,7 +4,7 @@ const faqs: { question: string; answer: React.ReactNode }[] = [
   {
     question: "What sets Spare Space Studios apart from the others?",
     answer:
-      "Not only are our studios completely moveable, allowing flexibility in their placement, but each custom studio is delivered already constructed — so there are no stressful flatpacks to navigate on your own, and no out-of-pocket expenses going to contractors.",
+      "Not only are our studios completely moveable, allowing flexibility in their placement, but each custom studio is delivered already constructed, so there are no stressful flatpacks to navigate on your own, and no out-of-pocket expenses going to contractors.",
   },
   {
     question: "Can you buy a studio if you lease a property?",
@@ -14,7 +14,7 @@ const faqs: { question: string; answer: React.ReactNode }[] = [
   {
     question: "Can you resell a Spare Space studio?",
     answer:
-      "If you lease and decide to move properties — yes, you can resell your studio investment.",
+      "If you lease and decide to move properties, yes, you can resell your studio investment.",
   },
   {
     question: "How are the studios moveable?",
@@ -34,7 +34,7 @@ const faqs: { question: string; answer: React.ReactNode }[] = [
   {
     question: "Tight space, limited access?",
     answer:
-      "We understand not everyone has space down the side of the house to move a studio through. In that case we perform a remote Google Earth site assessment and liaise with you on the best options — which may or may not include cranage.",
+      "We understand not everyone has space down the side of the house to move a studio through. In that case we perform a remote Google Earth site assessment and liaise with you on the best options, which may or may not include cranage.",
   },
   {
     question: "Do I need council approval?",
@@ -65,9 +65,8 @@ export function StudiosFaq() {
         </Reveal>
 
         <div className="mt-10 space-y-3.5">
-          {faqs.map((faq, index) => (
-            <Reveal key={faq.question} delay={index * 60}>
-              <details className="group rounded-3xl border border-line bg-white px-6 transition open:shadow-[0_24px_60px_-50px_rgba(44,40,37,0.6)]">
+          {faqs.map((faq) => (
+              <details key={faq.question} className="group rounded-3xl border border-line bg-white px-6 transition open:shadow-[0_24px_60px_-50px_rgba(44,40,37,0.6)]">
                 <summary className="faq-summary flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-2 font-heading text-[17px] tracking-tight text-dark sm:text-[19px]">
                   {faq.question}
                   <span className="grid size-9 shrink-0 place-items-center rounded-full border border-line text-mid transition group-open:rotate-45 group-open:border-accent-strong group-open:text-accent-strong">
@@ -80,7 +79,6 @@ export function StudiosFaq() {
                   {faq.answer}
                 </div>
               </details>
-            </Reveal>
           ))}
         </div>
       </div>

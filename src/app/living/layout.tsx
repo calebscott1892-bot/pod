@@ -4,10 +4,10 @@ import { sites } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Spare Space Living — Fit-out Supply & Install",
+    absolute: "Spare Space Living, Fit-out Supply & Install",
   },
   description:
-    "Fit-out your space with flooring, curtains, shelving and tiny-space furniture. Supply only, or supply and install — from Spare Space Living, part of the Kiwi Kiwi Group.",
+    "Fit-out your space with flooring, curtains, shelving and tiny-space furniture. Supply only, or supply and install, from Spare Space Living, part of the Kiwi Kiwi Group.",
   twitter: { card: "summary_large_image" },
 };
 

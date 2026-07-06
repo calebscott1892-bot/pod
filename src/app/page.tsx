@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 
 import { BrandMark } from "@/components/shared/brand-mark";
+import { StudioPreview } from "@/components/studios/studio-preview";
+import { presetConfig, presets } from "@/components/studios/studio-data";
 import { group, sites, type SiteId } from "@/lib/site-config";
 
+// A signature studio, rendered live on the featured gateway card, the actual
+// configurable product, not a stand-in image.
+const gatewayStudioConfig = presetConfig(
+  presets.find((preset) => preset.id === "creative") ?? presets[0],
+);
+
 export const metadata: Metadata = {
-  title: "Kiwi Kiwi Group of Companies — Spare Space Studios, Rentals & Living",
+  title: "Kiwi Kiwi Group of Companies, Spare Space Studios, Rentals & Living",
 };
 
 type Gateway = {
@@ -18,12 +27,12 @@ const gateways: Gateway[] = [
   {
     siteId: "studios",
     heading: "Own Your Studio",
-    body: "Design and buy your own signature studio — customised, built and delivered to your door within weeks.",
+    body: "Design and buy your own signature studio, customised, built and delivered to your door within weeks.",
   },
   {
     siteId: "rentals",
     heading: "Rent A Space",
-    body: "Flexible lifestyle studios on your property — gyms, offices, retreats — without the upfront cost.",
+    body: "Flexible lifestyle studios on your property, gyms, offices, retreats, without the upfront cost.",
   },
   {
     siteId: "living",
@@ -49,10 +58,14 @@ export default function Home() {
           delivered to your door within weeks.
         </p>
 
-        <div className="mt-12 grid w-full gap-5 md:grid-cols-3">
-          {gateways.map((gateway) => (
-            <GatewayCard key={gateway.siteId} {...gateway} />
-          ))}
+        <div className="mt-12 grid w-full gap-5 md:grid-cols-2 md:grid-rows-2">
+          <GatewayCard
+            {...gateways[0]}
+            featured
+            preview={<StudioPreview config={gatewayStudioConfig} />}
+          />
+          <GatewayCard {...gateways[1]} />
+          <GatewayCard {...gateways[2]} />
         </div>
       </div>
 
@@ -66,34 +79,43 @@ export default function Home() {
   );
 }
 
-function GatewayCard({ siteId, heading, body }: Gateway) {
+function GatewayCard({
+  siteId,
+  heading,
+  body,
+  featured = false,
+  preview,
+}: Gateway & { featured?: boolean; preview?: ReactNode }) {
   const site = sites[siteId];
 
   return (
     <Link
       href={`/${siteId}`}
       data-site={siteId}
-      className="group shape-soft relative flex flex-col items-center overflow-hidden border border-line bg-white/70 px-7 py-10 text-center shadow-[0_30px_80px_-60px_rgba(44,40,37,0.5)] backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-accent-strong/40 hover:shadow-[0_40px_90px_-55px_rgba(44,40,37,0.55)]"
+      className={`group shape-soft flex flex-col overflow-hidden border border-line bg-white/70 text-left shadow-[0_30px_80px_-60px_rgba(44,40,37,0.5)] backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-accent-strong/40 hover:shadow-[0_40px_90px_-55px_rgba(44,40,37,0.55)] ${
+        featured ? "justify-between p-8 md:row-span-2 md:p-10" : "p-7"
+      }`}
     >
-      <span
-        aria-hidden="true"
-        className="shape-blob absolute -top-16 -right-14 size-44 bg-accent-soft opacity-70 transition duration-500 group-hover:scale-110"
-      />
-      <span className="relative grid h-24 place-items-center">
-        <BrandMark site={site} size="lg" priority />
-      </span>
-      <h2 className="relative mt-6 font-heading text-[24px] tracking-tight">
-        {heading}
-      </h2>
-      <p className="relative mt-3 max-w-[340px] text-[15px] leading-7 text-mid">
-        {body}
-      </p>
-      <span className="relative mt-6 inline-flex min-h-12 items-center gap-2 rounded-full bg-dark px-6 font-heading text-[12px] tracking-[0.12em] text-cream uppercase transition group-hover:bg-accent-strong">
-        Explore {site.name}
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 8h10m0 0L9 4m4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </span>
+      <BrandMark site={site} size={featured ? "lg" : "md"} priority={featured} />
+      {preview ? (
+        <div className="shape-soft my-7 overflow-hidden border border-line bg-cream-soft shadow-[0_20px_50px_-45px_rgba(44,40,37,0.6)] transition duration-500 group-hover:-translate-y-0.5">
+          {preview}
+        </div>
+      ) : null}
+      <div className={featured ? "" : "mt-6"}>
+        <h2 className={`font-heading tracking-tight ${featured ? "text-[30px]" : "text-[22px]"}`}>
+          {heading}
+        </h2>
+        <p className="mt-2 max-w-[420px] text-[15px] leading-7 text-mid">
+          {body}
+        </p>
+        <span className="mt-5 inline-flex min-h-12 items-center gap-2 rounded-full bg-dark px-6 font-heading text-[12px] tracking-[0.12em] text-cream uppercase transition group-hover:bg-accent-strong">
+          Explore {site.name}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10m0 0L9 4m4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
+      </div>
     </Link>
   );
 }
