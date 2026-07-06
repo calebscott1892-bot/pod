@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { StudioPreview } from "@/components/studios/studio-preview";
+import { defaultConfig } from "@/components/studios/studio-data";
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -18,10 +19,13 @@ export default function NotFound() {
       <div className="relative w-full max-w-[420px] opacity-90" aria-hidden="true">
         <StudioPreview
           config={{
-            styleId: "office",
-            windowId: "standard",
-            doorId: "barn",
-            claddingId: "charcoal",
+            ...defaultConfig,
+            roof: "skillion-right",
+            door: "single-satin-black",
+            hardware: "matt-black",
+            window: "small",
+            trim: "black",
+            wall: "black",
           }}
         />
       </div>

@@ -1,6 +1,7 @@
 import { Drift } from "@/components/shared/drift";
 
 import { StudioPreview } from "./studio-preview";
+import { defaultConfig } from "./studio-data";
 
 export function StudiosHero() {
   return (
@@ -23,17 +24,20 @@ export function StudiosHero() {
             }}
           />
           <p className="shape-soft mt-4 ml-6 w-max -rotate-2 border border-line bg-white/85 px-4 py-2 font-heading text-[11px] tracking-[0.14em] text-dark uppercase backdrop-blur">
-            Seven styles · From $17,000
+            One shell · Endlessly yours
           </p>
         </Drift>
         <Drift speed={-0.09} className="absolute right-[3%] bottom-[16%]">
           <div className="shape-soft w-72 rotate-2 border border-line bg-white/90 p-4 pb-2 shadow-[0_30px_70px_-50px_rgba(44,40,37,0.5)] backdrop-blur">
             <StudioPreview
               config={{
-                styleId: "wellness",
-                windowId: "feature",
-                doorId: "french",
-                claddingId: "sage",
+                ...defaultConfig,
+                roof: "a-frame",
+                door: "french-blue",
+                hardware: "brushed-chrome",
+                window: "large",
+                trim: "blue",
+                wall: "white",
               }}
             />
             <p className="pb-1 text-center font-script text-[19px] text-accent-strong">
