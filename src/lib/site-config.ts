@@ -105,7 +105,7 @@ export const sites: Record<SiteId, SiteConfig> = {
     tradingAs: "Spare Space Studios, Spare Space Sheds, Spare Space Pods",
     logo: "/assets/logos/spare-space-studios.png",
     logoAlt: "Spare Space Studios",
-    tagline: "Seven signature designs. Endlessly customisable.",
+    tagline: "Signature designs customised to your lifestyle needs.",
     nav: [
       { href: "#styles", label: "Styles" },
       { href: "#configurator", label: "Customise" },

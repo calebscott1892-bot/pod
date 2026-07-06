@@ -30,7 +30,7 @@ const processSteps: ProcessStep[] = [
   },
   {
     title: "Move in",
-    body: "Fully finished, weather-tight, ready in 13 weeks.",
+    body: "Fully finished, weather-tight and ready to use — delivered and installed.",
     icon: "movein",
   },
 ];

@@ -1,5 +1,6 @@
 import { DeliverySection } from "@/components/studios/delivery-section";
 import { StudioJourney } from "@/components/studios/studio-journey";
+import { StudiosBenefits } from "@/components/studios/studios-benefits";
 import { StudiosFaq } from "@/components/studios/studios-faq";
 import { StudiosHero } from "@/components/studios/studios-hero";
 import { StudiosShell } from "@/components/studios/studios-shell";
@@ -15,6 +16,7 @@ export default function StudiosPage() {
       <SiteHeader site={sites.studios} />
       <main id="main-content">
         <StudiosHero />
+        <StudiosBenefits />
         <StudiosShell />
         <StudioJourney />
         <Curve />

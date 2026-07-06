@@ -4,13 +4,18 @@ import { Reveal } from "@/components/shared/reveal";
 
 const deliveryPoints: { title: string; body: string; icon: keyof typeof icons }[] = [
   {
-    title: "13-week build time",
-    body: "From order confirmation to delivery day — and we keep you posted along the way.",
+    title: "Delivered within weeks",
+    body: "Your custom studio is built and delivered to your door within weeks of your order — and we keep you posted along the way.",
     icon: "calendar",
   },
   {
     title: "In-house delivery team",
-    body: "Our own crew handles every delivery. We don't outsource the moment that matters most.",
+    body: "Our own crew serves Southeast QLD — Sunshine Coast, Brisbane, Ipswich, Logan, Gold Coast, Tweed, the Northern Rivers and Northern NSW.",
+    icon: "truck",
+  },
+  {
+    title: "Nation-wide delivery",
+    body: "Further afield, we deliver nation-wide with the most reliable trucking company, so your studio arrives safe and sound.",
     icon: "truck",
   },
   {
@@ -19,13 +24,13 @@ const deliveryPoints: { title: string; body: string; icon: keyof typeof icons }[
     icon: "satellite",
   },
   {
-    title: "Crane delivery available",
-    body: "Tight side access or a tricky block? We arrange crane placement where access requires it.",
+    title: "Crane where access requires",
+    body: "Tight space or limited access? We liaise with you on the best options, which may include cranage.",
     icon: "crane",
   },
   {
-    title: "Serving NSW & QLD",
-    body: "Northern NSW — Northern Rivers, and Southeast QLD — Sunshine Coast to Gold Coast.",
+    title: "Coming soon — Sydney & Melbourne",
+    body: "We're expanding. Sydney and Melbourne delivery is on its way.",
     icon: "pin",
   },
 ];

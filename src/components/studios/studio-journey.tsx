@@ -43,7 +43,7 @@ const captions = [
   },
   {
     title: "Delivered & yours",
-    body: "Landscaped, lights on, move-in ready — thirteen weeks from order to opening the door.",
+    body: "Landscaped, lights on, move-in ready — delivered to your door within weeks of your order.",
   },
 ];
 

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: {
     absolute: "Spare Space Studios — Design and Order Your Lifestyle Studio",
   },
-  description: `Seven signature studio designs, one size, endlessly customisable. Configure windows, doors and cladding, then order online. Delivered in 13 weeks, ${business.serviceArea}.`,
+  description: `Signature studio designs, one size, endlessly customisable. Choose your roof, doors, windows, wall and trim colour, then order online. Built and delivered within weeks, ${business.serviceArea}.`,
   twitter: { card: "summary_large_image" },
 };
 
