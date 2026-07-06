@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { business, sites, type SiteConfig } from "@/lib/site-config";
+import { business, group, sites, type SiteConfig } from "@/lib/site-config";
 
 export function SiteFooter({ site }: { site: SiteConfig }) {
   const otherSite = site.id === "rentals" ? sites.studios : sites.rentals;
@@ -51,6 +51,15 @@ export function SiteFooter({ site }: { site: SiteConfig }) {
                 {site.email}
               </a>
             </li>
+            <li className="text-[13px] text-mid">
+              Commercial orders (5+ units):{" "}
+              <a
+                href={`mailto:${site.commercialEmail}`}
+                className="text-dark underline decoration-line underline-offset-4 transition hover:text-accent-strong"
+              >
+                {site.commercialEmail}
+              </a>
+            </li>
             <li className="text-mid">{business.serviceArea}</li>
           </ul>
         </div>
@@ -70,9 +79,12 @@ export function SiteFooter({ site }: { site: SiteConfig }) {
           </p>
           <div className="mt-6 space-y-1 text-[13px] leading-6 text-mid">
             <p>
-              © 2026 {business.legalName} · ABN {business.abn}
+              © 2026 {site.legalEntity} · ABN {site.abn}
             </p>
-            <p>T/As {business.tradingNames.join(", ")}</p>
+            <p>T/As {site.tradingAs}</p>
+            <p className="pt-1 text-[12px]">
+              Part of the {group.name}.
+            </p>
           </div>
         </div>
       </div>

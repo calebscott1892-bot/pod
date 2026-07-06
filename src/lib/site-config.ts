@@ -32,6 +32,11 @@ export type SiteConfig = {
   name: string;
   domain: string;
   email: string;
+  commercialEmail: string;
+  /** Registered company operating this brand (from Paul, Jul 2026). */
+  legalEntity: string;
+  abn: string;
+  tradingAs: string;
   logo: string;
   logoAlt: string;
   tagline: string;
@@ -39,12 +44,46 @@ export type SiteConfig = {
   cta: { href: string; label: string };
 };
 
+/** The three-company structure for the group landing page. */
+export const companies = [
+  {
+    id: "studios",
+    name: "Spare Space Studios",
+    entity: "Kiwi Kiwi Industries Pty Ltd",
+    abn: "36 149 338 018",
+    tradingAs: "Spare Space Studios, Spare Space Sheds, Spare Space Pods",
+  },
+  {
+    id: "rentals",
+    name: "Spare Space Rentals",
+    entity: "Kiwi Kiwi Industries (QLD) Pty Ltd",
+    abn: "95 789 306 129",
+    tradingAs: "Spare Space Rentals",
+  },
+  {
+    id: "living",
+    name: "Spare Space Living",
+    entity: "Kiwi Kiwi Industries (National) Pty Ltd",
+    abn: "77 902 819 793",
+    tradingAs: "Spare Space Living",
+  },
+] as const;
+
+export const group = {
+  name: "Kiwi Kiwi Group of Companies",
+  otherBrands: ["Spare Space Sheds", "Spare Space Pods"],
+};
+
 export const sites: Record<SiteId, SiteConfig> = {
   rentals: {
     id: "rentals",
     name: "Spare Space Rentals",
     domain: "sparespacerentals.com.au",
-    email: "sparespacerentals@gmail.com",
+    email: "Rentals@sparespacerentals.com.au",
+    commercialEmail: "commercial@sparespacerentals.com.au",
+    legalEntity: "Kiwi Kiwi Industries (QLD) Pty Ltd",
+    abn: "95 789 306 129",
+    tradingAs: "Spare Space Rentals",
     logo: "/assets/logos/spare-space-rentals.png",
     logoAlt: "Spare Space Rentals",
     tagline: "Premium lifestyle studios, delivered and installed.",
@@ -59,8 +98,11 @@ export const sites: Record<SiteId, SiteConfig> = {
     id: "studios",
     name: "Spare Space Studios",
     domain: "sparespacestudios.com.au",
-    // Interim contact address until a studios inbox is set up.
-    email: "sparespacerentals@gmail.com",
+    email: "Sales@sparespacestudios.com.au",
+    commercialEmail: "commercial@sparespacestudios.com.au",
+    legalEntity: "Kiwi Kiwi Industries Pty Ltd",
+    abn: "36 149 338 018",
+    tradingAs: "Spare Space Studios, Spare Space Sheds, Spare Space Pods",
     logo: "/assets/logos/spare-space-studios.png",
     logoAlt: "Spare Space Studios",
     tagline: "Seven signature designs. Endlessly customisable.",
