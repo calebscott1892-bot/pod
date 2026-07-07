@@ -202,7 +202,11 @@ const ScrollExpandMedia = ({
 
   const mediaWidth = 300 + scrollProgress * (isMobileState ? 650 : 1250);
   const mediaHeight = 400 + scrollProgress * (isMobileState ? 200 : 400);
-  const textTranslateX = scrollProgress * (isMobileState ? 180 : 150);
+  // Reduced motion jumps straight to expanded; keep the title centred rather
+  // than translated off-screen so the branding is still visible.
+  const textTranslateX = reducedMotion
+    ? 0
+    : scrollProgress * (isMobileState ? 180 : 150);
 
   const firstWord = title ? title.split(" ")[0] : "";
   const restOfTitle = title ? title.split(" ").slice(1).join(" ") : "";
@@ -334,7 +338,7 @@ const ScrollExpandMedia = ({
                       {date}
                     </p>
                   )}
-                  {scrollToExpand && (
+                  {scrollToExpand && !reducedMotion && (
                     <p
                       className="text-center font-heading text-[13px] tracking-[0.14em] text-cream/80 uppercase"
                       style={{ transform: `translateX(${textTranslateX}vw)` }}

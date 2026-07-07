@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { BrandMark } from "@/components/shared/brand-mark";
 import { StudioPreview } from "@/components/studios/studio-preview";
 import { presetConfig, presets } from "@/components/studios/studio-data";
+import InkReveal from "@/components/ui/ink-reveal";
+import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
 import { group, sites, type SiteId } from "@/lib/site-config";
 
 // A signature studio, rendered live on the featured gateway card, the actual
@@ -44,21 +47,31 @@ const gateways: Gateway[] = [
 export default function Home() {
   return (
     <main id="main-content" className="relative flex min-h-screen flex-col">
-      <div className="video-placeholder" aria-hidden="true" />
-
-      <div className="relative mx-auto flex w-full max-w-[1200px] flex-1 flex-col items-center justify-center px-4 py-16 text-center sm:px-6">
-        <p className="font-script text-[30px] leading-none text-accent-strong sm:text-[38px]">
-          Lifestyle Spaces
-        </p>
-        <h1 className="mt-3 font-heading text-[46px] leading-[1.02] tracking-tight sm:text-[64px]">
-          Spare Space
-        </h1>
-        <p className="mt-5 max-w-[580px] text-[17px] leading-8 text-mid sm:text-[19px]">
+      {/* Cinematic opener — placeholder studio photo stands in until Paul
+          supplies hero footage; swap mediaType to "video" + mediaSrc then. */}
+      <ScrollExpandMedia
+        mediaType="image"
+        mediaSrc="/assets/images/studios-real.jpg"
+        bgImageSrc="/assets/images/studios-real.jpg"
+        title="Spare Space"
+        date="Kiwi Kiwi Group"
+        scrollToExpand="Scroll to enter"
+      >
+        <p className="mx-auto max-w-[620px] text-center text-[17px] leading-8 text-mid sm:text-[19px]">
           Signature designs customised to your lifestyle needs. Built and
           delivered to your door within weeks.
         </p>
+      </ScrollExpandMedia>
 
-        <div className="mt-12 grid w-full gap-5 md:grid-cols-2 md:grid-rows-2">
+      <section className="mx-auto w-full max-w-[1200px] px-4 py-14 text-center sm:px-6 lg:py-20">
+        <p className="font-script text-[30px] leading-none text-accent-strong sm:text-[38px]">
+          Lifestyle Spaces
+        </p>
+        <h1 className="mt-3 font-heading text-[40px] leading-[1.02] tracking-tight sm:text-[56px]">
+          Choose your space.
+        </h1>
+
+        <div className="mt-12 grid w-full gap-5 text-left md:grid-cols-2 md:grid-rows-2">
           <GatewayCard
             {...gateways[0]}
             featured
@@ -67,12 +80,28 @@ export default function Home() {
           <GatewayCard {...gateways[1]} />
           <GatewayCard {...gateways[2]} />
         </div>
-      </div>
+      </section>
+
+      {/* Interactive flourish — wipe the ink to reveal the photo. Decorative;
+          shows the plain photo on touch / reduced-motion. */}
+      <section className="mx-auto w-full max-w-[1200px] px-4 pb-20 sm:px-6">
+        <div className="elev-2 shape-soft relative aspect-[21/9] w-full overflow-hidden border border-line">
+          <Image
+            src="/assets/images/studios-real.jpg"
+            alt="Finished Spare Space studios in a landscaped backyard"
+            fill
+            sizes="(min-width: 1200px) 1200px, 100vw"
+            className="object-cover"
+          />
+          <InkReveal />
+        </div>
+        <p className="mt-4 text-center font-heading text-[12px] tracking-[0.16em] text-mid uppercase">
+          Move to reveal, real studios in real backyards
+        </p>
+      </section>
 
       <footer className="relative flex flex-col items-center gap-1 px-4 pb-8 text-center text-[13px] leading-6 text-mid">
-        <p>
-          Our other brands: {group.otherBrands.join(" & ")}
-        </p>
+        <p>Our other brands: {group.otherBrands.join(" & ")}</p>
         <p>© 2026 {group.name}</p>
       </footer>
     </main>
