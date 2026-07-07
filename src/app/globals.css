@@ -351,6 +351,41 @@ p {
 }
 
 /* ---------------------------------------------------------------------------
+   Signature — "the studio that rolls to you". When a StudioPreview is given
+   `roll`, the whole studio rolls in from off-canvas on its castors, wheels
+   spinning, then settles. One pass, eased to rest, no bounce. Reduced motion
+   and no-JS get the parked frame (the animation collapses to its end state).
+--------------------------------------------------------------------------- */
+
+.sp-roll {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sp-roll-in 1050ms cubic-bezier(0.3, 0.1, 0.2, 1) both;
+}
+
+.sp-roll .sp-wheel {
+  animation: sp-wheel-spin 1050ms cubic-bezier(0.3, 0.1, 0.2, 1) both;
+}
+
+@keyframes sp-roll-in {
+  from {
+    transform: translateX(-138%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes sp-wheel-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(860deg);
+  }
+}
+
+/* ---------------------------------------------------------------------------
    Studio journey — pinned construction sequence on the Studios page. A
    scroll handler sets --journey (0–1) and data-stage (0–5) on the track and
    animates the SVG parts (base → walls → roof → openings → finish → move-in)

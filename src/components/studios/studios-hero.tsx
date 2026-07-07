@@ -55,10 +55,10 @@ export function StudiosHero() {
 
         <div className="relative">
           <div className="shape-soft border border-line bg-white/85 p-4 shadow-[0_44px_100px_-60px_rgba(44,40,37,0.6)] backdrop-blur sm:p-6">
-            <StudioPreview config={heroConfig} />
+            <StudioPreview config={heroConfig} roll />
           </div>
           <p className="mt-3 text-center font-heading text-[12px] tracking-[0.14em] text-mid uppercase">
-            Live preview. Every option updates it.
+            Rolls in on nine castors. Every option updates it live.
           </p>
         </div>
       </div>

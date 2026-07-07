@@ -6,7 +6,13 @@ import { resolveConfig, type StudioConfig } from "./studio-data";
  * from the config; fills ease between choices via CSS transitions. Group
  * `sp-stage` classes drive the staged entrance in the configurator.
  */
-export function StudioPreview({ config }: { config: StudioConfig }) {
+export function StudioPreview({
+  config,
+  roll = false,
+}: {
+  config: StudioConfig;
+  roll?: boolean;
+}) {
   const resolved = resolveConfig(config);
 
   const wall = resolved?.wall.swatch ?? "#f3f0e9";
@@ -56,6 +62,8 @@ export function StudioPreview({ config }: { config: StudioConfig }) {
         <path d="M466 322h30l-4 24h-22l-4-24Z" fill="var(--ss-clay)" stroke="var(--ss-olive)" strokeWidth="2" />
       </g>
 
+      {/* Studio — rolls in on its castors when `roll` is set; parked otherwise. */}
+      <g className={roll ? "sp-roll" : undefined}>
       {/* Contact shadow */}
       <ellipse className="sp-stage sp-d1" cx="262" cy="350" rx="190" ry="12" fill="#2c2825" opacity="0.12" />
 
@@ -70,11 +78,27 @@ export function StudioPreview({ config }: { config: StudioConfig }) {
         {/* Corner posts in trim colour */}
         <rect x="84" y="150" width="12" height="196" fill={trim} style={{ transition: "fill 0.45s ease" }} />
         <rect x="424" y="150" width="12" height="196" fill={trim} style={{ transition: "fill 0.45s ease" }} />
-        {/* Castor wheels, the 9-wheel mobility story */}
-        <g fill={structure}>
-          {[112, 156, 200, 244, 288, 332, 376, 408].map((cx) => (
-            <circle key={cx} cx={cx} cy="350" r="6" />
+        {/* Nine braked castor wheels, the mobility story. Spokes read as
+            wheels and spin during the roll-in. */}
+        <g>
+          {[112, 149, 186, 223, 260, 297, 334, 371, 408].map((cx) => (
+            <g
+              key={cx}
+              className="sp-wheel"
+              style={{ transformBox: "fill-box", transformOrigin: "center" }}
+            >
+              <circle cx={cx} cy="352" r="7.5" fill={structure} />
+              <circle cx={cx} cy="352" r="2.3" fill={wall} />
+              <g stroke={wall} strokeWidth="1.3" strokeLinecap="round" opacity="0.85">
+                <path d={`M${cx} 352 V346`} />
+                <path d={`M${cx} 352 L${cx - 4.3} 354.5`} />
+                <path d={`M${cx} 352 L${cx + 4.3} 354.5`} />
+              </g>
+            </g>
           ))}
+          {/* Front braking lever on the leading castor */}
+          <path d="M408 346 l8 -9" stroke={structure} strokeWidth="2.4" strokeLinecap="round" />
+          <circle cx="416" cy="337" r="2.6" fill={structure} />
         </g>
       </g>
 
@@ -143,6 +167,7 @@ export function StudioPreview({ config }: { config: StudioConfig }) {
             <rect x="330" y="272" width="6" height="24" rx="3" fill={structure} />
           </>
         )}
+      </g>
       </g>
     </svg>
   );

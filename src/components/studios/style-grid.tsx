@@ -23,7 +23,7 @@ export function StyleGrid({ selectedPresetId, onChoose }: Props) {
       <div className="mx-auto w-full max-w-[1280px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <Reveal className="max-w-[700px]">
           <p className="font-heading text-[13px] tracking-[0.22em] text-accent-strong uppercase">
-            Signature designs
+            Space for the way you live
           </p>
           <h2
             id="styles-heading"

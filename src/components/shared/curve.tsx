@@ -5,8 +5,9 @@ type Props = {
 };
 
 /**
- * Organic wave divider between cream and cream-soft sections, the soft
- * shape language of the brand applied to section boundaries.
+ * Section divider drawn as a shallow studio roofline — a low, off-centre rake
+ * in straight segments, so every cream-to-cream boundary reads as a roof
+ * rather than a generic wave. Flip mirrors it for a section's bottom edge.
  */
 export function Curve({ flip = false, className = "" }: Props) {
   return (
@@ -17,7 +18,7 @@ export function Curve({ flip = false, className = "" }: Props) {
       className={`block h-8 w-full sm:h-12 ${flip ? "rotate-180" : ""} ${className}`}
     >
       <path
-        d="M0 34C240 10 480 58 720 34 960 10 1200 58 1440 34V64H0Z"
+        d="M0 46 L840 22 L1440 34 V64 H0 Z"
         fill="var(--ss-cream-soft)"
       />
     </svg>
