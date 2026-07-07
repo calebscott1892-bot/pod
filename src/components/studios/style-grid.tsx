@@ -68,7 +68,7 @@ function PresetCard({
 
   return (
     <article className="group transition duration-300 hover:-translate-y-1.5">
-      <div className="shape-soft relative overflow-hidden border border-line bg-cream-soft shadow-[0_30px_70px_-55px_rgba(44,40,37,0.55)]">
+      <div className="elev-2 elev-hover shape-soft relative overflow-hidden border border-line bg-cream-soft transition-shadow duration-300">
         <StudioPreview config={config} />
         {selected ? (
           <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-dark px-4 py-2 font-heading text-[11px] tracking-[0.14em] text-cream uppercase">

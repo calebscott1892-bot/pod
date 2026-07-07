@@ -139,6 +139,91 @@ p {
 }
 
 /* ---------------------------------------------------------------------------
+   Material depth — layered elevation + a debossed icon chip. Cards get a lit,
+   tactile surface (tight contact shadow + soft ambient cast + a top rim-light)
+   instead of one flat drop shadow, and the accent-soft icon discs read as
+   chips pressed into the page. CSS-only, no new assets, alphas kept low so the
+   brand stays clean and airy rather than heavy/skeuomorphic.
+--------------------------------------------------------------------------- */
+
+.elev-1 {
+  box-shadow:
+    0 1px 2px rgba(44, 40, 37, 0.1),
+    0 14px 30px -24px rgba(44, 40, 37, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.elev-2 {
+  box-shadow:
+    0 2px 4px rgba(44, 40, 37, 0.1),
+    0 28px 55px -34px rgba(44, 40, 37, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.elev-3 {
+  box-shadow:
+    0 4px 8px rgba(44, 40, 37, 0.12),
+    0 46px 90px -48px rgba(44, 40, 37, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+/* Cards that lift: rest at elev-2, rise under the group hover. */
+.group:hover .elev-hover {
+  box-shadow:
+    0 6px 12px rgba(44, 40, 37, 0.14),
+    0 60px 110px -46px rgba(44, 40, 37, 0.58),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.icon-chip {
+  background:
+    radial-gradient(
+      120% 120% at 50% 15%,
+      color-mix(in srgb, var(--accent-soft) 78%, #fff) 0%,
+      var(--accent-soft) 52%,
+      color-mix(in srgb, var(--accent-soft) 80%, var(--ss-dark)) 100%
+    );
+  box-shadow:
+    inset 0 2px 4px rgba(44, 40, 37, 0.16),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* ---------------------------------------------------------------------------
+   Dark anchor band — one deep, natural-toned section per page gives the cream
+   stack a tonal floor and lets the three brands diverge (studios olive /
+   rentals teal / living eucalyptus). Foreground flips to cream, muted copy
+   lightens, hairlines and the accent drop to light tints so eyebrows and
+   glyphs glow on the deep ground. Tones stay warm shade, never corporate black.
+--------------------------------------------------------------------------- */
+
+.section-dark {
+  --band: var(--ss-olive);
+  background: var(--band);
+  color: var(--ss-cream);
+  /* Theme utilities inline the --ss-* sources (@theme inline), so remap those,
+     not --color-*: text-dark/mid and border-line all lift onto the deep ground. */
+  --ss-dark: var(--ss-cream);
+  --ss-mid: color-mix(in srgb, var(--ss-cream) 74%, transparent);
+  --ss-line: color-mix(in srgb, var(--ss-cream) 18%, transparent);
+}
+
+[data-site="rentals"] .section-dark {
+  --band: var(--ss-glass);
+}
+
+[data-site="living"] .section-dark {
+  --band: var(--ss-eucalyptus);
+}
+
+/* Glowing glass chip for icons sitting on a dark band. */
+.chip-on-dark {
+  background: color-mix(in srgb, var(--ss-cream) 10%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--ss-cream) 16%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--ss-cream) 22%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
    Hero video placeholder — warm cream gradient with a slow soft-light shimmer.
    Swap for a <video> once Paul supplies footage; the markup already allows it.
 --------------------------------------------------------------------------- */

@@ -66,7 +66,7 @@ export function StudiosFaq() {
 
         <div className="mt-10 space-y-3.5">
           {faqs.map((faq) => (
-              <details key={faq.question} className="group rounded-3xl border border-line bg-white px-6 transition open:shadow-[0_24px_60px_-50px_rgba(44,40,37,0.6)]">
+              <details key={faq.question} className="elev-1 group rounded-3xl border border-line bg-white px-6 transition">
                 <summary className="faq-summary flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-2 font-heading text-[17px] tracking-tight text-dark sm:text-[19px]">
                   {faq.question}
                   <span className="grid size-9 shrink-0 place-items-center rounded-full border border-line text-mid transition group-open:rotate-45 group-open:border-accent-strong group-open:text-accent-strong">

@@ -51,7 +51,7 @@ export function StudiosBenefits() {
         <div className="mt-12 grid gap-x-7 gap-y-9 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit) => (
             <article key={benefit.title} className="flex gap-4">
-                <span className="grid size-12 shrink-0 place-items-center rounded-full bg-accent-soft text-accent-strong">
+                <span className="icon-chip grid size-12 shrink-0 place-items-center rounded-full text-accent-strong">
                   <BenefitIcon icon={benefit.icon} />
                 </span>
                 <div>

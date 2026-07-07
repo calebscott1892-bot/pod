@@ -4,7 +4,7 @@ import { Reveal } from "@/components/shared/reveal";
 
 const deliveryPoints: { title: string; body: string; icon: keyof typeof icons }[] = [
   {
-    title: "Delivered within weeks",
+    title: "Built to order",
     body: "Your custom studio is built and delivered to your door within weeks of your order, and we keep you posted along the way.",
     icon: "calendar",
   },
@@ -39,30 +39,30 @@ export function DeliverySection() {
   return (
     <section
       id="delivery"
-      className="bg-cream-soft"
+      className="section-dark"
       aria-labelledby="delivery-heading"
     >
-      <div className="mx-auto grid w-full max-w-[1280px] gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:gap-16 lg:px-8 lg:py-24">
+      <div className="mx-auto grid w-full max-w-[1280px] gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:gap-16 lg:px-8 lg:py-28">
         <Reveal>
-          <p className="font-heading text-[13px] tracking-[0.22em] text-accent-strong uppercase">
+          <p className="font-heading text-[13px] tracking-[0.22em] text-accent uppercase">
             Delivery &amp; logistics
           </p>
           <h2
             id="delivery-heading"
-            className="mt-3 max-w-[520px] font-heading text-[34px] leading-[1.08] tracking-tight sm:text-[44px]"
+            className="mt-4 max-w-[540px] font-heading text-[40px] leading-[1.02] tracking-tight sm:text-[56px] lg:text-[64px]"
           >
-            Big purchase. Clear plan.
+            Delivered within weeks.
           </h2>
-          <p className="mt-4 max-w-[540px] text-[16px] leading-8 text-mid">
+          <p className="mt-5 max-w-[540px] text-[16px] leading-8 text-mid">
             A studio is a serious investment, so we keep the logistics simple
             and honest, here&apos;s exactly how your studio gets from our
             workshop to your backyard.
           </p>
 
-          <ul className="mt-8 space-y-5">
+          <ul className="mt-9 space-y-5">
             {deliveryPoints.map((point) => (
               <li key={point.title} className="flex gap-4">
-                <span className="grid size-12 shrink-0 place-items-center rounded-full bg-accent-soft text-accent-strong">
+                <span className="chip-on-dark grid size-12 shrink-0 place-items-center rounded-full text-accent">
                   <DeliveryIcon icon={point.icon} />
                 </span>
                 <div>
@@ -89,7 +89,7 @@ export function DeliverySection() {
                 className="object-cover"
               />
             </div>
-            <p className="shape-soft absolute -bottom-5 left-1/2 w-max max-w-[90%] -translate-x-1/2 border border-line bg-white px-6 py-3 text-center font-heading text-[13px] tracking-[0.1em] text-dark uppercase shadow-[0_20px_50px_-30px_rgba(44,40,37,0.5)]">
+            <p className="shape-soft absolute -bottom-5 left-1/2 w-max max-w-[90%] -translate-x-1/2 border border-white/70 bg-white px-6 py-3 text-center font-heading text-[13px] tracking-[0.1em] text-[#2c2825] uppercase shadow-[0_24px_50px_-24px_rgba(0,0,0,0.6)]">
               Delivered &amp; installed by our team
             </p>
           </div>
