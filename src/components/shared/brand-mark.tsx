@@ -22,8 +22,13 @@ export function BrandMark({
 }) {
   if (site.logo) {
     const d = dims[site.id] ?? { width: 1024, height: 1024 };
-    const imgClass =
-      size === "lg" ? "h-24 w-auto" : size === "md" ? "h-16 w-auto" : "h-12 w-auto sm:h-14";
+    // `self-start` keeps the logo at its intrinsic aspect ratio: as a direct
+    // flex child it would otherwise stretch to the container's cross axis
+    // (full card width in the column-layout gateway) and distort. No-op in the
+    // header, where the wrapping link already shrink-wraps to the logo.
+    const imgClass = `max-w-full self-start object-contain ${
+      size === "lg" ? "h-24 w-auto" : size === "md" ? "h-16 w-auto" : "h-12 w-auto sm:h-14"
+    }`;
     return (
       <Image
         src={site.logo}
