@@ -1,6 +1,13 @@
-import Image from "next/image";
+import { StudioPreview } from "@/components/studios/studio-preview";
+import { defaultConfig } from "@/components/studios/studio-data";
 
-import { Drift } from "@/components/shared/drift";
+// A rental studio in Rentals blue — rolls in on its castors as the hero.
+const heroConfig = {
+  ...defaultConfig,
+  roof: "skillion-right",
+  trim: "blue",
+  wall: "white",
+};
 
 export function RentalsHero() {
   return (
@@ -12,91 +19,50 @@ export function RentalsHero() {
       {/* Video placeholder, swap for a muted, looping <video> when supplied. */}
       <div className="video-placeholder" aria-hidden="true" />
 
-      {/* Floating lifestyle chips, drifting on scroll. Wide screens only. */}
-      <div className="pointer-events-none absolute inset-0 hidden 2xl:block" aria-hidden="true">
-        <Drift speed={0.14} className="absolute top-[14%] left-[3.5%]">
-          <div className="shape-arch relative aspect-[3/3.7] w-56 -rotate-3 overflow-hidden border border-line shadow-[0_36px_80px_-50px_rgba(44,40,37,0.55)]">
-            <Image
-              src="/assets/images/studios-real.jpg"
-              alt=""
-              fill
-              sizes="224px"
-              className="object-cover"
-            />
+      <div className="relative mx-auto grid w-full max-w-[1280px] items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 lg:px-8 lg:py-20">
+        <div>
+          <p className="font-heading text-[13px] tracking-[0.3em] text-accent-strong uppercase">
+            Spare Space Rentals
+          </p>
+          <h1
+            id="hero-heading"
+            className="mt-5 max-w-[560px] font-heading text-[46px] leading-[1.02] tracking-tight text-dark sm:text-[64px] lg:text-[74px]"
+          >
+            Your backyard,
+            <span className="mt-1 block font-script text-[52px] leading-[1.1] text-accent-strong sm:text-[72px] lg:text-[84px]">
+              transformed.
+            </span>
+          </h1>
+          <p className="mt-6 max-w-[520px] text-[17px] leading-8 text-mid sm:text-[19px]">
+            Premium lifestyle studios, delivered and installed across the
+            Sunshine Coast and Northern Rivers. Rented, not bought, and it rolls
+            in on nine castors, no slab and no permits.
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <a
+              href="#spaces"
+              className="inline-flex min-h-13 items-center rounded-full bg-dark px-8 font-heading text-[14px] tracking-[0.12em] text-cream uppercase transition hover:bg-accent-strong"
+            >
+              Explore spaces
+            </a>
+            <a
+              href="#enquire"
+              className="inline-flex min-h-13 items-center rounded-full border border-dark/30 bg-white/40 px-8 font-heading text-[14px] tracking-[0.12em] text-dark uppercase backdrop-blur transition hover:border-dark hover:bg-white/70"
+            >
+              Make an enquiry
+            </a>
           </div>
-          <p className="shape-soft mt-4 ml-6 w-max -rotate-2 border border-line bg-white/85 px-4 py-2 font-heading text-[11px] tracking-[0.14em] text-dark uppercase backdrop-blur">
-            Installed · Southeast QLD
-          </p>
-        </Drift>
-        <Drift speed={-0.09} className="absolute right-[4%] bottom-[18%]">
-          <div
-            className="shape-oblong aspect-[4/2.6] w-60 rotate-2 border border-line shadow-[0_30px_70px_-50px_rgba(44,40,37,0.5)]"
-            style={{
-              background:
-                "linear-gradient(150deg, #f9efe6 8%, #efd2bb 56%, #e2ae8d 100%)",
-            }}
-          />
-          <p className="shape-soft mt-4 ml-10 w-max rotate-1 border border-line bg-white/85 px-4 py-2 font-script text-[19px] text-accent-strong backdrop-blur">
-            your sanctuary, steps away
-          </p>
-        </Drift>
-      </div>
-
-      <div className="relative mx-auto w-full max-w-[1280px] px-4 py-20 text-center sm:px-6 lg:px-8">
-        <p className="font-heading text-[13px] tracking-[0.3em] text-accent-strong uppercase">
-          Spare Space Rentals
-        </p>
-        <h1
-          id="hero-heading"
-          className="mx-auto mt-6 max-w-[860px] font-heading text-[52px] leading-[1.02] tracking-tight text-dark sm:text-[76px] lg:text-[92px]"
-        >
-          Your backyard,
-          <span className="mt-2 block font-script text-[58px] leading-[1.1] text-accent-strong sm:text-[86px] lg:text-[104px]">
-            transformed.
-          </span>
-        </h1>
-        <p className="mx-auto mt-7 max-w-[620px] text-[17px] leading-8 text-mid sm:text-[19px]">
-          Premium lifestyle studios, delivered and installed in the Northern
-          Rivers and Sunshine Coast. Designed for the way you actually live.
-        </p>
-
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="#spaces"
-            className="inline-flex min-h-13 items-center rounded-full bg-dark px-8 font-heading text-[14px] tracking-[0.12em] text-cream uppercase transition hover:bg-accent-strong"
-          >
-            Explore spaces
-          </a>
-          <a
-            href="#enquire"
-            className="inline-flex min-h-13 items-center rounded-full border border-dark/30 bg-white/40 px-8 font-heading text-[14px] tracking-[0.12em] text-dark uppercase backdrop-blur transition hover:border-dark hover:bg-white/70"
-          >
-            Make an enquiry
-          </a>
         </div>
 
-        <a
-          href="#spaces"
-          aria-label="Scroll to lifestyle spaces"
-          className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 text-mid transition hover:text-dark sm:block"
-        >
-          <svg
-            width="26"
-            height="26"
-            viewBox="0 0 26 26"
-            fill="none"
-            aria-hidden="true"
-            className="animate-bounce"
-          >
-            <path
-              d="m6 10 7 7 7-7"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </a>
+        <div className="relative">
+          <div className="shape-soft border border-line bg-white/85 p-4 shadow-[0_44px_100px_-60px_rgba(44,40,37,0.6)] backdrop-blur sm:p-6">
+            <StudioPreview config={heroConfig} roll />
+          </div>
+          <p className="mt-3 text-center font-heading text-[12px] tracking-[0.14em] text-mid uppercase">
+            Rolls in, rolls out. No slab, no permits.
+          </p>
+        </div>
       </div>
     </section>
   );
