@@ -4,6 +4,7 @@ import { EnquiryForm } from "@/components/rentals/enquiry-form";
 import { LifestyleCategories } from "@/components/rentals/lifestyle-categories";
 import { LifestyleStrip } from "@/components/rentals/lifestyle-strip";
 import { RentalsHero } from "@/components/rentals/rentals-hero";
+import { RentalsProof } from "@/components/rentals/rentals-proof";
 import { ServiceArea } from "@/components/rentals/service-area";
 import { BackToTop } from "@/components/shared/back-to-top";
 import { Curve } from "@/components/shared/curve";
@@ -41,6 +42,7 @@ export default function RentalsPage() {
       <SiteHeader site={sites.rentals} />
       <main id="main-content">
         <RentalsHero />
+        <RentalsProof />
         <LifestyleCategories />
         <DayJourney />
         <HowItWorks

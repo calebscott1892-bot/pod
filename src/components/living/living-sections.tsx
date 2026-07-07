@@ -2,10 +2,10 @@ import { Reveal } from "@/components/shared/reveal";
 
 export function LivingOffering() {
   return (
-    <section id="offering" className="bg-cream" aria-labelledby="offering-heading">
-      <div className="mx-auto w-full max-w-[1280px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+    <section id="offering" className="section-dark" aria-labelledby="offering-heading">
+      <div className="mx-auto w-full max-w-[1280px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <Reveal className="max-w-[680px]">
-          <p className="font-heading text-[13px] tracking-[0.22em] text-accent-strong uppercase">
+          <p className="font-heading text-[13px] tracking-[0.22em] text-accent-soft uppercase">
             What we offer
           </p>
           <h2
@@ -34,7 +34,7 @@ export function LivingOffering() {
               points: ["On-site measure & quote", "Professional installation", "One team, start to finish"],
             },
           ].map((card) => (
-            <article key={card.title} className="shape-soft h-full border border-line bg-cream-soft p-8 shadow-[0_30px_70px_-55px_rgba(44,40,37,0.5)]">
+            <article key={card.title} className="shape-soft h-full border border-line bg-white/[0.06] p-8">
                 <h3 className="font-heading text-[24px] tracking-tight">
                   {card.title}
                 </h3>
@@ -42,7 +42,7 @@ export function LivingOffering() {
                 <ul className="mt-5 space-y-2.5">
                   {card.points.map((point) => (
                     <li key={point} className="flex items-center gap-3 text-[15px] text-dark">
-                      <span className="grid size-6 shrink-0 place-items-center rounded-full bg-accent-soft text-accent-strong">
+                      <span className="chip-on-dark grid size-6 shrink-0 place-items-center rounded-full text-accent-soft">
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                           <path d="m2 6.5 2.7 2.7L10 3.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
@@ -89,7 +89,7 @@ export function LivingFitout() {
         <div className="mt-12 grid gap-x-7 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((category) => (
             <article key={category.name} className="group">
-                <div className="shape-soft relative grid aspect-[4/3] place-items-center overflow-hidden border border-line bg-white text-accent-strong shadow-[0_26px_60px_-52px_rgba(44,40,37,0.5)] transition duration-300 group-hover:-translate-y-1">
+                <div className="shape-soft elev-2 elev-hover relative grid aspect-[4/3] place-items-center overflow-hidden border border-line bg-white text-accent-strong transition duration-300 group-hover:-translate-y-1">
                   <CategoryIcon icon={category.icon} />
                 </div>
                 <h3 className="mt-4 font-heading text-[20px] tracking-tight">

@@ -46,7 +46,7 @@ export function HowItWorks({
           />
           {steps.map((step, index) => (
             <div key={step.title} className="relative">
-              <div className="relative inline-grid size-16 place-items-center rounded-full bg-accent-soft text-accent-strong">
+              <div className="icon-chip relative inline-grid size-16 place-items-center rounded-full text-accent-strong">
                 <StepIcon icon={step.icon} />
                 <span className="absolute -top-1 -right-1 grid size-6 place-items-center rounded-full bg-dark font-heading text-[12px] text-cream">
                   {index + 1}

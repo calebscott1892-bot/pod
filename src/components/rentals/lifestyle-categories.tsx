@@ -40,7 +40,7 @@ export function LifestyleCategories() {
           {lifestyleCategories.map((category) => (
             <article key={category.id} className="group transition duration-300 hover:-translate-y-1.5">
                 <div
-                  className={`${category.shape} relative aspect-[4/4.4] overflow-hidden border border-line shadow-[0_30px_70px_-55px_rgba(44,40,37,0.55)] transition duration-300 group-hover:shadow-[0_40px_85px_-50px_rgba(44,40,37,0.6)]`}
+                  className={`${category.shape} elev-2 elev-hover relative aspect-[4/4.4] overflow-hidden border border-line transition duration-300`}
                 >
                   <div className="absolute inset-0 transition duration-500 group-hover:scale-[1.04]">
                     <CategoryScene category={category} />

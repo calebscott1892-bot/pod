@@ -212,7 +212,9 @@ p {
 }
 
 [data-site="living"] .section-dark {
-  --band: var(--ss-eucalyptus);
+  /* A deep forest green — the raw --ss-eucalyptus (#6f8067) is too light for
+     cream body text to pass AA, so the band uses a darkened eucalyptus. */
+  --band: #37452e;
 }
 
 /* Glowing glass chip for icons sitting on a dark band. */

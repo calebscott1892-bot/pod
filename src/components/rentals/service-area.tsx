@@ -25,7 +25,7 @@ export function ServiceArea() {
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="shape-soft border border-line bg-cream-soft p-6">
+            <div className="shape-soft elev-1 border border-line bg-cream-soft p-6">
               <p className="font-heading text-[13px] tracking-[0.18em] text-accent-strong uppercase">
                 Southeast QLD
               </p>
@@ -36,7 +36,7 @@ export function ServiceArea() {
                 Including Brisbane and surrounds.
               </p>
             </div>
-            <div className="shape-soft border border-line bg-cream-soft p-6">
+            <div className="shape-soft elev-1 border border-line bg-cream-soft p-6">
               <p className="font-heading text-[13px] tracking-[0.18em] text-accent-strong uppercase">
                 Northern NSW
               </p>
