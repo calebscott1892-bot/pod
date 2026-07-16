@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState } from "react";
 
 import { sendEnquiry } from "@/app/rentals/actions";
 import { Reveal } from "@/components/shared/reveal";
@@ -36,10 +36,9 @@ const regionHints: Record<"qld" | "nsw" | "outside", { text: string; inArea: boo
 };
 
 export function EnquiryForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [intendedUse, setIntendedUse] = useState("");
   const [postcode, setPostcode] = useState("");
-  const [, startTransition] = useTransition();
 
   // Pre-select the space the visitor came from, a category card click
   // (custom event) or a shared link with ?use=<category>.
@@ -69,14 +68,16 @@ export function EnquiryForm() {
   const region = postcodeRegion(postcode);
   const hint = region ? regionHints[region] : null;
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // Optimistic UI, confirm immediately, deliver in the background.
-    setSubmitted(true);
-    startTransition(() => {
-      void sendEnquiry(data);
-    });
+    setStatus("sending");
+    try {
+      const result = await sendEnquiry(data);
+      setStatus(result.ok ? "sent" : "error");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -138,7 +139,7 @@ export function EnquiryForm() {
 
         <Reveal delay={100}>
           <div className="shape-soft border border-line bg-white p-5 shadow-[0_40px_100px_-70px_rgba(44,40,37,0.65)] sm:p-8">
-            {submitted ? (
+            {status === "sent" ? (
               <div
                 role="status"
                 aria-live="polite"
@@ -238,11 +239,34 @@ export function EnquiryForm() {
                   </label>
                 </div>
 
+                {status === "error" ? (
+                  <p
+                    role="alert"
+                    className="rounded-2xl border border-[#e0b7a6] bg-[#fbeae3] px-4 py-3 text-[14px] leading-6 text-[#8f3115]"
+                  >
+                    Sorry, something went wrong sending your enquiry. Please try
+                    again, or reach us directly on{" "}
+                    <a href={business.phoneHref} className="font-medium underline underline-offset-2">
+                      {business.phone}
+                    </a>{" "}
+                    or{" "}
+                    <a
+                      href={`mailto:${sites.rentals.email}`}
+                      className="font-medium underline underline-offset-2"
+                    >
+                      {sites.rentals.email}
+                    </a>
+                    .
+                  </p>
+                ) : null}
+
                 <button
                   type="submit"
-                  className="inline-flex min-h-13 w-full items-center justify-center rounded-full bg-dark px-8 font-heading text-[14px] tracking-[0.12em] text-cream uppercase transition hover:bg-accent-strong"
+                  disabled={status === "sending"}
+                  aria-busy={status === "sending"}
+                  className="inline-flex min-h-13 w-full items-center justify-center rounded-full bg-dark px-8 font-heading text-[14px] tracking-[0.12em] text-cream uppercase transition hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Send my enquiry
+                  {status === "sending" ? "Sending…" : "Send my enquiry"}
                 </button>
                 <p className="text-center text-[13px] leading-6 text-mid">
                   Your details go straight to our team, never to a mailing

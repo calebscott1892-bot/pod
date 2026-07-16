@@ -69,9 +69,11 @@ export async function sendLivingEnquiry(
       console.error(
         `[living-enquiry] Resend responded ${response.status}: ${await response.text()}`,
       );
+      return { ok: false };
     }
   } catch (error) {
     console.error("[living-enquiry] Failed to reach Resend:", error);
+    return { ok: false };
   }
 
   return { ok: true };

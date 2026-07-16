@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { sendStudioOrder } from "@/app/studios/actions";
 import { Reveal } from "@/components/shared/reveal";
+import { sites } from "@/lib/site-config";
 
 import { StudioPreview } from "./studio-preview";
 import type { ConfiguratorStep } from "./studios-shell";
@@ -414,21 +415,23 @@ function SwatchButton({
 
 function ReviewOrder({ config, total }: { config: StudioConfig; total: number }) {
   const resolved = resolveConfig(config);
-  const [submitted, setSubmitted] = useState(false);
-  const [, startTransition] = useTransition();
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   if (!resolved) return null;
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    setSubmitted(true);
-    startTransition(() => {
-      void sendStudioOrder(data);
-    });
+    setStatus("sending");
+    try {
+      const result = await sendStudioOrder(data);
+      setStatus(result.ok ? "sent" : "error");
+    } catch {
+      setStatus("error");
+    }
   }
 
-  if (submitted) {
+  if (status === "sent") {
     return (
       <div role="status" aria-live="polite" className="flex min-h-[360px] flex-col items-center justify-center py-8 text-center">
         <span className="grid size-16 place-items-center rounded-full bg-accent-soft text-accent-strong">
@@ -511,11 +514,31 @@ function ReviewOrder({ config, total }: { config: StudioConfig; total: number })
             <input type="text" name="website" tabIndex={-1} autoComplete="off" />
           </label>
         </div>
+        {status === "error" ? (
+          <p
+            role="alert"
+            className="rounded-2xl border border-[#e0b7a6] bg-[#fbeae3] px-4 py-3 text-[14px] leading-6 text-[#8f3115]"
+          >
+            Sorry, something went wrong sending your order request. Please try
+            again, or email your build to{" "}
+            <a
+              href={`mailto:${sites.studios.email}`}
+              className="font-medium underline underline-offset-2"
+            >
+              {sites.studios.email}
+            </a>
+            .
+          </p>
+        ) : null}
         <button
           type="submit"
-          className="inline-flex min-h-13 w-full items-center justify-center rounded-full bg-dark px-8 font-heading text-[14px] tracking-[0.1em] text-cream uppercase transition hover:bg-accent-strong"
+          disabled={status === "sending"}
+          aria-busy={status === "sending"}
+          className="inline-flex min-h-13 w-full items-center justify-center rounded-full bg-dark px-8 font-heading text-[14px] tracking-[0.1em] text-cream uppercase transition hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
         >
-          Place order request, {formatAud(total)}
+          {status === "sending"
+            ? "Sending…"
+            : `Place order request, ${formatAud(total)}`}
         </button>
         <p className="text-center text-[12px] leading-5 text-mid">
           No payment taken now, we confirm price and delivery, then send a

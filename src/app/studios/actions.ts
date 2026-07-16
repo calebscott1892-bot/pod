@@ -84,9 +84,11 @@ export async function sendStudioOrder(formData: FormData): Promise<OrderResult> 
       console.error(
         `[studio-order] Resend responded ${response.status}: ${await response.text()}`,
       );
+      return { ok: false };
     }
   } catch (error) {
     console.error("[studio-order] Failed to reach Resend:", error);
+    return { ok: false };
   }
 
   return { ok: true };

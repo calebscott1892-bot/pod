@@ -74,11 +74,12 @@ export async function sendEnquiry(formData: FormData): Promise<EnquiryResult> {
       console.error(
         `[enquiry] Resend responded ${response.status}: ${await response.text()}`,
       );
+      return { ok: false };
     }
   } catch (error) {
     console.error("[enquiry] Failed to reach Resend:", error);
+    return { ok: false };
   }
 
-  // The form shows success optimistically; delivery issues surface in logs.
   return { ok: true };
 }

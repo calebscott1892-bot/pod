@@ -31,9 +31,9 @@ export default function ScrollHeroLabPage() {
         scrollToExpand="Scroll to expand"
       >
         <div className="mx-auto max-w-[720px] text-center">
-          <h3 className="font-heading text-[30px] leading-[1.1] tracking-tight sm:text-[40px]">
+          <h1 className="font-heading text-[30px] leading-[1.1] tracking-tight sm:text-[40px]">
             Delivered to your door, within weeks.
-          </h3>
+          </h1>
           <p className="mt-5 text-[16px] leading-8 text-mid">
             Once Paul supplies a hero video, this opener plays it full-bleed as
             you scroll, then hands you into the rest of the page. Until then this

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 
 import { sendLivingEnquiry } from "@/app/living/actions";
 import { Reveal } from "@/components/shared/reveal";
@@ -16,16 +16,18 @@ const interestOptions = [
 ];
 
 export function LivingEnquiry() {
-  const [submitted, setSubmitted] = useState(false);
-  const [, startTransition] = useTransition();
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    setSubmitted(true);
-    startTransition(() => {
-      void sendLivingEnquiry(data);
-    });
+    setStatus("sending");
+    try {
+      const result = await sendLivingEnquiry(data);
+      setStatus(result.ok ? "sent" : "error");
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -59,7 +61,7 @@ export function LivingEnquiry() {
 
         <Reveal delay={100}>
           <div className="shape-soft border border-line bg-white p-5 shadow-[0_40px_100px_-70px_rgba(44,40,37,0.65)] sm:p-8">
-            {submitted ? (
+            {status === "sent" ? (
               <div
                 role="status"
                 aria-live="polite"
@@ -124,11 +126,30 @@ export function LivingEnquiry() {
                   </label>
                 </div>
 
+                {status === "error" ? (
+                  <p
+                    role="alert"
+                    className="rounded-2xl border border-[#e0b7a6] bg-[#fbeae3] px-4 py-3 text-[14px] leading-6 text-[#8f3115]"
+                  >
+                    Sorry, something went wrong sending your enquiry. Please try
+                    again, or email us at{" "}
+                    <a
+                      href={`mailto:${sites.living.email}`}
+                      className="font-medium underline underline-offset-2"
+                    >
+                      {sites.living.email}
+                    </a>
+                    .
+                  </p>
+                ) : null}
+
                 <button
                   type="submit"
-                  className="inline-flex min-h-13 w-full items-center justify-center rounded-full bg-dark px-8 font-heading text-[14px] tracking-[0.12em] text-cream uppercase transition hover:bg-accent-strong"
+                  disabled={status === "sending"}
+                  aria-busy={status === "sending"}
+                  className="inline-flex min-h-13 w-full items-center justify-center rounded-full bg-dark px-8 font-heading text-[14px] tracking-[0.12em] text-cream uppercase transition hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Send enquiry
+                  {status === "sending" ? "Sending…" : "Send enquiry"}
                 </button>
               </form>
             )}
