@@ -42,3 +42,10 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# local Claude Code config / skills
+/.claude/
+
+# client reference documents — kept local, never published (repo is public)
+*.docx
+*.xlsx
