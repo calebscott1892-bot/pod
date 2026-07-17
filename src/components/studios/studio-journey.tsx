@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { SectionMark } from "@/components/shared/section-mark";
 
 /**
  * Pinned construction sequence, the studio is genuinely built as the
@@ -162,9 +163,7 @@ export function StudioJourney() {
         <div className="journey-stage sticky top-0 flex h-svh items-center overflow-hidden pt-20">
           <div className="mx-auto grid w-full max-w-[1280px] items-center gap-6 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14 lg:px-8">
             <div className="text-center lg:text-left">
-              <p className="font-heading text-[13px] tracking-[0.22em] text-accent-strong uppercase">
-                The build
-              </p>
+              <SectionMark>watch it come together</SectionMark>
               <h2
                 id="journey-heading"
                 className="mt-3 font-heading text-[30px] leading-[1.08] tracking-tight sm:text-[40px]"

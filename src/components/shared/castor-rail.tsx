@@ -3,16 +3,16 @@
  * wheels, echoing the studio's mobility. Inherits the current accent via
  * `text-accent-strong` on the caller.
  */
-export function CastorRail({ className = "" }: { className?: string }) {
+export function CastorRail({ className = "text-accent-strong" }: { className?: string }) {
   const wheels = Array.from({ length: 9 }, (_, i) => 40 + (i * 1120) / 8);
   return (
     <svg
       viewBox="0 0 1200 26"
       preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
-      className={`h-5 w-full text-accent-strong ${className}`}
+      className={`h-5 w-full ${className}`}
     >
-      <line x1="24" y1="15" x2="1176" y2="15" stroke="var(--ss-line)" strokeWidth="2" />
+      <line x1="24" y1="15" x2="1176" y2="15" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.35" />
       {wheels.map((cx) => (
         <g key={cx} stroke="currentColor">
           <circle cx={cx} cy="15" r="6.5" fill="none" strokeWidth="2" opacity="0.85" />

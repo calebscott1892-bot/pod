@@ -5,12 +5,9 @@ export function LivingOffering() {
     <section id="offering" className="section-dark" aria-labelledby="offering-heading">
       <div className="mx-auto w-full max-w-[1280px] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <Reveal className="max-w-[680px]">
-          <p className="font-heading text-[13px] tracking-[0.22em] text-accent-soft uppercase">
-            What we offer
-          </p>
           <h2
             id="offering-heading"
-            className="mt-3 font-heading text-[34px] leading-[1.08] tracking-tight sm:text-[44px]"
+            className="mt-3 font-heading text-sect leading-[1.04] tracking-tight"
           >
             Two ways to work with us.
           </h2>
@@ -71,12 +68,9 @@ export function LivingFitout() {
     <section id="fitout" className="bg-cream-soft" aria-labelledby="fitout-heading">
       <div className="mx-auto w-full max-w-[1280px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <Reveal className="max-w-[680px]">
-          <p className="font-heading text-[13px] tracking-[0.22em] text-accent-strong uppercase">
-            The range
-          </p>
           <h2
             id="fitout-heading"
-            className="mt-3 font-heading text-[34px] leading-[1.08] tracking-tight sm:text-[44px]"
+            className="mt-3 font-heading text-sect leading-[1.04] tracking-tight"
           >
             Everything to finish the room.
           </h2>

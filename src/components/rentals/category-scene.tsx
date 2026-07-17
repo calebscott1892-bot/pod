@@ -11,6 +11,7 @@ export function CategoryScene({ category }: { category: LifestyleCategory }) {
   return (
     <svg
       viewBox="0 0 300 330"
+      preserveAspectRatio="xMidYMid slice"
       role="img"
       aria-label={`Illustration of a ${category.name.toLowerCase()} interior`}
       className="absolute inset-0 h-full w-full"
@@ -25,6 +26,17 @@ export function CategoryScene({ category }: { category: LifestyleCategory }) {
       <ellipse cx="135" cy="294" rx="118" ry="20" fill={category.accent} opacity="0.18" />
 
       <Furniture category={category} />
+
+      {/* Dusk overlay — off by default; the mosaic turns the lights on when
+          you point at the room. Generic across scenes: the room floods glass
+          teal, the window glows warm, the lamp spills light. */}
+      <g className="cs-dusk">
+        <rect width="300" height="330" fill="var(--ss-glass)" opacity="0.52" />
+        <rect x="200" y="46" width="64" height="146" rx="3" fill="#ffe4b3" opacity="0.92" />
+        <path d="M232 46v146M200 119h64" stroke="#8a6a3a" strokeWidth="2" opacity="0.5" />
+        <circle cx="232" cy="122" r="96" fill="#ffe4b3" opacity="0.26" />
+        <circle cx="96" cy="158" r="46" fill="#ffd79a" opacity="0.16" />
+      </g>
     </svg>
   );
 }

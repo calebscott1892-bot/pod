@@ -1,5 +1,6 @@
 import { StudioPreview } from "./studio-preview";
 import { defaultConfig } from "./studio-data";
+import { SectionMark } from "@/components/shared/section-mark";
 
 const heroConfig = {
   ...defaultConfig,
@@ -23,9 +24,7 @@ export function StudiosHero() {
 
       <div className="relative mx-auto grid w-full max-w-[1280px] items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14 lg:px-8 lg:py-24">
         <div>
-          <p className="font-heading text-[13px] tracking-[0.3em] text-accent-strong uppercase">
-            Spare Space Studios
-          </p>
+          <SectionMark>rolls right to you</SectionMark>
           <h1
             id="hero-heading"
             className="mt-5 max-w-[560px] font-heading text-[44px] leading-[1.04] tracking-tight text-dark sm:text-[58px] lg:text-[66px]"
@@ -37,16 +36,16 @@ export function StudiosHero() {
             trim colour. Built and delivered to your door within weeks.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
             <a
               href="#configurator"
-              className="inline-flex min-h-13 items-center rounded-full bg-dark px-8 font-heading text-[14px] tracking-[0.12em] text-cream uppercase transition hover:bg-accent-strong"
+              className="inline-flex min-h-13 items-center rounded-full bg-dark px-8 font-heading text-[15px] tracking-tight text-cream transition hover:bg-accent-strong"
             >
               Design yours
             </a>
             <a
               href="#styles"
-              className="inline-flex min-h-13 items-center rounded-full border border-dark/30 bg-white/40 px-8 font-heading text-[14px] tracking-[0.12em] text-dark uppercase backdrop-blur transition hover:border-dark hover:bg-white/70"
+              className="link-draw inline-flex min-h-12 items-center font-heading text-[15px] tracking-tight text-dark"
             >
               Browse styles
             </a>

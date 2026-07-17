@@ -337,7 +337,7 @@ const ScrollExpandMedia = ({
                 <div className="relative z-10 mt-4 flex flex-col items-center text-center transition-none">
                   {date && (
                     <p
-                      className="font-heading text-[13px] tracking-[0.22em] text-cream/80 uppercase"
+                      className="font-script text-[22px] leading-none text-cream"
                       style={{ transform: `translateX(-${textTranslateX}vw)` }}
                     >
                       {date}
@@ -345,7 +345,7 @@ const ScrollExpandMedia = ({
                   )}
                   {scrollToExpand && !reducedMotion && (
                     <p
-                      className="text-center font-heading text-[13px] tracking-[0.14em] text-cream/80 uppercase"
+                      className="mt-1 text-center font-heading text-[12px] tracking-[0.08em] text-cream/70 uppercase"
                       style={{ transform: `translateX(${textTranslateX}vw)` }}
                     >
                       {scrollToExpand}

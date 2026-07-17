@@ -5,6 +5,7 @@ import { useState } from "react";
 import { sendLivingEnquiry } from "@/app/living/actions";
 import { Reveal } from "@/components/shared/reveal";
 import { sites } from "@/lib/site-config";
+import { SectionMark } from "@/components/shared/section-mark";
 
 const supplyOptions = ["Supply only", "Supply & install", "Not sure yet"];
 const interestOptions = [
@@ -34,12 +35,10 @@ export function LivingEnquiry() {
     <section id="enquire" className="bg-cream" aria-labelledby="living-enquire-heading">
       <div className="mx-auto grid w-full max-w-[1280px] gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:px-8 lg:py-24">
         <Reveal>
-          <p className="font-heading text-[13px] tracking-[0.22em] text-accent-strong uppercase">
-            Enquire
-          </p>
+          <SectionMark>tell us about the room</SectionMark>
           <h2
             id="living-enquire-heading"
-            className="mt-3 font-heading text-[34px] leading-[1.08] tracking-tight sm:text-[44px]"
+            className="mt-3 font-heading text-sect leading-[1.04] tracking-tight"
           >
             Tell us about your space.
           </h2>

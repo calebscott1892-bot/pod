@@ -53,12 +53,9 @@ export function StudiosFaq() {
     <section id="faq" className="bg-cream" aria-labelledby="faq-heading">
       <div className="mx-auto w-full max-w-[860px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <Reveal className="text-center">
-          <p className="font-heading text-[13px] tracking-[0.22em] text-accent-strong uppercase">
-            Good to know
-          </p>
           <h2
             id="faq-heading"
-            className="mt-3 font-heading text-[34px] leading-[1.08] tracking-tight sm:text-[44px]"
+            className="mt-3 font-heading text-sect leading-[1.04] tracking-tight"
           >
             Questions, answered.
           </h2>

@@ -1,8 +1,16 @@
 import Link from "next/link";
 
+import { CastorRail } from "@/components/shared/castor-rail";
 import { business, group, sites, type SiteConfig } from "@/lib/site-config";
 
 import { BrandMark } from "./brand-mark";
+
+/** A script sign-off per brand — the page parks on its own ground. */
+const signoff: Record<string, string> = {
+  studios: "Yours, out the back.",
+  rentals: "Rolls in Monday.",
+  living: "Make it feel like home.",
+};
 
 export function SiteFooter({ site }: { site: SiteConfig }) {
   const others = (["studios", "rentals", "living"] as const)
@@ -10,8 +18,15 @@ export function SiteFooter({ site }: { site: SiteConfig }) {
     .map((id) => sites[id]);
 
   return (
-    <footer className="border-t border-line bg-cream-soft">
-      <div className="mx-auto grid w-full max-w-[1280px] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_0.9fr_1fr] lg:gap-8 lg:px-8 lg:py-16">
+    <footer className="section-dark">
+      <div className="mx-auto w-full max-w-[1280px] px-4 pt-14 sm:px-6 lg:px-8 lg:pt-16">
+        <CastorRail className="text-accent-soft" />
+        <p className="mt-8 max-w-[16ch] font-script text-[40px] leading-none text-cream sm:text-[54px]">
+          {signoff[site.id] ?? site.tagline}
+        </p>
+      </div>
+
+      <div className="mx-auto grid w-full max-w-[1280px] gap-10 px-4 pt-12 pb-12 sm:px-6 lg:grid-cols-[1.2fr_0.9fr_1fr] lg:gap-8 lg:px-8 lg:pt-14 lg:pb-16">
         <div>
           <BrandMark site={site} size="md" />
           <p className="mt-4 max-w-[340px] text-[15px] leading-7 text-mid">
@@ -28,7 +43,7 @@ export function SiteFooter({ site }: { site: SiteConfig }) {
         </div>
 
         <div>
-          <p className="font-heading text-[13px] tracking-[0.18em] text-accent-strong uppercase">
+          <p className="font-heading text-[13px] tracking-[0.12em] text-accent-soft uppercase">
             Get in touch
           </p>
           <ul className="mt-4 space-y-3 text-[15px] leading-6">
@@ -36,7 +51,7 @@ export function SiteFooter({ site }: { site: SiteConfig }) {
               <li>
                 <a
                   href={business.phoneHref}
-                  className="text-dark transition hover:text-accent-strong"
+                  className="link-draw text-dark transition hover:text-cream"
                 >
                   {business.phone}
                 </a>
@@ -45,7 +60,7 @@ export function SiteFooter({ site }: { site: SiteConfig }) {
             <li>
               <a
                 href={`mailto:${site.email}`}
-                className="text-dark transition hover:text-accent-strong"
+                className="link-draw text-dark transition hover:text-cream"
               >
                 {site.email}
               </a>
@@ -54,7 +69,7 @@ export function SiteFooter({ site }: { site: SiteConfig }) {
               Commercial orders (5+ units):{" "}
               <a
                 href={`mailto:${site.commercialEmail}`}
-                className="text-dark underline decoration-line underline-offset-4 transition hover:text-accent-strong"
+                className="link-draw text-cream/90"
               >
                 {site.commercialEmail}
               </a>
@@ -64,7 +79,7 @@ export function SiteFooter({ site }: { site: SiteConfig }) {
         </div>
 
         <div>
-          <p className="font-heading text-[13px] tracking-[0.18em] text-accent-strong uppercase">
+          <p className="font-heading text-[13px] tracking-[0.12em] text-accent-soft uppercase">
             Spare Space family
           </p>
           <ul className="mt-4 space-y-2 text-[15px] leading-6">
@@ -72,7 +87,7 @@ export function SiteFooter({ site }: { site: SiteConfig }) {
               <li key={other.id}>
                 <Link
                   href={`/${other.id}`}
-                  className="text-dark underline decoration-line underline-offset-4 transition hover:text-accent-strong"
+                  className="link-draw text-cream/90"
                 >
                   Visit {other.name}
                 </Link>
@@ -84,9 +99,7 @@ export function SiteFooter({ site }: { site: SiteConfig }) {
               © 2026 {site.legalEntity} · ABN {site.abn}
             </p>
             <p>T/As {site.tradingAs}</p>
-            <p className="pt-1 text-[12px]">
-              Part of the {group.name}.
-            </p>
+            <p className="pt-1 text-[12px]">Part of the {group.name}.</p>
           </div>
         </div>
       </div>
@@ -105,7 +118,7 @@ function SocialLink({
     <a
       href="#"
       aria-label={`${label} (coming soon)`}
-      className="grid size-12 place-items-center rounded-full border border-line text-mid transition hover:border-accent-strong hover:text-accent-strong"
+      className="chip-on-dark grid size-12 place-items-center rounded-full text-cream transition hover:text-accent-soft"
     >
       <svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor" aria-hidden="true">
         {children}

@@ -62,6 +62,8 @@
   --color-eucalyptus: var(--ss-eucalyptus);
   --color-olive: var(--ss-olive);
   --color-clay: var(--ss-clay);
+  /* Section-heading scale — one committed step above body, fluid. `text-sect` */
+  --text-sect: clamp(2.5rem, 1.4rem + 4vw, 3.75rem);
   --font-sans: var(--font-corbel);
   --font-heading: var(--font-arcon);
   --font-script: var(--font-harold);
@@ -223,6 +225,91 @@ p {
   box-shadow:
     inset 0 0 0 1px color-mix(in srgb, var(--ss-cream) 16%, transparent),
     inset 0 1px 0 color-mix(in srgb, var(--ss-cream) 22%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Voice & interaction — the bolder pass. Navigation is words with a drawn
+   underline (the filled pill is reserved for commerce/submit); the lifestyle
+   mosaic turns the lights on at dusk when you point at a room; a preset rolls
+   its own wheels when hovered; the Three Doors gateway widens the chosen door.
+   Everything gated to fine-pointer/hover and neutralised under reduced motion.
+--------------------------------------------------------------------------- */
+
+.link-draw {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.link-draw:hover,
+.link-draw:focus-visible {
+  background-size: 100% 2px;
+}
+
+/* Lifestyle mosaic dusk overlay — day by default; lights on when pointed at. */
+.cs-dusk {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cs-card:hover .cs-dusk,
+  .cs-card:focus-within .cs-dusk {
+    opacity: 1;
+  }
+}
+
+/* A hovered preset rolls its own build — the signature, per card. */
+@media (hover: hover) and (pointer: fine) {
+  .preset-card:hover .sp-wheel,
+  .preset-card:focus-within .sp-wheel {
+    animation: sp-wheel-spin 900ms cubic-bezier(0.3, 0.1, 0.2, 1);
+  }
+  .preset-card:hover .sp-studio,
+  .preset-card:focus-within .sp-studio {
+    transform: translateX(6px);
+    transition: transform 0.6s cubic-bezier(0.3, 0.1, 0.2, 1);
+  }
+}
+
+/* Three Doors gateway — the chosen door widens; the others yield. */
+.three-doors {
+  display: flex;
+  flex-direction: column;
+}
+.three-doors > a {
+  min-height: 420px;
+}
+@media (min-width: 1024px) {
+  .three-doors {
+    flex-direction: row;
+  }
+  .three-doors > a {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: clamp(480px, 70vh, 680px);
+    transition: flex-grow 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+}
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .three-doors:has(> a:is(:hover, :focus-visible)) > a:is(:hover, :focus-visible) {
+    flex-grow: 1.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-draw,
+  .cs-dusk,
+  .three-doors > a {
+    transition: none;
+  }
+  .preset-card:hover .sp-wheel,
+  .preset-card:focus-within .sp-wheel,
+  .preset-card:hover .sp-studio,
+  .preset-card:focus-within .sp-studio {
+    animation: none;
+    transform: none;
+  }
 }
 
 /* ---------------------------------------------------------------------------

@@ -16,10 +16,10 @@ export function RentalsProof() {
   return (
     <section
       aria-label="Spare Space Rentals at a glance"
-      className="border-b border-line bg-cream"
+      className="section-dark"
     >
-      <div className="mx-auto w-full max-w-[1280px] px-4 py-12 sm:px-6 lg:px-8 lg:py-14">
-        <dl className="grid grid-cols-2 gap-y-9 lg:grid-cols-4 lg:gap-0">
+      <div className="mx-auto w-full max-w-[1280px] px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
+        <dl className="grid grid-cols-2 gap-y-10 lg:grid-cols-4 lg:gap-0">
           {proofPoints.map((point, index) => (
             <div
               key={point.value}
@@ -27,7 +27,13 @@ export function RentalsProof() {
                 index % 2 === 1 ? "border-l border-line lg:border-l" : ""
               } ${index === 0 ? "lg:border-l-0" : "lg:border-l"}`}
             >
-              <dt className="font-heading text-[30px] leading-[0.98] tracking-tight text-accent-strong sm:text-[40px] lg:text-[46px]">
+              {/* Only the lead value carries the blue accent (large-text AA on
+                  teal); the rest are cream so one number visibly leads. */}
+              <dt
+                className={`font-heading text-[40px] leading-[0.96] tracking-tight sm:text-[52px] lg:text-[62px] ${
+                  index === 0 ? "text-accent" : "text-cream"
+                }`}
+              >
                 {point.value}
               </dt>
               <dd className="mt-2 max-w-[230px] text-[13px] leading-6 text-mid sm:text-[14px]">
@@ -37,7 +43,7 @@ export function RentalsProof() {
           ))}
         </dl>
 
-        <CastorRail className="mt-9" />
+        <CastorRail className="mt-10 text-accent" />
       </div>
     </section>
   );

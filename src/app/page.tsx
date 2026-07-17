@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { BrandMark } from "@/components/shared/brand-mark";
 import { StudioPreview } from "@/components/studios/studio-preview";
 import { presetConfig, presets } from "@/components/studios/studio-data";
 import InkReveal from "@/components/ui/ink-reveal";
 import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
 import { group, sites, type SiteId } from "@/lib/site-config";
 
-// A signature studio, rendered live on the featured gateway card, the actual
-// configurable product, not a stand-in image.
-const gatewayStudioConfig = presetConfig(
+// A signature studio, rendered live on the Studios door — the real product.
+const doorStudioConfig = presetConfig(
   presets.find((preset) => preset.id === "creative") ?? presets[0],
 );
 
@@ -20,27 +17,29 @@ export const metadata: Metadata = {
   title: "Kiwi Kiwi Group of Companies, Spare Space Studios, Rentals & Living",
 };
 
-type Gateway = {
+type Door = {
   siteId: Exclude<SiteId, never>;
-  heading: string;
+  name: string;
   body: string;
+  light?: boolean;
 };
 
-const gateways: Gateway[] = [
+const doors: Door[] = [
   {
     siteId: "studios",
-    heading: "Own Your Studio",
-    body: "Design and buy your own signature studio, customised, built and delivered to your door within weeks.",
+    name: "Studios",
+    body: "Design and buy your signature studio — customised, built, and rolled to your door within weeks.",
+    light: true,
   },
   {
     siteId: "rentals",
-    heading: "Rent A Space",
-    body: "Flexible lifestyle studios on your property, gyms, offices, retreats, without the upfront cost.",
+    name: "Rentals",
+    body: "Lifestyle studios on your property — gym, office, retreat — without the upfront cost.",
   },
   {
     siteId: "living",
-    heading: "Fit Out Your Space",
-    body: "Flooring, curtains, shelving and tiny-space furniture. Supply only, or supply and install.",
+    name: "Living",
+    body: "Flooring, curtains, shelving and tiny-space furniture. Supply only, or fully installed.",
   },
 ];
 
@@ -54,7 +53,7 @@ export default function Home() {
         mediaSrc="/assets/images/studios-real.jpg"
         bgImageSrc="/assets/images/studios-real.jpg"
         title="Spare Space"
-        date="Kiwi Kiwi Group"
+        date="a Kiwi Kiwi family of spaces"
         scrollToExpand="Scroll to enter"
       >
         <p className="mx-auto max-w-[620px] text-center text-[17px] leading-8 text-mid sm:text-[19px]">
@@ -63,28 +62,30 @@ export default function Home() {
         </p>
       </ScrollExpandMedia>
 
-      <section className="mx-auto w-full max-w-[1200px] px-4 py-14 text-center sm:px-6 lg:py-20">
-        <p className="font-script text-[30px] leading-none text-accent-strong sm:text-[38px]">
+      <section className="mx-auto w-full max-w-[1280px] px-[clamp(1.25rem,6vw,5rem)] pt-16 pb-10 lg:pt-20">
+        <p className="font-script text-[32px] leading-none text-accent-strong sm:text-[42px]">
           Lifestyle Spaces
         </p>
-        <h1 className="mt-3 font-heading text-[40px] leading-[1.02] tracking-tight sm:text-[56px]">
+        <h1 className="mt-2 font-heading text-[clamp(3rem,6vw,4.5rem)] leading-[0.98] tracking-tight">
           Choose your space.
         </h1>
+        <p className="mt-5 max-w-[52ch] text-[17px] leading-8 text-mid sm:text-[19px]">
+          Three companies, one workshop. Buy a studio, rent one, or fit out the
+          inside — every one built on the same nine-castor shell.
+        </p>
+      </section>
 
-        <div className="mt-12 grid w-full gap-5 text-left md:grid-cols-2 md:grid-rows-2">
-          <GatewayCard
-            {...gateways[0]}
-            featured
-            preview={<StudioPreview config={gatewayStudioConfig} />}
-          />
-          <GatewayCard {...gateways[1]} />
-          <GatewayCard {...gateways[2]} />
-        </div>
+      {/* The Three Doors — a full-bleed triptych. Each brand is drenched in its
+          own ground; the door you point at widens. */}
+      <section className="three-doors w-full" aria-label="Choose a Spare Space brand">
+        {doors.map((door) => (
+          <DoorPanel key={door.siteId} {...door} />
+        ))}
       </section>
 
       {/* Interactive flourish — wipe the ink to reveal the photo. Decorative;
           shows the plain photo on touch / reduced-motion. */}
-      <section className="mx-auto w-full max-w-[1200px] px-4 pb-20 sm:px-6">
+      <section className="mx-auto w-full max-w-[1200px] px-4 py-20 sm:px-6">
         <div className="elev-2 shape-soft relative aspect-[21/9] w-full overflow-hidden border border-line">
           <Image
             src="/assets/images/studios-real.jpg"
@@ -95,8 +96,8 @@ export default function Home() {
           />
           <InkReveal />
         </div>
-        <p className="mt-4 text-center font-heading text-[12px] tracking-[0.16em] text-mid uppercase">
-          Move to reveal, real studios in real backyards
+        <p className="mt-4 text-center font-script text-[22px] leading-none text-accent-strong">
+          go on, wipe the ink away
         </p>
       </section>
 
@@ -108,41 +109,64 @@ export default function Home() {
   );
 }
 
-function GatewayCard({
-  siteId,
-  heading,
-  body,
-  featured = false,
-  preview,
-}: Gateway & { featured?: boolean; preview?: ReactNode }) {
+function DoorPanel({ siteId, name, body, light = false }: Door) {
   const site = sites[siteId];
-
   return (
     <Link
       href={`/${siteId}`}
       data-site={siteId}
-      className={`group shape-soft flex flex-col overflow-hidden border border-line bg-white/70 text-left shadow-[0_30px_80px_-60px_rgba(44,40,37,0.5)] backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-accent-strong/40 hover:shadow-[0_40px_90px_-55px_rgba(44,40,37,0.55)] ${
-        featured ? "justify-between p-8 md:row-span-2 md:p-10" : "p-7"
+      aria-label={`${site.name} — enter`}
+      className={`group relative flex flex-col justify-between gap-8 overflow-hidden px-7 py-10 lg:px-9 lg:py-12 ${
+        light ? "bg-cream-soft" : "section-dark"
       }`}
     >
-      <BrandMark site={site} size={featured ? "lg" : "md"} priority={featured} />
-      {preview ? (
-        <div className="shape-soft my-7 overflow-hidden border border-line bg-cream-soft shadow-[0_20px_50px_-45px_rgba(44,40,37,0.6)] transition duration-500 group-hover:-translate-y-0.5">
-          {preview}
-        </div>
-      ) : null}
-      <div className={featured ? "" : "mt-6"}>
-        <h2 className={`font-heading tracking-tight ${featured ? "text-[30px]" : "text-[22px]"}`}>
-          {heading}
-        </h2>
-        <p className="mt-2 max-w-[420px] text-[15px] leading-7 text-mid">
-          {body}
+      <div>
+        <span className="font-heading text-[13px] tracking-tight text-mid">
+          Spare Space
+        </span>
+        <p className="mt-0.5 font-heading text-[clamp(2.2rem,3.2vw,3rem)] leading-none tracking-tight">
+          {name}
         </p>
-        <span className="mt-5 inline-flex min-h-12 items-center gap-2 rounded-full bg-dark px-6 font-heading text-[12px] tracking-[0.12em] text-cream uppercase transition group-hover:bg-accent-strong">
-          Explore {site.name}
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M3 8h10m0 0L9 4m4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      </div>
+
+      {light ? (
+        <div className="relative -mx-2">
+          <StudioPreview config={doorStudioConfig} />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-[var(--ss-clay)]/50 to-transparent" />
+        </div>
+      ) : (
+        <span className="pointer-events-none self-start text-accent-soft/70" aria-hidden="true">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+            <circle cx="26" cy="26" r="19" stroke="currentColor" strokeWidth="2.4" opacity="0.7" />
+            <g stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.55">
+              <path d="M26 26V9" />
+              <path d="M26 26 12 34" />
+              <path d="M26 26 40 34" />
+            </g>
           </svg>
+        </span>
+      )}
+
+      <div className="max-w-[360px]">
+        <p className="text-[15px] leading-7 text-mid">{body}</p>
+        <span className="mt-6 inline-flex flex-col gap-2.5 text-dark">
+          <span
+            aria-hidden="true"
+            className="door-rule h-0.5 w-9 origin-left bg-current transition-transform duration-500 ease-out group-hover:scale-x-[2.6] group-focus-visible:scale-x-[2.6]"
+          />
+          <span className="inline-flex items-center gap-2.5 font-heading text-[17px] tracking-tight">
+            Step into {name}
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+              className="transition-transform duration-500 ease-out group-hover:translate-x-1"
+            >
+              <path d="M3 8h10m0 0L9 4m4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
         </span>
       </div>
     </Link>

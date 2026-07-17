@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { SectionMark } from "@/components/shared/section-mark";
 
 /**
  * Pinned day-in-the-life journey, one studio carried through a single
@@ -84,9 +85,7 @@ export function DayJourney() {
         <div className="dj-stage sticky top-0 flex h-svh items-center overflow-hidden pt-20">
           <div className="mx-auto grid w-full max-w-[1280px] items-center gap-6 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14 lg:px-8">
             <div className="text-center lg:text-left">
-              <p className="font-heading text-[13px] tracking-[0.22em] text-accent-strong uppercase">
-                A day in your space
-              </p>
+              <SectionMark>dawn to dusk</SectionMark>
               <h2
                 id="day-journey-heading"
                 className="mt-3 font-heading text-[30px] leading-[1.08] tracking-tight sm:text-[40px]"

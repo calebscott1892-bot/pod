@@ -1,5 +1,6 @@
 import { StudioPreview } from "@/components/studios/studio-preview";
 import { defaultConfig } from "@/components/studios/studio-data";
+import { SectionMark } from "@/components/shared/section-mark";
 
 // A rental studio in Rentals blue — rolls in on its castors as the hero.
 const heroConfig = {
@@ -21,9 +22,7 @@ export function RentalsHero() {
 
       <div className="relative mx-auto grid w-full max-w-[1280px] items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 lg:px-8 lg:py-20">
         <div>
-          <p className="font-heading text-[13px] tracking-[0.3em] text-accent-strong uppercase">
-            Spare Space Rentals
-          </p>
+          <SectionMark>rented, not bought</SectionMark>
           <h1
             id="hero-heading"
             className="mt-5 max-w-[560px] font-heading text-[46px] leading-[1.02] tracking-tight text-dark sm:text-[64px] lg:text-[74px]"
@@ -39,16 +38,16 @@ export function RentalsHero() {
             in on nine castors, no slab and no permits.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
             <a
               href="#spaces"
-              className="inline-flex min-h-13 items-center rounded-full bg-dark px-8 font-heading text-[14px] tracking-[0.12em] text-cream uppercase transition hover:bg-accent-strong"
+              className="inline-flex min-h-13 items-center rounded-full bg-dark px-8 font-heading text-[15px] tracking-tight text-cream transition hover:bg-accent-strong"
             >
               Explore spaces
             </a>
             <a
               href="#enquire"
-              className="inline-flex min-h-13 items-center rounded-full border border-dark/30 bg-white/40 px-8 font-heading text-[14px] tracking-[0.12em] text-dark uppercase backdrop-blur transition hover:border-dark hover:bg-white/70"
+              className="link-draw inline-flex min-h-12 items-center font-heading text-[15px] tracking-tight text-dark"
             >
               Make an enquiry
             </a>

@@ -9,12 +9,9 @@ export function ServiceArea() {
     >
       <div className="mx-auto grid w-full max-w-[1280px] items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:gap-16 lg:px-8 lg:py-24">
         <Reveal>
-          <p className="font-heading text-[13px] tracking-[0.22em] text-accent-strong uppercase">
-            Service area
-          </p>
           <h2
             id="service-area-heading"
-            className="mt-3 max-w-[560px] font-heading text-[34px] leading-[1.08] tracking-tight sm:text-[44px]"
+            className="mt-3 max-w-[560px] font-heading text-sect leading-[1.04] tracking-tight"
           >
             Northern Rivers to the Sunshine Coast.
           </h2>
@@ -26,7 +23,7 @@ export function ServiceArea() {
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             <div className="shape-soft elev-1 border border-line bg-cream-soft p-6">
-              <p className="font-heading text-[13px] tracking-[0.18em] text-accent-strong uppercase">
+              <p className="font-heading text-[13px] tracking-tight text-accent-strong">
                 Southeast QLD
               </p>
               <p className="mt-2 font-heading text-[20px] tracking-tight">
@@ -37,7 +34,7 @@ export function ServiceArea() {
               </p>
             </div>
             <div className="shape-soft elev-1 border border-line bg-cream-soft p-6">
-              <p className="font-heading text-[13px] tracking-[0.18em] text-accent-strong uppercase">
+              <p className="font-heading text-[13px] tracking-tight text-accent-strong">
                 Northern NSW
               </p>
               <p className="mt-2 font-heading text-[20px] tracking-tight">

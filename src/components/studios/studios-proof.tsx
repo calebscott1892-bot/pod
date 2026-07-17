@@ -41,7 +41,7 @@ export function StudiosProof() {
           ))}
         </dl>
 
-        <CastorRail className="mt-9" />
+        <CastorRail className="mt-9 text-accent-strong" />
       </div>
     </section>
   );

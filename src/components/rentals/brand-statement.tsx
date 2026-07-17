@@ -11,7 +11,7 @@ export function BrandStatement() {
           >
             Designed for the way you actually live.
           </p>
-          <p className="mt-6 font-heading text-[13px] tracking-[0.26em] text-accent-soft uppercase">
+          <p className="mt-6 font-heading text-[13px] tracking-[0.12em] text-accent-soft uppercase">
             Not a shed, a lifestyle asset
           </p>
         </Reveal>

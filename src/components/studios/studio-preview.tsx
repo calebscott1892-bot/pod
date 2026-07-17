@@ -62,8 +62,9 @@ export function StudioPreview({
         <path d="M466 322h30l-4 24h-22l-4-24Z" fill="var(--ss-clay)" stroke="var(--ss-olive)" strokeWidth="2" />
       </g>
 
-      {/* Studio — rolls in on its castors when `roll` is set; parked otherwise. */}
-      <g className={roll ? "sp-roll" : undefined}>
+      {/* Studio — rolls in on its castors when `roll` is set; parked otherwise.
+          `sp-studio` is always present so a preset card can nudge it on hover. */}
+      <g className={roll ? "sp-studio sp-roll" : "sp-studio"}>
       {/* Contact shadow */}
       <ellipse className="sp-stage sp-d1" cx="262" cy="350" rx="190" ry="12" fill="#2c2825" opacity="0.12" />
 

@@ -7,6 +7,7 @@ import { Reveal } from "@/components/shared/reveal";
 import { business, sites } from "@/lib/site-config";
 
 import { lifestyleCategories } from "./categories";
+import { SectionMark } from "@/components/shared/section-mark";
 
 const heardAboutOptions = [
   "Google search",
@@ -84,12 +85,10 @@ export function EnquiryForm() {
     <section id="enquire" className="bg-cream" aria-labelledby="enquire-heading">
       <div className="mx-auto grid w-full max-w-[1280px] gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:px-8 lg:py-24">
         <Reveal>
-          <p className="font-heading text-[13px] tracking-[0.22em] text-accent-strong uppercase">
-            Make an enquiry
-          </p>
+          <SectionMark>let&apos;s get rolling</SectionMark>
           <h2
             id="enquire-heading"
-            className="mt-3 font-heading text-[34px] leading-[1.08] tracking-tight sm:text-[44px]"
+            className="mt-3 font-heading text-sect leading-[1.04] tracking-tight"
           >
             Let&apos;s find your space.
           </h2>

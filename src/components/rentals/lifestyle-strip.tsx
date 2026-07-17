@@ -26,7 +26,7 @@ export function LifestyleStrip() {
           </p>
           <h2
             id="strip-heading"
-            className="mt-3 font-heading text-[34px] leading-[1.08] tracking-tight sm:text-[44px]"
+            className="mt-3 font-heading text-sect leading-[1.04] tracking-tight"
           >
             Real studios, in real backyards.
           </h2>

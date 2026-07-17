@@ -44,9 +44,6 @@ export function DeliverySection() {
     >
       <div className="mx-auto grid w-full max-w-[1280px] gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:gap-16 lg:px-8 lg:py-28">
         <Reveal>
-          <p className="font-heading text-[13px] tracking-[0.22em] text-accent-soft uppercase">
-            Delivery &amp; logistics
-          </p>
           <h2
             id="delivery-heading"
             className="mt-4 max-w-[540px] font-heading text-[40px] leading-[1.02] tracking-tight sm:text-[56px] lg:text-[64px]"
